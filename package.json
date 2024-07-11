@@ -1,0 +1,8 @@
+{
+  "name": "flowing",
+  "version": "0.0.0",
+  "description": "An online editor😉",
+  "keywords": ["rich text editor", "markdown", "helpful"],
+  "author": "leon yu",
+  "license": "MIT"
+}
