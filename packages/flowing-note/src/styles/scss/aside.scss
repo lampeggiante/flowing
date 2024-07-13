@@ -1,0 +1,12 @@
+.aside-cursor {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 8px;
+  height: 100%;
+  transition: all linear 200ms;
+  &:hover {
+    background-color: #3370eb;
+    cursor: ew-resize;
+  }
+}
