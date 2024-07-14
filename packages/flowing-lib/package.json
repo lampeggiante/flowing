@@ -1,0 +1,11 @@
+{
+  "name": "flowing-components",
+  "version": "0.0.0",
+  "description": "flowing lib",
+  "module": "index.ts",
+  "keywords": [
+    "lib"
+  ],
+  "author": "leon yu",
+  "license": "MIT"
+}

@@ -10,12 +10,12 @@ export const containerStyle: RCSS = {
 
 export const asideStyle: RCSS = {
   position: 'relative',
-  width: '400px',
+  width: '250px',
   minWidth: '200px',
   maxWidth: '50vw',
   height: '100%',
   backgroundColor: defaultColor.secondaryColor,
-  borderRight: defaultBorderSize.medium + ' solid ' + defaultColor.borderColor
+  borderRight: defaultBorderSize.small + ' solid ' + defaultColor.borderColor
 }
 
 export const mainStyle: RCSS = {
@@ -27,7 +27,7 @@ export const mainStyle: RCSS = {
 export const headerStyle: RCSS = {
   height: '60px',
   backgroundColor: defaultColor.primaryColor,
-  borderBottom: defaultBorderSize.medium + ' solid ' + defaultColor.borderColor
+  borderBottom: defaultBorderSize.small + ' solid ' + defaultColor.borderColor
 }
 
 export const contentStyle: RCSS = {

@@ -1,3 +1,4 @@
+// 缩放侧边栏的光标
 .aside-cursor {
   position: absolute;
   top: 0;
@@ -8,5 +9,63 @@
   &:hover {
     background-color: #3370eb;
     cursor: ew-resize;
+  }
+}
+
+// 侧边栏头部
+.aside-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 12px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #141414;
+  font-style: italic;
+  &-logo {
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+  }
+}
+
+.aside-button-left {
+  position: absolute;
+  top: 30px;
+  transform: translateY(-50%);
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #3370eb;
+    color: #fff;
+  }
+}
+
+.aside-button-right {
+  position: absolute;
+  top: 30px;
+  transform: translateY(-50%);
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 5px;
+  &:hover {
+    background-color: #3370eb;
+    color: #fff;
   }
 }

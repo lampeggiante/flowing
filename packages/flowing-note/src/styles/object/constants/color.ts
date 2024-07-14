@@ -1,5 +1,5 @@
 export const defaultColor = {
   borderColor: '#cdcdcd',
-  primaryColor: '#f2f2f2',
-  secondaryColor: '#f9f9f9'
+  primaryColor: '#fff',
+  secondaryColor: '#f2f2f2'
 }
