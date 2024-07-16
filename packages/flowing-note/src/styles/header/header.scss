@@ -1,0 +1,27 @@
+.app-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+  background-color: var(--flowing-front-color);
+  border-bottom: var(--flowing-border-small) solid var(--flowing-border-color);
+  &-block {
+    display: none;
+    width: 60px;
+    height: 40px;
+    border-right: 1px dashed #ccc;
+  }
+  &-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &-title {
+    margin: auto 12px;
+  }
+  &-tool {
+    display: flex;
+    justify-content: flex-end;
+    margin: auto 12px;
+  }
+}

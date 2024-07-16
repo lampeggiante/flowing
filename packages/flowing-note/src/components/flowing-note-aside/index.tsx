@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
-import { asideStyle } from '@/styles/object'
-import '@/styles/scss/aside.scss'
+import '@/styles/aside/aside.scss'
 import { useViewPort } from '@/hooks/useViewport'
 import { AsideHeader } from './aside-header'
+import { GlobalConfigCtx } from '../ConfigContext'
 
 export function FlowingNoteAside() {
+  /** states */
   const [container, setContainer] = useState<HTMLElement | null>(null)
-  const [opened, setOpened] = useState<boolean>(true)
   const [leftBtn, setLeftBtn] = useState<HTMLElement | null>(null)
   const [rightBtn, setRightBtn] = useState<HTMLElement | null>(null)
+
+  /** hooks */
+  const { openAside, setOpenAside } = useContext(GlobalConfigCtx)
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!container) return
@@ -36,7 +39,7 @@ export function FlowingNoteAside() {
 
   const handleBtnClick = () => {
     if (container && leftBtn && rightBtn) {
-      if (opened) {
+      if (openAside) {
         container.style.display = 'none'
         leftBtn.style.display = 'none'
         rightBtn.style.display = 'flex'
@@ -45,7 +48,7 @@ export function FlowingNoteAside() {
         leftBtn.style.display = 'flex'
         rightBtn.style.display = 'none'
       }
-      setOpened(!opened)
+      setOpenAside && setOpenAside(!openAside)
     }
   }
 
@@ -69,17 +72,23 @@ export function FlowingNoteAside() {
     }
   }, [container])
   return (
-    <>
-      <div className="aside-container" style={asideStyle}>
+    <aside>
+      <div className="aside-container">
         <AsideHeader />
-        <button className="aside-button-left" onClick={handleBtnClick}>
+        <button
+          className="aside-button aside-button-left"
+          onClick={handleBtnClick}
+        >
           <LeftOutlined />
         </button>
         <div className="aside-cursor" />
       </div>
-      <button className="aside-button-right" onClick={handleBtnClick}>
+      <button
+        className="aside-button aside-button-right"
+        onClick={handleBtnClick}
+      >
         <RightOutlined />
       </button>
-    </>
+    </aside>
   )
 }

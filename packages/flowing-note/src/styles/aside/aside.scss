@@ -1,3 +1,13 @@
+.aside-container {
+  position: relative;
+  width: 250px;
+  min-width: 200px;
+  max-width: 50vw;
+  height: 100%;
+  background-color: var(--flowing-back-color);
+  border-right: var(--flowing-border-small) solid var(--flowing-border-color);
+}
+
 // 缩放侧边栏的光标
 .aside-cursor {
   position: absolute;
@@ -5,7 +15,7 @@
   right: -4px;
   width: 8px;
   height: 100%;
-  transition: all linear 200ms;
+  z-index: 1;
   &:hover {
     background-color: #3370eb;
     cursor: ew-resize;
@@ -21,7 +31,6 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: bold;
   font-size: 24px;
-  color: #141414;
   font-style: italic;
   &-logo {
     width: 36px;
@@ -30,11 +39,10 @@
   }
 }
 
-.aside-button-left {
+.aside-button {
   position: absolute;
   top: 30px;
   transform: translateY(-50%);
-  right: 2px;
   width: 24px;
   height: 24px;
   font-size: 16px;
@@ -50,22 +58,12 @@
   }
 }
 
+.aside-button-left {
+  right: 16px;
+}
+
 .aside-button-right {
-  position: absolute;
-  top: 30px;
-  transform: translateY(-50%);
-  left: 2px;
-  width: 24px;
-  height: 24px;
-  font-size: 16px;
   display: none;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: #fff;
-  border-radius: 5px;
-  &:hover {
-    background-color: #3370eb;
-    color: #fff;
-  }
+  left: 16px;
+  z-index: 1;
 }

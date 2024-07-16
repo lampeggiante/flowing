@@ -28,5 +28,6 @@
       "assets/": ["./assets"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "files": ["types.d.ts"]
 }
