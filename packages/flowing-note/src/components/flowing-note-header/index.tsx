@@ -13,10 +13,10 @@ export function FlowingNoteHeader() {
   return (
     <header className="app-header">
       <HeaderBlock />
-      <span className="app-header-container">
+      <div className="app-header-container">
         <HeaderTitle />
         <HeaderTool />
-      </span>
+      </div>
     </header>
   )
 }

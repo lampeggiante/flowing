@@ -13,8 +13,8 @@
   }
   &-container {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    width: 100%;
   }
   &-title {
     margin: auto 12px;

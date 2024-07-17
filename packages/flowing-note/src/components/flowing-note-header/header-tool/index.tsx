@@ -1,23 +1,31 @@
-import { useEffect, useState } from 'react'
+import { GlobalConfigCtx } from '@/components/ConfigContext'
+import { useCallback, useContext, useEffect, useState } from 'react'
 
 export function HeaderTool() {
+  /** states */
   const [bodyContainer, setBodyContainer] = useState<HTMLDivElement | null>(
     null
   )
 
-  const handleSkinChange = () => {
+  /** hooks */
+  const { globalTheme, setGlobalTheme } = useContext(GlobalConfigCtx)
+
+  const handleSkinChange = useCallback(() => {
     if (!bodyContainer) return
-    console.log(bodyContainer)
-    bodyContainer.setAttribute('flowing-theme', 'dark')
-  }
+    const toTheme = globalTheme === 'dark' ? 'light' : 'dark'
+    if (setGlobalTheme) {
+      setGlobalTheme(toTheme)
+    }
+    bodyContainer.setAttribute('flowing-theme', toTheme)
+  }, [globalTheme, bodyContainer])
 
   useEffect(() => {
     const bodyContainer = document.body
     setBodyContainer(bodyContainer as HTMLDivElement)
   }, [bodyContainer])
   return (
-    <span className="app-header-tool">
+    <div className="app-header-tool">
       <button onClick={handleSkinChange}>换肤</button>
-    </span>
+    </div>
   )
 }
