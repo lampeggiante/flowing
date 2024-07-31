@@ -1,4 +1,4 @@
-import { GlobalConfigCtx } from '@/components/ConfigContext'
+import { GlobalConfigCtx } from '@/components/config-context'
 import { useContext, useEffect, useState } from 'react'
 
 export function HeaderBlock() {

@@ -1,4 +1,6 @@
-import { GlobalConfigCtx } from '@/components/ConfigContext'
+import { GlobalConfigCtx } from '@/components/config-context'
+import { SkinOutlined } from '@ant-design/icons'
+import { FlowingButton } from 'flowing-components'
 import { useCallback, useContext, useEffect, useState } from 'react'
 
 export function HeaderTool() {
@@ -25,7 +27,13 @@ export function HeaderTool() {
   }, [bodyContainer])
   return (
     <div className="app-header-tool">
-      <button onClick={handleSkinChange}>换肤</button>
+      <FlowingButton
+        className="flowing-frontColor flowing-fontColor"
+        shape="circle"
+        onClick={handleSkinChange}
+      >
+        <SkinOutlined />
+      </FlowingButton>
     </div>
   )
 }

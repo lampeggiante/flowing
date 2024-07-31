@@ -1,9 +1,10 @@
 {
-  "name": "flowing-components",
+  "name": "flowing-lib",
   "version": "0.0.0",
   "description": "flowing lib",
   "module": "index.ts",
   "keywords": [
+    "flowing",
     "lib"
   ],
   "author": "leon yu",
