@@ -4,6 +4,7 @@ import '@/styles/aside/aside.scss'
 import { useViewPort } from '@/hooks/useViewport'
 import { AsideHeader } from './aside-header'
 import { GlobalConfigCtx } from '../config-context'
+import { FlowingButton } from 'flowing-components'
 
 export function FlowingNoteAside() {
   /** states */
@@ -75,20 +76,23 @@ export function FlowingNoteAside() {
     <aside>
       <div className="aside-container">
         <AsideHeader />
-        <button
+        <FlowingButton
           className="aside-button aside-button-left"
+          size="small"
+          icon={<LeftOutlined />}
           onClick={handleBtnClick}
-        >
-          <LeftOutlined />
-        </button>
+        />
         <div className="aside-cursor" />
+        <div className="aside-tree">
+          <a href="#">文件系统</a>
+        </div>
       </div>
-      <button
+      <FlowingButton
         className="aside-button aside-button-right"
+        size="small"
+        icon={<RightOutlined />}
         onClick={handleBtnClick}
-      >
-        <RightOutlined />
-      </button>
+      />
     </aside>
   )
 }
