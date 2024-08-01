@@ -5,6 +5,7 @@ import { useViewPort } from '@/hooks/useViewport'
 import { AsideHeader } from './aside-header'
 import { GlobalConfigCtx } from '../config-context'
 import { FlowingButton } from 'flowing-components'
+import AsideNoteTree from './aside-note-tree'
 
 export function FlowingNoteAside() {
   /** states */
@@ -29,13 +30,17 @@ export function FlowingNoteAside() {
     }
   }
 
+  const handlePreventSelect = (e: any) => e.preventDefault()
+
   const handleMouseDown = (e: any) => {
     if (e.target.className !== 'aside-cursor') return
+    document.addEventListener('selectstart', handlePreventSelect)
     document.addEventListener('mousemove', handleMouseMove)
   }
 
   const handleMouseUp = () => {
     document.removeEventListener('mousemove', handleMouseMove)
+    document.removeEventListener('selectstart', handlePreventSelect)
   }
 
   const handleBtnClick = () => {
@@ -75,6 +80,7 @@ export function FlowingNoteAside() {
   return (
     <aside>
       <div className="aside-container">
+        <div className="aside-cursor" />
         <AsideHeader />
         <FlowingButton
           className="aside-button aside-button-left"
@@ -82,10 +88,7 @@ export function FlowingNoteAside() {
           icon={<LeftOutlined />}
           onClick={handleBtnClick}
         />
-        <div className="aside-cursor" />
-        <div className="aside-tree">
-          <a href="#">文件系统</a>
-        </div>
+        <AsideNoteTree />
       </div>
       <FlowingButton
         className="aside-button aside-button-right"

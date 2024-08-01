@@ -1,1 +1,1 @@
-export { default as FlowingButton } from './flowing-button/index.tsx'
+export { default as FlowingButton } from './src/flowing-button'
