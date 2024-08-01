@@ -84,17 +84,15 @@ export function FlowingNoteAside() {
         <AsideHeader />
         <FlowingButton
           className="aside-button aside-button-left"
-          size="small"
-          icon={<LeftOutlined />}
           onClick={handleBtnClick}
+          prefixIcon={<LeftOutlined />}
         />
         <AsideNoteTree />
       </div>
       <FlowingButton
         className="aside-button aside-button-right"
-        size="small"
-        icon={<RightOutlined />}
         onClick={handleBtnClick}
+        prefixIcon={<RightOutlined />}
       />
     </aside>
   )

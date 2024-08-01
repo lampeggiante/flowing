@@ -28,10 +28,12 @@
   justify-content: flex-start;
   align-items: center;
   padding: 12px;
+  height: 60px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: bold;
   font-size: 24px;
   font-style: italic;
+
   &-logo {
     width: 36px;
     height: 36px;
@@ -43,14 +45,10 @@
   position: absolute;
   top: 30px;
   transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: var(--flowing-componentBack-color);
   cursor: pointer;
   &:hover {
-    background-color: #3370eb;
+    background-color: var(--flowing-hover-color);
     color: #fff;
   }
 }
@@ -61,6 +59,7 @@
 
 .aside-button-right {
   display: none;
+  background-color: var(--flowing-componentBack-color);
   left: 16px;
   z-index: 1;
 }

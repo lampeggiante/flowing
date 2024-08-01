@@ -9,7 +9,7 @@
     display: none;
     width: 60px;
     height: 40px;
-    border-right: 1px dashed #ccc;
+    border-right: 1px dashed var(--flowing-border-color);
   }
   &-container {
     display: flex;

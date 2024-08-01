@@ -20,6 +20,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
+    "antd": "^5.19.3",
     "autoprefixer": "^10.4.19",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.40",
