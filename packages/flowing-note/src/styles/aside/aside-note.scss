@@ -1,4 +1,11 @@
-.aside-note-tree-container {
+$prefix: 'aside-note-tree';
+
+.#{$prefix}-container {
   height: calc(100vh - 60px);
   overflow-y: auto;
+  .#{$prefix}-item {
+    &:hover {
+      background-color: var(--flowing-hover-color);
+    }
+  }
 }

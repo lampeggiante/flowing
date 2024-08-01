@@ -1,0 +1,10 @@
+.flowing-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.flowing-tree-item {
+  width: 100%;
+}

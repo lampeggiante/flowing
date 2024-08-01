@@ -93,6 +93,7 @@ export function FlowingNoteAside() {
         className="aside-button aside-button-right"
         onClick={handleBtnClick}
         prefixIcon={<RightOutlined />}
+        style={{ display: 'none' }}
       />
     </aside>
   )

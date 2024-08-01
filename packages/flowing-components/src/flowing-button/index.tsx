@@ -15,9 +15,13 @@ const FlowingButton = forwardRef<HTMLButtonElement, FlowingButtonProps>(
 
     return (
       <button {...rest} className={`${className} flowing-button`} ref={ref}>
-        {prefixIcon}
-        {children}
-        {suffixIcon}
+        {prefixIcon && (
+          <span className="flowing-button-prefix-icon">{prefixIcon}</span>
+        )}
+        {children && <span className="flowing-button-content">{children}</span>}
+        {suffixIcon && (
+          <span className="flowing-button-suffix-icon">{suffixIcon}</span>
+        )}
       </button>
     )
   }
