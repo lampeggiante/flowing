@@ -5,12 +5,11 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/flowing/',
-  publicDir: './assets',
+  publicDir: '/assets',
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      assets: path.resolve(__dirname, 'assets')
+      '@': path.resolve(__dirname, 'src')
     }
   }
 })
