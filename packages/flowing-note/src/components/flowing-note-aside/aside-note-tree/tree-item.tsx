@@ -5,7 +5,7 @@ import {
   FileTextOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import { forwardRef, HTMLAttributes, ReactNode, useMemo, useState } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode, useState } from 'react'
 
 export interface TreeItemProps {
   prefixIcon?: ReactNode
@@ -31,14 +31,14 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
           {children &&
             (expanded ? <CaretDownOutlined /> : <CaretRightOutlined />)}
         </span>
-        <span className="aside-note-tree-item-icon">
+        <span className="aside-note-tree-item-icon aside-note-tree-item-icon-hover">
           {prefixIcon || <FileTextOutlined />}
         </span>
         <span className="aside-note-tree-item-title">{title}</span>
-        <span className="aside-note-tree-item-icon aside-note-tree-item-option">
+        <span className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover">
           <PlusOutlined />
         </span>
-        <span className="aside-note-tree-item-icon aside-note-tree-item-option">
+        <span className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover">
           <BarsOutlined />
         </span>
       </div>
@@ -50,7 +50,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
             <TreeItem
               {...child}
               key={id}
-              style={{ paddingLeft: newPad * 20 + 'px' }}
+              style={{ paddingLeft: newPad * 10 + 'px' }}
               pad={newPad}
             />
           )

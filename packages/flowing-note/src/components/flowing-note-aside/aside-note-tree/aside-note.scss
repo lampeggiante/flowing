@@ -2,3 +2,95 @@
   height: calc(100vh - 60px);
   overflow-y: auto;
 }
+
+.aside-note-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  &-header {
+    position: sticky;
+    top: -0.5rem;
+    background-color: var(--flowing-back-color);
+    --aside-note-header-display: none;
+    &:hover {
+      --aside-note-header-display: inline;
+    }
+    &-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &-title {
+      height: 24px;
+      padding: 2px 4px;
+      font-size: 16px;
+      line-height: 16px;
+      border-radius: 4px;
+    }
+    &-hover {
+      &:hover {
+        cursor: pointer;
+        background-color: var(--flowing-hover-color);
+      }
+    }
+    &-item {
+      height: 20px;
+      padding: 2px;
+      font-size: 16px;
+      line-height: 16px;
+      border-radius: 4px;
+    }
+    &-option {
+      display: var(--aside-note-header-display);
+    }
+  }
+  &-hiden {
+    display: none;
+  }
+  &-item {
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    border-radius: 4px;
+    gap: 4px;
+    width: 100%;
+    cursor: pointer;
+    --option-display: none;
+    &-title {
+      flex: 1;
+      text-align: start;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      user-select: none;
+    }
+    &-icon {
+      width: 20px;
+      height: 20px;
+      padding: 2px;
+      font-size: 16px;
+      line-height: 16px;
+      border-radius: 4px;
+      &-hover {
+        cursor: pointer;
+        &:hover {
+          background-color: var(--flowing-deep-hover-color);
+        }
+      }
+    }
+    &-caret {
+      width: 16px;
+      height: 16px;
+      line-height: 12px;
+      font-size: 12px;
+    }
+    &:hover {
+      --option-display: block;
+      background-color: var(--flowing-hover-color);
+    }
+    &-option {
+      display: var(--option-display);
+    }
+  }
+}
