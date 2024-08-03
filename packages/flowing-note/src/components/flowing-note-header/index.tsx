@@ -1,5 +1,5 @@
 import { HeaderBlock } from './header-block'
-import '@/styles/header/header.scss'
+import './header.scss'
 import { HeaderTitle } from './header-title'
 import { HeaderTool } from './header-tool'
 

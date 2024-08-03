@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
-import '@/styles/aside/aside.scss'
+import './aside.scss'
 import { useViewPort } from '@/hooks/useViewport'
 import { AsideHeader } from './aside-header'
 import { GlobalConfigCtx } from '../config-context'

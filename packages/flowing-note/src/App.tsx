@@ -6,7 +6,7 @@ import { ConfigContext } from './components/config-context'
 import { FlowingNoteAside } from './components/flowing-note-aside'
 import { FlowingNoteHeader } from './components/flowing-note-header'
 import { FlowingNoteMain } from './components/flowing-note-main'
-import '@/styles/app/app.scss'
+import './app.scss'
 
 function App() {
   return (
