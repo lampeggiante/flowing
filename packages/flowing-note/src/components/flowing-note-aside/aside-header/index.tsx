@@ -2,7 +2,7 @@ export function AsideHeader() {
   return (
     <div className="aside-header">
       <img
-        src="assets/logo_transparent-cut.png"
+        src="/flowing/assets/logo_transparent-cut.png"
         alt="flowing"
         className="aside-header-logo"
       />

@@ -1,3 +1,4 @@
+import { baseUrl } from '@/pages/routes'
 import {
   BarsOutlined,
   CaretRightOutlined,
@@ -6,6 +7,7 @@ import {
   PlusOutlined
 } from '@ant-design/icons'
 import { forwardRef, HTMLAttributes, ReactNode, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export interface TreeItemProps {
   prefixIcon?: ReactNode
@@ -26,22 +28,24 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
 
   return (
     <>
-      <div ref={ref} className="aside-note-tree-item" {...rest}>
-        <span className={caretClsName} onClick={() => setExpanded(!expanded)}>
-          {children &&
-            (expanded ? <CaretDownOutlined /> : <CaretRightOutlined />)}
-        </span>
-        <span className="aside-note-tree-item-icon aside-note-tree-item-icon-hover">
-          {prefixIcon || <FileTextOutlined />}
-        </span>
-        <span className="aside-note-tree-item-title">{title}</span>
-        <span className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover">
-          <PlusOutlined />
-        </span>
-        <span className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover">
-          <BarsOutlined />
-        </span>
-      </div>
+      <Link to={`${baseUrl}/wiki/${id}`} style={{ width: '100%' }}>
+        <div ref={ref} className="aside-note-tree-item" {...rest}>
+          <span className={caretClsName} onClick={() => setExpanded(!expanded)}>
+            {children &&
+              (expanded ? <CaretDownOutlined /> : <CaretRightOutlined />)}
+          </span>
+          <span className="aside-note-tree-item-icon aside-note-tree-item-icon-hover">
+            {prefixIcon || <FileTextOutlined />}
+          </span>
+          <span className="aside-note-tree-item-title">{title}</span>
+          <span className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover">
+            <PlusOutlined />
+          </span>
+          <span className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover">
+            <BarsOutlined />
+          </span>
+        </div>
+      </Link>
       {expanded &&
         children?.map((child) => {
           const { id } = child
