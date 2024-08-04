@@ -7,8 +7,18 @@ import { FlowingNoteAside } from './components/flowing-note-aside'
 import { FlowingNoteHeader } from './components/flowing-note-header'
 import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
+import useWebWorker from './hooks/useWebWorker'
+import { useEffect } from 'react'
 
 function App() {
+  const { getWorker } = useWebWorker()
+  getWorker().postMessage('hello')
+
+  useEffect(() => {
+    return () => {
+      getWorker().terminate()
+    }
+  })
   return (
     <ConfigContext>
       <div className="app-container">
