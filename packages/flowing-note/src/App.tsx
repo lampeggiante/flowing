@@ -7,18 +7,21 @@ import { FlowingNoteAside } from './components/flowing-note-aside'
 import { FlowingNoteHeader } from './components/flowing-note-header'
 import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
-import useWebWorker from './hooks/useWebWorker'
+import { useIndexedDB } from './hooks/useIndexedDB'
 import { useEffect } from 'react'
 
 function App() {
-  const { getWorker } = useWebWorker()
-  getWorker().postMessage('hello')
+  const { openDB } = useIndexedDB()
+
+  const initDB = async () => {
+    const ans = await openDB()
+    console.log(ans)
+  }
 
   useEffect(() => {
-    return () => {
-      getWorker().terminate()
-    }
-  })
+    initDB()
+  }, [])
+
   return (
     <ConfigContext>
       <div className="app-container">
