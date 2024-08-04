@@ -28,8 +28,7 @@ export function HeaderTool() {
   return (
     <div className="app-header-tool">
       <FlowingButton
-        className="flowing-frontColor flowing-fontColor"
-        shape="circle"
+        className="flowing-frontColor flowing-fontColor app-header-tool-skin"
         onClick={handleSkinChange}
       >
         <SkinOutlined />

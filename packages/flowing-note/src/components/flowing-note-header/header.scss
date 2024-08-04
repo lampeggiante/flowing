@@ -21,7 +21,15 @@
   }
   &-tool {
     display: flex;
-    justify-content: flex-end;
-    margin: auto 12px;
+    align-items: center;
+    gap: 8px;
+    margin: auto 8px;
+    &-skin {
+      height: 32px;
+      font-size: 16px;
+      line-height: 16px;
+      border-radius: 32px;
+      border: var(--flowing-border-small) solid var(--flowing-border-color);
+    }
   }
 }
