@@ -18,13 +18,15 @@
   }
   &-title {
     margin: auto 12px;
+    font-size: 20px;
+    font-weight: 900;
   }
   &-tool {
     display: flex;
     align-items: center;
     gap: 8px;
     margin: auto 8px;
-    &-skin {
+    &-item {
       height: 32px;
       font-size: 16px;
       line-height: 16px;
