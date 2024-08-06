@@ -1,0 +1,31 @@
+img {
+  width: 200px;
+  background-size: cover;
+}
+
+.mde-container {
+  background: #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  .mde-body {
+    display: flex;
+    flex-direction: row;
+    height: 65vh;
+    border: 1px solid #e1e1e1;
+    .mde-edit {
+      border: none;
+      outline: none;
+      resize: none;
+      flex: 1;
+      padding: 24px 12px;
+      overflow: auto;
+      font: 1rem/1.5 sans-serif;
+    }
+    #write {
+      padding: 12px;
+      flex: 1;
+      border-left: 1px solid #e1e1e1;
+      overflow: auto;
+      background-color: #fdfdfd;
+    }
+  }
+}
