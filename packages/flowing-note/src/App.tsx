@@ -7,21 +7,8 @@ import { FlowingNoteAside } from './components/flowing-note-aside'
 import { FlowingNoteHeader } from './components/flowing-note-header'
 import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
-import { useIndexedDB } from './hooks/useIndexedDB'
-import { useEffect } from 'react'
 
 function App() {
-  const { openDB } = useIndexedDB()
-
-  const initDB = async () => {
-    const ans = await openDB()
-    console.log(ans)
-  }
-
-  useEffect(() => {
-    initDB()
-  }, [])
-
   return (
     <ConfigContext>
       <div className="app-container">
