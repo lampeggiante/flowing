@@ -1,19 +1,16 @@
-import { useMockData } from '@/hooks/useMockData'
-import { useEffect, useMemo } from 'react'
+import { useNoteState } from '@/hooks/useNoteState'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 const NoteBody = () => {
   const { id } = useParams()
-  const { getNoteTitle } = useMockData()
-  const noteTitle = useMemo(() => {
-    return getNoteTitle(parseInt(id!))
-  }, [id])
-
+  const { currentNote, setCurrentNote } = useNoteState()
   useEffect(() => {
     /** 从路由获取笔记id */
     console.log(id)
+    setCurrentNote(parseInt(id!))
   }, [id])
-  return <>{noteTitle}</>
+  return <>{currentNote.noteContent}</>
 }
 
 export default NoteBody
