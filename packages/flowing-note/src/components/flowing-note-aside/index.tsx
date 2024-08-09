@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import './aside.scss'
-import { useViewPort } from '@/hooks/useViewport'
 import { AsideHeader } from './aside-header'
 import { GlobalConfigCtx } from '../config-context'
 import { FlowingButton } from 'flowing-components'
@@ -19,7 +18,7 @@ export function FlowingNoteAside() {
   const handleMouseMove = (e: MouseEvent) => {
     if (!container) return
     const minWidth = parseInt(container.style.minWidth)
-    const { vw } = useViewPort()
+    const vw = document.body.clientWidth
     const maxWidth = (parseInt(container.style.maxWidth) * vw) / 100
     if (e.clientX - container.offsetLeft > maxWidth) {
       container.style.width = maxWidth + 'px'
