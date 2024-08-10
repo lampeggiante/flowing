@@ -1,24 +1,23 @@
 import { EditorContent, useEditor } from '@tiptap/react'
-import Document from '@tiptap/extension-document'
-import Heading from '@tiptap/extension-heading'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
 import './index.scss'
 import { useEffect } from 'react'
+import StarterKit from '@tiptap/starter-kit'
 
 interface FlowingTopHeadingProps {
   noteTitle: string
+  setNoteTitle: (title: string) => void
 }
 
 const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
-  const { noteTitle } = props
+  const { noteTitle, setNoteTitle } = props
   const editor = useEditor({
-    extensions: [Document, Paragraph, Text, Heading],
+    extensions: [StarterKit],
     editorProps: {
       attributes: {
         class: 'flowing-top-heading'
       }
-    }
+    },
+    onTransaction() {}
   })
 
   useEffect(() => {

@@ -1,0 +1,16 @@
+.app-note-info {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  margin-bottom: 12px;
+  font-size: 12px;
+  &-avatar {
+    width: 12px;
+    margin-right: 8px;
+  }
+  &-author {
+    padding-right: 8px;
+    margin-right: 8px;
+    border-right: var(--flowing-border-small) solid var(--flowing-border-color);
+  }
+}

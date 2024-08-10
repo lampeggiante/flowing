@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   FlowingPlainText,
@@ -6,25 +6,23 @@ import {
 } from '@/components/flowing-editor'
 import { useNoteState } from '@/hooks/useNoteState'
 import './note-body.scss'
-import { useMockData } from '@/hooks/useMockData'
+import FlowingNoteInfo from '@/components/flowing-note-main/flowing-note-info'
 
 const NoteBody = () => {
   const { id } = useParams()
-  const { currentNote, setCurrentNote } = useNoteState()
-  const { getNoteTitle } = useMockData()
-  const noteTitle = useMemo(() => {
-    return getNoteTitle(parseInt(id!))
-  }, [id, location])
+  const { currentNote, setCurrentNote, setNoteTitle } = useNoteState()
 
   useEffect(() => {
     /** 从路由获取笔记id */
-    console.log(id)
     setCurrentNote(parseInt(id!))
   }, [id])
   return (
     <div className="note-body">
-      <FlowingTopHeading noteTitle={noteTitle} />
-      <div>leon yu 2024-08-10</div>
+      <FlowingTopHeading
+        noteTitle={currentNote.noteTitle}
+        setNoteTitle={setNoteTitle}
+      />
+      <FlowingNoteInfo />
       <FlowingPlainText content={currentNote.noteContent} />
     </div>
   )

@@ -1,19 +1,23 @@
 import { FlowingTopHeading } from '@/components/flowing-editor'
-import { useMockData } from '@/hooks/useMockData'
-import { useMemo } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useNoteState } from '@/hooks/useNoteState'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 export function HeaderTitle() {
   const { id } = useParams()
-  const location = useLocation()
-  const { getNoteTitle } = useMockData()
-  const noteTitle = useMemo(() => {
-    return getNoteTitle(parseInt(id!))
-  }, [id, location])
+  const { currentNote, setCurrentNote, setNoteTitle } = useNoteState()
+
+  useEffect(() => {
+    /** 从路由获取笔记id */
+    setCurrentNote(parseInt(id!))
+  }, [id])
 
   return (
     <div className="app-header-title">
-      <FlowingTopHeading noteTitle={noteTitle} />
+      <FlowingTopHeading
+        noteTitle={currentNote.noteTitle}
+        setNoteTitle={setNoteTitle}
+      />
     </div>
   )
 }
