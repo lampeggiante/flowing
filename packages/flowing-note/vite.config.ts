@@ -3,8 +3,11 @@ import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   base: '/flowing/',
+  define: {
+    __DEV__: mode === 'development'
+  },
   publicDir: '/assets',
   plugins: [react()],
   resolve: {
@@ -12,4 +15,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src')
     }
   }
-})
+}))

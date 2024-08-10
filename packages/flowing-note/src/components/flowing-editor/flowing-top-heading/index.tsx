@@ -10,14 +10,24 @@ interface FlowingTopHeadingProps {
 
 const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
   const { noteTitle, setNoteTitle } = props
+
   const editor = useEditor({
     extensions: [StarterKit],
     editorProps: {
       attributes: {
-        class: 'flowing-top-heading'
+        class: 'flowing-top-heading',
+        wrap: 'off'
+      },
+      handleDOMEvents: {
+        keydown: (v, e) => {
+          if (e.key === 'Enter') {
+            __DEV__ && console.log(v, e)
+            e.preventDefault()
+            editor?.commands.blur()
+          }
+        }
       }
-    },
-    onTransaction() {}
+    }
   })
 
   useEffect(() => {

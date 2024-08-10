@@ -4,3 +4,5 @@ declare interface GlobalConfig {
   globalTheme: 'dark' | 'light'
   setGlobalTheme?: (value: 'dark' | 'light') => void
 }
+
+declare const __DEV__: boolean

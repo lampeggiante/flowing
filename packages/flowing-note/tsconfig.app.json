@@ -28,6 +28,5 @@
       "assets/": ["./assets"]
     }
   },
-  "include": ["src"],
-  "files": ["types.d.ts"]
+  "include": ["src", "./**/*.d.ts"]
 }
