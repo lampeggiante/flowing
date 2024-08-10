@@ -46,8 +46,8 @@ const FlowingPlainText = (props: FlowingPlainTextProps) => {
             case 'Enter': {
               __DEV__ && console.log('plain text 按下了回车')
               event.preventDefault()
-              const newNoteId = addNoteContent(contentId)
               setNoteContent({ contentId, content: editor!.getHTML() })
+              const newNoteId = addNoteContent(contentId)
               setFocusId(newNoteId)
               break
             }
