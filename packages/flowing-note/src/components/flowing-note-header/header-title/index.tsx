@@ -1,3 +1,4 @@
+import { FlowingTopHeading } from '@/components/flowing-editor'
 import { useMockData } from '@/hooks/useMockData'
 import { useMemo } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
@@ -10,5 +11,9 @@ export function HeaderTitle() {
     return getNoteTitle(parseInt(id!))
   }, [id, location])
 
-  return <h3 className="app-header-title">{noteTitle}</h3>
+  return (
+    <div className="app-header-title">
+      <FlowingTopHeading noteTitle={noteTitle} />
+    </div>
+  )
 }

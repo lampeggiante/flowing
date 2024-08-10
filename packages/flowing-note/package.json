@@ -18,6 +18,13 @@
     "react-router-dom": "^6.26.0"
   },
   "devDependencies": {
+    "@tiptap/extension-document": "^2.5.9",
+    "@tiptap/extension-heading": "^2.5.9",
+    "@tiptap/extension-paragraph": "^2.5.9",
+    "@tiptap/extension-text": "^2.5.9",
+    "@tiptap/pm": "^2.5.9",
+    "@tiptap/react": "^2.5.9",
+    "@tiptap/starter-kit": "^2.5.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.7.0",

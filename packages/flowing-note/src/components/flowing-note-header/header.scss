@@ -18,8 +18,10 @@
   }
   &-title {
     margin: auto 12px;
-    font-size: 20px;
-    font-weight: 900;
+    color: var(--flowing-text-color);
+    h1 {
+      font-size: 12px;
+    }
   }
   &-tool {
     display: flex;
