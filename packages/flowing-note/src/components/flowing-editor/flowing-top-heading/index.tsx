@@ -31,7 +31,7 @@ const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
   })
 
   useEffect(() => {
-    editor?.commands.setContent(`<h1>${noteTitle}</h1>`)
+    editor?.commands.setContent(noteTitle)
   }, [noteTitle])
   return <EditorContent editor={editor} />
 }

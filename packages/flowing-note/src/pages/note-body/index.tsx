@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   FlowingPlainText,
@@ -10,7 +10,37 @@ import FlowingNoteInfo from '@/components/flowing-note-main/flowing-note-info'
 
 const NoteBody = () => {
   const { id } = useParams()
-  const { currentNote, setCurrentNote, setNoteTitle } = useNoteState()
+  const {
+    currentNote,
+    setCurrentNote,
+    setNoteTitle,
+    setNoteContent,
+    addNoteContent
+  } = useNoteState()
+  const [focusId, setFocusId] = useState<number>(NaN)
+
+  const NoteContent = () => {
+    return (
+      <>
+        {currentNote.noteContent.map((note) => (
+          <div
+            key={note.contentId}
+            data-content-zone-id={note.contentId}
+            className="flowing-plain-text-wrapper"
+          >
+            <FlowingPlainText
+              content={note.content}
+              contentId={note.contentId}
+              setNoteContent={setNoteContent}
+              addNoteContent={addNoteContent}
+              focusId={focusId}
+              setFocusId={setFocusId}
+            />
+          </div>
+        ))}
+      </>
+    )
+  }
 
   useEffect(() => {
     /** 从路由获取笔记id */
@@ -23,7 +53,7 @@ const NoteBody = () => {
         setNoteTitle={setNoteTitle}
       />
       <FlowingNoteInfo />
-      <FlowingPlainText content={currentNote.noteContent} />
+      <NoteContent />
     </div>
   )
 }
