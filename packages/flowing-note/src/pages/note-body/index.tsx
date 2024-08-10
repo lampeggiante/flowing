@@ -26,7 +26,7 @@ const NoteBody = () => {
           <div
             key={note.contentId}
             data-content-zone-id={note.contentId}
-            className="flowing-plain-text-wrapper"
+            className="note-body-item"
           >
             <FlowingPlainText
               content={note.content}

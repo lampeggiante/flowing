@@ -13,12 +13,11 @@
   --alice-title-color: #0079d2;
   --alice-font-color: rgb(102, 55, 24);
   --alice-important-color: rgb(162, 42, 42);
-  background: var(--alice-bg-color);
-  font-size: 18px;
-  font-family: 'Helvetica';
 }
 
 .flowing-plain-text {
+  font-size: 18px;
+  font-family: 'Helvetica';
   p {
     font-family: firacode, lxgw, sans-serif;
   }

@@ -1,8 +1,9 @@
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import './index.scss'
 import { NoteContentNode } from '@/hooks/useNoteState'
+import { flowingDebounce } from '@/utils'
 
 interface FlowingPlainTextProps {
   content: string
@@ -22,6 +23,15 @@ const FlowingPlainText = (props: FlowingPlainTextProps) => {
     focusId,
     setFocusId
   } = props
+
+  const debounceSetContent = useCallback(
+    flowingDebounce(() => {
+      console.log('plain text debounce 准备更新')
+      setNoteContent({ contentId, content: editor!.getHTML() })
+    }, 2000),
+    []
+  )
+
   const editor = useEditor({
     extensions: [StarterKit],
     content: content,
@@ -30,14 +40,15 @@ const FlowingPlainText = (props: FlowingPlainTextProps) => {
         class: 'flowing-plain-text'
       },
       handleDOMEvents: {
-        keydown: (_, event) => {
+        keydown: (view, event) => {
+          console.log('view', view)
           switch (event.key) {
             case 'Enter': {
+              __DEV__ && console.log('plain text 按下了回车')
               event.preventDefault()
               const newNoteId = addNoteContent(contentId)
+              setNoteContent({ contentId, content: editor!.getHTML() })
               setFocusId(newNoteId)
-              console.log('plain text 想要创建新的block')
-              console.log('text:', editor?.getHTML())
               break
             }
           }
@@ -45,11 +56,8 @@ const FlowingPlainText = (props: FlowingPlainTextProps) => {
       }
     },
     /** 编辑事件 */
-    onUpdate: ({ editor }) => {
-      console.log('plain text 更新了')
-      console.log('text:', editor?.getHTML())
-      const newContent = editor?.getHTML()
-      setNoteContent({ contentId, content: newContent })
+    onUpdate: () => {
+      debounceSetContent()
     }
   })
 
