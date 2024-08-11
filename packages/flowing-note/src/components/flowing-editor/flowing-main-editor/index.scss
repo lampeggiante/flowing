@@ -1,0 +1,23 @@
+@import '@/themes/alice/alice.scss';
+
+.flowing-main-editor {
+  width: 100%;
+  word-break: break-all;
+
+  /** block 化 */
+  p,
+  pre,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  img,
+  ul,
+  blockquote table {
+    padding: 4px 0;
+    margin: 8px 0;
+    border-radius: 4px;
+  }
+}

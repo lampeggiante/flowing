@@ -18,10 +18,13 @@
     "react-router-dom": "^6.26.0"
   },
   "devDependencies": {
+    "@tiptap/extension-color": "^2.5.9",
     "@tiptap/extension-document": "^2.5.9",
     "@tiptap/extension-heading": "^2.5.9",
+    "@tiptap/extension-list-item": "^2.5.9",
     "@tiptap/extension-paragraph": "^2.5.9",
     "@tiptap/extension-text": "^2.5.9",
+    "@tiptap/extension-text-style": "^2.5.9",
     "@tiptap/pm": "^2.5.9",
     "@tiptap/react": "^2.5.9",
     "@tiptap/starter-kit": "^2.5.9",
