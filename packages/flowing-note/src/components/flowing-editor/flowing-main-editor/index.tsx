@@ -11,7 +11,7 @@ import StarterKit from '@tiptap/starter-kit'
 import './index.scss'
 import FlowingFloatingMenu from './flowing-floating-menu'
 import FlowingBubbleMenu from './flowing-bubble-menu'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface FlowingPlainTextProps {
   content: string
@@ -34,16 +34,14 @@ const extensions = [
 const FlowingMainEditor = (props: FlowingPlainTextProps) => {
   const { content } = props
 
-  const editorProps = {
-    attributes: {
-      class: 'flowing-main-editor'
-    }
-  }
-
   const editor = useEditor({
     extensions,
     content: content,
-    editorProps
+    editorProps: {
+      attributes: {
+        class: 'flowing-main-editor'
+      }
+    }
   })
 
   useEffect(() => {
@@ -54,7 +52,17 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
   return (
     <>
       <EditorContent editor={editor} />
-      <FloatingMenu editor={editor}>
+      <FloatingMenu
+        editor={editor}
+        shouldShow={({ editor, state }) => {
+          const from = state.selection.from
+          const to = state.selection.to
+          const empty = from === to
+          const lastText = editor?.getText()[from - 2]
+          const previousText = editor?.getText()[from - 3]
+          return empty && lastText === '/' && previousText === '\n'
+        }}
+      >
         <FlowingFloatingMenu />
       </FloatingMenu>
       <BubbleMenu editor={editor}>

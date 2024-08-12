@@ -1,0 +1,14 @@
+.flowing-floating-menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100px;
+  height: 200px;
+  border-radius: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--flowing-front-color);
+  border: var(--flowing-border-small) solid var(--flowing-border-color);
+  transform: translateX(-150px);
+}
