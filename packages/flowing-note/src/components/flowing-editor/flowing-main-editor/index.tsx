@@ -12,6 +12,7 @@ import './index.scss'
 import FlowingFloatingMenu from './flowing-floating-menu'
 import FlowingBubbleMenu from './flowing-bubble-menu'
 import { useEffect, useState } from 'react'
+import { log } from '@/utils/log'
 
 interface FlowingPlainTextProps {
   content: string
@@ -45,7 +46,7 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
   })
 
   useEffect(() => {
-    __DEV__ && console.log('当前文档内容更新', content)
+    __DEV__ && log('当前文档内容更新', content)
     editor?.commands.setContent(content)
   }, [content])
 

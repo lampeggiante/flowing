@@ -2,6 +2,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import './index.scss'
 import { useEffect } from 'react'
 import StarterKit from '@tiptap/starter-kit'
+import { log } from '@/utils/log'
 
 interface FlowingTopHeadingProps {
   noteTitle: string
@@ -21,7 +22,7 @@ const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
       handleDOMEvents: {
         keydown: (v, e) => {
           if (e.key === 'Enter') {
-            __DEV__ && console.log(v, e)
+            __DEV__ && log(v, e)
             e.preventDefault()
             editor?.commands.blur()
           }
