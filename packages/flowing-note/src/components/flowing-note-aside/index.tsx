@@ -13,20 +13,24 @@ export function FlowingNoteAside() {
   const [rightBtn, setRightBtn] = useState<HTMLElement | null>(null)
 
   /** hooks */
-  const { openAside, setOpenAside } = useContext(GlobalConfigCtx)
+  const { openAside, setOpenAside, asideWidth, setAsideWidth } =
+    useContext(GlobalConfigCtx)
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!container) return
     const minWidth = parseInt(container.style.minWidth)
     const vw = document.body.clientWidth
     const maxWidth = (parseInt(container.style.maxWidth) * vw) / 100
+    let targetWidth
     if (e.clientX - container.offsetLeft > maxWidth) {
-      container.style.width = maxWidth + 'px'
+      targetWidth = maxWidth + 'px'
     } else if (e.clientX - container.offsetLeft < minWidth) {
-      container.style.width = minWidth + 'px'
+      targetWidth = minWidth + 'px'
     } else {
-      container.style.width = e.clientX - container.offsetLeft + 'px'
+      targetWidth = e.clientX - container.offsetLeft + 'px'
     }
+    container.style.width = targetWidth
+    setAsideWidth && setAsideWidth(targetWidth)
   }
 
   const handlePreventSelect = (e: any) => e.preventDefault()
@@ -89,7 +93,10 @@ export function FlowingNoteAside() {
     <aside>
       <div
         className="aside-container"
-        style={{ display: openAside ? 'block' : 'none' }}
+        style={{
+          display: openAside ? 'block' : 'none',
+          width: asideWidth || '250px'
+        }}
       >
         <div className="aside-cursor" />
         <AsideHeader />
