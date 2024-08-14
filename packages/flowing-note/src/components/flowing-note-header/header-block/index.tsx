@@ -14,5 +14,10 @@ export function HeaderBlock() {
       block.style.display = openAside ? 'none' : 'inline'
     }
   }, [openAside])
-  return <span className="app-header-block" />
+  return (
+    <span
+      className="app-header-block"
+      style={{ display: openAside ? 'none' : 'inline' }}
+    />
+  )
 }

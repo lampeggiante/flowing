@@ -42,16 +42,24 @@ export function FlowingNoteAside() {
     document.removeEventListener('selectstart', handlePreventSelect)
   }
 
+  const handleTabOpen = () => {
+    container!.style.display = 'block'
+    leftBtn!.style.display = 'flex'
+    rightBtn!.style.display = 'none'
+  }
+
+  const handleTabClose = () => {
+    container!.style.display = 'none'
+    leftBtn!.style.display = 'none'
+    rightBtn!.style.display = 'flex'
+  }
+
   const handleBtnClick = () => {
     if (container && leftBtn && rightBtn) {
       if (openAside) {
-        container.style.display = 'none'
-        leftBtn.style.display = 'none'
-        rightBtn.style.display = 'flex'
+        handleTabClose()
       } else {
-        container.style.display = 'block'
-        leftBtn.style.display = 'flex'
-        rightBtn.style.display = 'none'
+        handleTabOpen()
       }
       setOpenAside && setOpenAside(!openAside)
     }
@@ -76,13 +84,18 @@ export function FlowingNoteAside() {
       document.removeEventListener('mouseup', handleMouseUp)
     }
   }, [container])
+
   return (
     <aside>
-      <div className="aside-container">
+      <div
+        className="aside-container"
+        style={{ display: openAside ? 'block' : 'none' }}
+      >
         <div className="aside-cursor" />
         <AsideHeader />
         <FlowingButton
           className="aside-button aside-button-left"
+          style={{ display: openAside ? 'flex' : 'none' }}
           onClick={handleBtnClick}
           prefixIcon={<LeftOutlined />}
         />
@@ -92,7 +105,7 @@ export function FlowingNoteAside() {
         className="aside-button aside-button-right"
         onClick={handleBtnClick}
         prefixIcon={<RightOutlined />}
-        style={{ display: 'none' }}
+        style={{ display: openAside ? 'none' : 'flex' }}
       />
     </aside>
   )
