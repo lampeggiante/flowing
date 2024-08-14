@@ -1,4 +1,3 @@
-import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { createContext, ReactNode, useMemo, useState } from 'react'
 
 export const GlobalConfigCtx: React.Context<GlobalConfig> = createContext(
@@ -6,12 +5,7 @@ export const GlobalConfigCtx: React.Context<GlobalConfig> = createContext(
 )
 
 export function ConfigContext({ children }: { children: ReactNode }) {
-  const { getItem } = useLocalStorage()
-  const storagedConfig: GlobalConfig = getItem('globalConfig') || {
-    openAside: true,
-    globalTheme: 'light'
-  }
-  const [open, setOpen] = useState<boolean>(storagedConfig.openAside)
+  const [open, setOpen] = useState<boolean>(true)
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const globalConfig: GlobalConfig = useMemo(() => {
     return {
