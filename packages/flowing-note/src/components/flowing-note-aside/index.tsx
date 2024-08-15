@@ -33,10 +33,10 @@ export function FlowingNoteAside() {
     setAsideWidth(targetWidth)
   }
 
-  const handlePreventSelect = (e: any) => e.preventDefault()
+  const handlePreventSelect = (e: Event) => e.preventDefault()
 
-  const handleMouseDown = (e: any) => {
-    if (e.target.className !== 'aside-cursor') return
+  const handleMouseDown = (e: Event) => {
+    if ((e.target as HTMLElement).className !== 'aside-cursor') return
     document.addEventListener('selectstart', handlePreventSelect)
     document.addEventListener('mousemove', handleMouseMove)
   }

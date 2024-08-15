@@ -23,6 +23,9 @@ importers:
       '@eslint/js':
         specifier: ^9.6.0
         version: 9.6.0
+      dayjs:
+        specifier: ^1.11.12
+        version: 1.11.12
       eslint:
         specifier: ^9.6.0
         version: 9.6.0
