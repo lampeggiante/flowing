@@ -30,7 +30,7 @@ export function FlowingNoteAside() {
       targetWidth = e.clientX - container.offsetLeft + 'px'
     }
     container.style.width = targetWidth
-    setAsideWidth && setAsideWidth(targetWidth)
+    setAsideWidth(targetWidth)
   }
 
   const handlePreventSelect = (e: any) => e.preventDefault()
@@ -65,7 +65,7 @@ export function FlowingNoteAside() {
       } else {
         handleTabOpen()
       }
-      setOpenAside && setOpenAside(!openAside)
+      setOpenAside(!openAside)
     }
   }
 

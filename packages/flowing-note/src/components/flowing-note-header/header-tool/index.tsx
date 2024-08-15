@@ -9,19 +9,17 @@ export function HeaderTool() {
 
   const handleSkinChange = useCallback(() => {
     const toTheme = globalTheme === 'dark' ? 'light' : 'dark'
-    setGlobalTheme && setGlobalTheme(toTheme)
+    setGlobalTheme(toTheme)
   }, [globalTheme])
 
   return (
     <div className="app-header-tool">
-      {setGlobalTheme && (
-        <FlowingButton
-          className="flowing-frontColor flowing-fontColor app-header-tool-item"
-          onClick={handleSkinChange}
-        >
-          <SkinOutlined />
-        </FlowingButton>
-      )}
+      <FlowingButton
+        className="flowing-frontColor flowing-fontColor app-header-tool-item"
+        onClick={handleSkinChange}
+      >
+        <SkinOutlined />
+      </FlowingButton>
     </div>
   )
 }
