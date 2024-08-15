@@ -11,7 +11,7 @@ export interface IndexedDBConfig {
   tables: indexedDBTable | indexedDBTable[]
 }
 
-export function initIndexedDB(params: IndexedDBConfig) {
+function initIndexedDB(params: IndexedDBConfig) {
   const { dbName, initVersion, tables } = params
   const openReq = indexedDB.open(dbName, initVersion)
   let db: IDBDatabase | null = null
@@ -98,9 +98,11 @@ export function initIndexedDB(params: IndexedDBConfig) {
 }
 
 let instance: ReturnType<typeof initIndexedDB> | null = null
-export function useIndexedDB(params: IndexedDBConfig) {
+function useIndexedDB(params: IndexedDBConfig) {
   if (!instance) {
     instance = initIndexedDB(params)
   }
   return instance
 }
+
+export default useIndexedDB
