@@ -48,7 +48,7 @@ export function ConfigContext({ children }: { children: ReactNode }) {
       asideWidth: width,
       setAsideWidth
     }
-  }, [open, setOpen, theme, setTheme])
+  }, [open, setOpen, theme, setTheme, width, setAsideWidth])
 
   return (
     <GlobalConfigCtx.Provider value={globalConfig}>
