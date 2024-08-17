@@ -1,5 +1,5 @@
 {
-  "name": "flowing-server",
+  "name": "@flowing/server",
   "version": "1.0.0",
   "description": "server side for flowing",
   "main": "index.js",

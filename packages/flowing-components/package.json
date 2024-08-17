@@ -1,5 +1,5 @@
 {
-  "name": "flowing-components",
+  "name": "@flowing/components",
   "version": "1.0.0",
   "description": "flowing components",
   "module": "index.ts",
