@@ -53,7 +53,7 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
   })
 
   useEffect(() => {
-    __DEV__ && log('当前文档内容更新', content)
+    log('当前文档内容更新', content)
     editor?.commands.setContent(content)
   }, [content])
 
