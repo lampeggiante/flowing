@@ -6,11 +6,12 @@ import { log } from '@/utils/log'
 
 interface FlowingTopHeadingProps {
   noteTitle: string
+  editable: boolean
   setNoteTitle: (title: string) => void
 }
 
 const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
-  const { noteTitle, setNoteTitle } = props
+  const { noteTitle, editable, setNoteTitle } = props
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -32,8 +33,13 @@ const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
   })
 
   useEffect(() => {
+    editor?.setEditable(editable)
+  }, [editable])
+
+  useEffect(() => {
     editor?.commands.setContent(noteTitle)
   }, [noteTitle])
+
   return <EditorContent editor={editor} />
 }
 

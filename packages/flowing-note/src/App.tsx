@@ -20,7 +20,7 @@ function App() {
   const WelcomePage = () => {
     return (
       <div className="app-welcome">
-        欢迎来到 <span className="app-welcome-title">Flowing</span>
+        欢迎来到<span className="app-welcome-title">Flowing</span>
       </div>
     )
   }
@@ -40,14 +40,10 @@ function App() {
     <ConfigContext>
       <div className="app-container">
         <FlowingNoteAside />
-        {id ? (
-          <div className="app-content">
-            <FlowingNoteHeader />
-            <FlowingNoteMain />
-          </div>
-        ) : (
-          <WelcomePage />
-        )}
+        <div className="app-content">
+          <FlowingNoteHeader />
+          {id ? <FlowingNoteMain /> : <WelcomePage />}
+        </div>
       </div>
     </ConfigContext>
   )
