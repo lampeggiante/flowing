@@ -9,13 +9,14 @@ import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
 import { useEffect } from 'react'
 import { noteDB } from './services/note-store'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { init } from './services/init'
 import { useNoteState } from './hooks/useNoteState'
 import { info } from './utils/log'
 
 function App() {
-  const { id } = useParams()
+  const location = useLocation()
+  const id = new URLSearchParams(location.search).get('id')
   const { setCurrentNote } = useNoteState()
 
   const WelcomePage = () => {

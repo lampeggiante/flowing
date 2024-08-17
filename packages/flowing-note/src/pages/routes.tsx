@@ -14,7 +14,7 @@ export default [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: getPath('/wiki/:id'),
+        path: getPath('/wiki'),
         element: <NoteBody />
       }
     ]

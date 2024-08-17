@@ -55,7 +55,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
 
   return (
     <>
-      <Link to={`${baseUrl}/wiki/${id}`} style={{ width: '100%' }}>
+      <Link to={`${baseUrl}/wiki?id=${id}`} style={{ width: '100%' }}>
         <div ref={ref} className="aside-note-tree-item" {...rest}>
           <span className={caretClsName} onClick={handleExpand}>
             {children.length > 0 &&

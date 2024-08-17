@@ -1,8 +1,7 @@
 import Tree from './tree'
 import './aside-note.scss'
 import { noteDB, storeName, storeNameMap } from '@/services/note-store'
-import { useCallback, useEffect } from 'react'
-import { log } from '@/utils/log'
+import { useEffect } from 'react'
 import { useNoteTree } from '@/hooks/useNoteTree'
 
 const prefix = 'aside-note-tree'
@@ -10,11 +9,11 @@ const prefix = 'aside-note-tree'
 const AsideNoteTree = () => {
   const { noteTree, updateNoteTree } = useNoteTree()
   const storeTitle = storeNameMap[storeName]
-  const initTreeData = useCallback(async () => {
-    const store = await noteDB.instance?.getAllStore(storeTitle)
+  const initTreeData = async () => {
+    const store = await noteDB.instance?.getAllStore(storeName)
     if (!store) return
     const data = store.filter((item: any) => item.noteId !== 0)
-    log('initTreeData', data)
+    console.log('initTreeData', data)
     const visited = new Set()
     function traverse(id?: number) {
       let ans = []
@@ -36,13 +35,14 @@ const AsideNoteTree = () => {
       return ans
     }
     const treeDataList = traverse()
-    log('treeDataList', treeDataList)
+    console.log('treeDataList', treeDataList)
     updateNoteTree(treeDataList)
-  }, [])
+  }
 
   useEffect(() => {
+    if (noteTree.length > 0) return
     initTreeData()
-  }, [])
+  }, [initTreeData])
 
   return (
     <div className={`${prefix}-container p-2`}>
