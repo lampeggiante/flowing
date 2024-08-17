@@ -7,8 +7,7 @@ export default {
     },
     {
       id: 2,
-      title:
-        'Title 2 with a very long description that needs to be truncated to fit within the UI',
+      title: 'Title 2',
       children: [
         {
           id: 21,
@@ -32,7 +31,7 @@ export default {
     },
     {
       id: 4,
-      title: 'Title 4 with special characters: !@#$%^&*()',
+      title: 'Title 4',
       children: [
         {
           id: 41,
@@ -42,11 +41,11 @@ export default {
     },
     {
       id: 5,
-      title: 'Title 5 with numbers 1234567890'
+      title: 'Title 5'
     },
     {
       id: 6,
-      title: 'Title 6 with spaces and special characters: !@#$%^&*()',
+      title: 'Title 6',
       children: [
         {
           id: 61,
@@ -60,12 +59,11 @@ export default {
     },
     {
       id: 7,
-      title: 'Title 7 with numbers 1234567890 and spaces'
+      title: 'Title 7'
     },
     {
       id: 8,
-      title:
-        'Title 8 with special characters: !@#$%^&*() and numbers 1234567890',
+      title: 'Title 8',
       children: [
         {
           id: 81,
@@ -75,12 +73,11 @@ export default {
     },
     {
       id: 9,
-      title: 'Title 9 with spaces and numbers 1234567890'
+      title: 'Title 9'
     },
     {
       id: 10,
-      title:
-        'Title 10 with a very long description that needs to be truncated to fit within the UI and special characters: !@#$%^&*()',
+      title: 'Title 10',
       children: [
         {
           id: 101,

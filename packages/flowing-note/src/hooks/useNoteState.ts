@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { noteDB, noteDBStoreName } from '@/services/note-store'
 import { log } from '@/utils/log'
-import { titleWrap } from '@/utils/wrap'
+import { paragraphWrap } from '@/utils/wrap'
 
 export interface NoteContentNode {
   contentId: number
@@ -45,7 +45,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         set({
           currentNote: {
             noteId,
-            noteTitle: titleWrap(title),
+            noteTitle: paragraphWrap(title),
             noteContent: content
           }
         })
@@ -59,7 +59,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           content: state.currentNote.noteContent
         })
         return {
-          currentNote: { ...state.currentNote, noteTitle: titleWrap(title) }
+          currentNote: { ...state.currentNote, noteTitle: paragraphWrap(title) }
         }
       })
     }

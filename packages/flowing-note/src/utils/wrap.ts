@@ -1,3 +1,3 @@
-export function titleWrap(text: string) {
+export function paragraphWrap(text: string) {
   return `<h1>${text}</h1>`
 }

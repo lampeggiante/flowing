@@ -1,20 +1,28 @@
 import { EditorContent, useEditor } from '@tiptap/react'
+import Document from '@tiptap/extension-document'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
+import CharacterCount from '@tiptap/extension-character-count'
 import './index.scss'
 import { useEffect } from 'react'
-import StarterKit from '@tiptap/starter-kit'
 import { log } from '@/utils/log'
 
 interface FlowingTopHeadingProps {
   noteTitle: string
-  editable: boolean
+  editable?: boolean
   setNoteTitle: (title: string) => void
 }
 
 const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
-  const { noteTitle, editable, setNoteTitle } = props
+  const { noteTitle, editable = true, setNoteTitle } = props
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      Document,
+      Paragraph,
+      Text,
+      CharacterCount.configure({ limit: 30 })
+    ],
     editorProps: {
       attributes: {
         class: 'flowing-top-heading',
@@ -40,6 +48,7 @@ const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
   }, [editable])
 
   useEffect(() => {
+    if (editor?.isFocused) return
     editor?.commands.setContent(noteTitle)
   }, [noteTitle])
 

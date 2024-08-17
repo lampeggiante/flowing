@@ -8,3 +8,5 @@ declare interface GlobalConfig {
 }
 
 declare const __DEV__: boolean
+
+declare module '@tiptap/extension-character-count'

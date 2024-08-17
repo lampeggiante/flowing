@@ -12,6 +12,7 @@ import { noteDB } from './services/note-store'
 import { useParams } from 'react-router-dom'
 import { init } from './services/init'
 import { useNoteState } from './hooks/useNoteState'
+import { info } from './utils/log'
 
 function App() {
   const { id } = useParams()
@@ -28,9 +29,11 @@ function App() {
   useEffect(() => {
     if (!id) {
       setCurrentNote(0)
+      info('没有id，默认设置为0')
       return
     }
     setCurrentNote(parseInt(id))
+    info(`id为${id}，设置为当前笔记`)
   }, [id])
 
   useEffect(() => {
