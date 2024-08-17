@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import {
   FlowingMainEditor,
   FlowingTopHeading
@@ -6,15 +5,26 @@ import {
 import { useNoteState } from '@/hooks/useNoteState'
 import './note-body.scss'
 import FlowingNoteInfo from '@/components/flowing-note-main/flowing-note-info'
+import { useNoteTree } from '@/hooks/useNoteTree'
+import { useCallback } from 'react'
 
 const NoteBody = () => {
   const { currentNote, setNoteTitle, setNoteContent } = useNoteState()
+  const { updateTreeItemTitle } = useNoteTree()
+
+  const updateNoteTitle = useCallback(
+    (title: string) => {
+      updateTreeItemTitle(currentNote.noteId, title)
+      setNoteTitle(title)
+    },
+    [currentNote, updateTreeItemTitle, setNoteTitle]
+  )
 
   return (
     <div className="note-body">
       <FlowingTopHeading
         noteTitle={currentNote.noteTitle}
-        setNoteTitle={setNoteTitle}
+        setNoteTitle={updateNoteTitle}
       />
       <FlowingNoteInfo />
       <FlowingMainEditor

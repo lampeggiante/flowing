@@ -1,16 +1,14 @@
 import Tree from './tree'
 import './aside-note.scss'
 import { noteDB, noteDBStoreName } from '@/services/note-store'
-import { Children, useCallback, useEffect, useState } from 'react'
-import noteTitleList from '@/mock/note-title-list'
+import { useCallback, useEffect } from 'react'
 import { log } from '@/utils/log'
-import { TreeItemProps } from './tree-item'
+import { useNoteTree } from '@/hooks/useNoteTree'
 
 const prefix = 'aside-note-tree'
 
 const AsideNoteTree = () => {
-  // const { treeData } = noteTitleList
-  const [treeData, setTreeData] = useState<TreeItemProps[]>([])
+  const { noteTree, updateNoteTree } = useNoteTree()
   const storeTitle = noteDBStoreName.storeName
   const initTreeData = useCallback(async () => {
     const store = await noteDB.instance?.getAllStore(storeTitle)
@@ -39,7 +37,7 @@ const AsideNoteTree = () => {
     }
     const treeDataList = traverse()
     log('treeDataList', treeDataList)
-    setTreeData(treeDataList)
+    updateNoteTree(treeDataList)
   }, [])
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const AsideNoteTree = () => {
 
   return (
     <div className={`${prefix}-container p-2`}>
-      {treeData && <Tree treeData={treeData} title={storeTitle} />}
+      {noteTree.length > 0 && <Tree treeData={noteTree} title={storeTitle} />}
     </div>
   )
 }

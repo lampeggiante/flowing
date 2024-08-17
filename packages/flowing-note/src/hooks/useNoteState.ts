@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { noteDB, noteDBStoreName } from '@/services/note-store'
 import { log } from '@/utils/log'
 import { paragraphWrap } from '@/utils/wrap'
+import { useNoteTree } from './useNoteTree'
 
 export interface NoteContentNode {
   contentId: number
