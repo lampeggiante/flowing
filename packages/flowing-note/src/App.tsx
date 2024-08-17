@@ -7,8 +7,15 @@ import { FlowingNoteAside } from './components/flowing-note-aside'
 import { FlowingNoteHeader } from './components/flowing-note-header'
 import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
+import { useEffect } from 'react'
+import { noteDB } from './services/note-store'
 
 function App() {
+  useEffect(() => {
+    return () => {
+      noteDB.instance!.closeDatabase()
+    }
+  })
   return (
     <ConfigContext>
       <div className="app-container">
