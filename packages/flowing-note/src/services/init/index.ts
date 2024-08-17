@@ -4,6 +4,7 @@ import {
   noteDB,
   noteDBName,
   noteDBStoreName,
+  storeName,
   noteDBVersion
 } from '../note-store'
 import { injectDBData } from './utils'
@@ -19,7 +20,7 @@ function initDB() {
   const data = noteTitleList.treeData
   const len = data.length
   for (let i = 0; i < len; i++) {
-    injectDBData(noteDB.instance, noteDBStoreName.storeName, data[i])
+    injectDBData(noteDB.instance, storeName, data[i])
   }
 }
 

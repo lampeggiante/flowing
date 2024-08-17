@@ -1,8 +1,7 @@
 import { create } from 'zustand'
-import { noteDB, noteDBStoreName } from '@/services/note-store'
+import { noteDB, storeName } from '@/services/note-store'
 import { log } from '@/utils/log'
 import { paragraphWrap } from '@/utils/wrap'
-import { useNoteTree } from './useNoteTree'
 
 export interface NoteContentNode {
   contentId: number
@@ -43,7 +42,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         })
         return
       }
-      noteDB.instance?.getStore(noteDBStoreName.storeName, id).then((store) => {
+      noteDB.instance?.getStore(storeName, id).then((store) => {
         log('setCurrentNote', store)
         const { noteId, title, content, parent } = store
         set({
@@ -58,7 +57,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
     },
     setNoteTitle: (title: string) => {
       set((state) => {
-        noteDB.instance?.updateStore(noteDBStoreName.storeName, {
+        noteDB.instance?.updateStore(storeName, {
           noteId: state.currentNote.noteId,
           title,
           content: state.currentNote.noteContent,
@@ -71,7 +70,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
     },
     setNoteContent: (content: string) => {
       set((state) => {
-        noteDB.instance?.updateStore(noteDBStoreName.storeName, {
+        noteDB.instance?.updateStore(storeName, {
           noteId: state.currentNote.noteId,
           title: state.currentNote.noteTitle,
           content,

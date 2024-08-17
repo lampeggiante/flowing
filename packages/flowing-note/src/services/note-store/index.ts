@@ -7,9 +7,13 @@ type NoteDB = {
 
 export const noteDBName = 'flowing-note'
 export const noteDBVersion = 1
+export const storeName = 'notes'
 export const noteDBStoreName: IdbStoreType = {
-  storeName: 'notes',
+  storeName,
   keyPath: 'noteId'
+}
+export enum storeNameMap {
+  notes = '我的知识库'
 }
 
 export const noteDB: NoteDB = {

@@ -1,6 +1,6 @@
 import Tree from './tree'
 import './aside-note.scss'
-import { noteDB, noteDBStoreName } from '@/services/note-store'
+import { noteDB, storeName, storeNameMap } from '@/services/note-store'
 import { useCallback, useEffect } from 'react'
 import { log } from '@/utils/log'
 import { useNoteTree } from '@/hooks/useNoteTree'
@@ -9,7 +9,7 @@ const prefix = 'aside-note-tree'
 
 const AsideNoteTree = () => {
   const { noteTree, updateNoteTree } = useNoteTree()
-  const storeTitle = noteDBStoreName.storeName
+  const storeTitle = storeNameMap[storeName]
   const initTreeData = useCallback(async () => {
     const store = await noteDB.instance?.getAllStore(storeTitle)
     if (!store) return
