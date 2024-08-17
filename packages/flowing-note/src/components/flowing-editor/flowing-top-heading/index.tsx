@@ -48,7 +48,7 @@ const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
   }, [editable])
 
   useEffect(() => {
-    if (editor?.isFocused) return
+    if (noteTitle && editor?.isFocused) return
     editor?.commands.setContent(noteTitle)
   }, [noteTitle])
 
