@@ -47,7 +47,7 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
       }
     },
     onUpdate: ({ editor }) => {
-      if (!editor.isFocused) return
+      if (editor.isFocused) return
       setContent(editor.getHTML())
     }
   })
