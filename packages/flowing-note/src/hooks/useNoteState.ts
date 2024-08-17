@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 import { useMockData } from './useMockData'
+import { noteDB, noteDBStoreName } from '@/services/note-store'
+import { log } from '@/utils/log'
 
 export interface NoteContentNode {
   contentId: number
@@ -21,8 +23,6 @@ export interface UseNoteMethodsType {
   setNoteTitle: (title: string) => void
 }
 
-const { getNoteTitle } = useMockData()
-
 export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
   (set) => ({
     currentNote: {
@@ -31,13 +31,16 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
       noteContent: '<p></p>'
     },
     setCurrentNote: (id: number) => {
-      const newNoteTitle = getNoteTitle(id)
-      set({
-        currentNote: {
-          noteId: id,
-          noteTitle: `<h1>${newNoteTitle}</h1>`,
-          noteContent: `<p>test${newNoteTitle}</p>`
-        }
+      noteDB.instance?.getStore(noteDBStoreName.storeName, id).then((store) => {
+        log('store', store)
+        const { noteId, title, content } = store
+        set({
+          currentNote: {
+            noteId,
+            noteTitle: `<h1>${title}</h1>`,
+            noteContent: content
+          }
+        })
       })
     },
     setNoteTitle: (title: string) => {
