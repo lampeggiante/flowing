@@ -39,9 +39,6 @@ function App() {
 
   useEffect(() => {
     init()
-    return () => {
-      noteDB.instance!.closeDatabase()
-    }
   }, [])
   return (
     <ConfigContext>

@@ -39,6 +39,7 @@ const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
       }
     },
     onUpdate: ({ editor }) => {
+      if (!editor.getText()) return
       setNoteTitle(editor.getText())
     }
   })
