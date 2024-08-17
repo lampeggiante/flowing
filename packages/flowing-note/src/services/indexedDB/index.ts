@@ -59,7 +59,9 @@ class IndexedDBService {
     })
   }
   public closeDatabase() {
-    this.db.close()
+    if (!this.db) return
+    log('close db', this.db.close)
+    this.db.close && this.db.close()
   }
   private async readTx(storeName: string) {
     log('readTx', this.db)

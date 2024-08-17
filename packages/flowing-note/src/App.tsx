@@ -9,21 +9,45 @@ import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
 import { useEffect } from 'react'
 import { noteDB } from './services/note-store'
+import { useParams } from 'react-router-dom'
+import { init } from './services/init'
+import { useNoteState } from './hooks/useNoteState'
 
 function App() {
+  const { id } = useParams()
+  const { setCurrentNote } = useNoteState()
+
+  const WelcomePage = () => {
+    return (
+      <div className="app-welcome">
+        欢迎来到 <span className="app-welcome-title">Flowing</span>
+      </div>
+    )
+  }
+
   useEffect(() => {
+    if (!id) return
+    setCurrentNote(parseInt(id))
+  }, [id])
+
+  useEffect(() => {
+    init()
     return () => {
       noteDB.instance!.closeDatabase()
     }
-  })
+  }, [])
   return (
     <ConfigContext>
       <div className="app-container">
         <FlowingNoteAside />
-        <div className="app-content">
-          <FlowingNoteHeader />
-          <FlowingNoteMain />
-        </div>
+        {id ? (
+          <div className="app-content">
+            <FlowingNoteHeader />
+            <FlowingNoteMain />
+          </div>
+        ) : (
+          <WelcomePage />
+        )}
       </div>
     </ConfigContext>
   )

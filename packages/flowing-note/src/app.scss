@@ -70,6 +70,17 @@
   flex-direction: column;
 }
 
+.app-welcome {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+  font-weight: 900;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--flowing-front-color);
+}
+
 .flowing-frontColor {
   background-color: var(--flowing-front-color);
 }
