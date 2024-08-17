@@ -47,12 +47,12 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
       }
     },
     onUpdate: ({ editor }) => {
-      if (editor.isFocused) return
       setContent(editor.getHTML())
     }
   })
 
   useEffect(() => {
+    if (editor?.isFocused) return
     log('当前文档内容更新', content)
     editor?.commands.setContent(content)
   }, [content])
