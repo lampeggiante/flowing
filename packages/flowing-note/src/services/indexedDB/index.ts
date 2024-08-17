@@ -29,7 +29,7 @@ class IndexedDBService {
     const _this = this
     log(`open db ${this.dbName} version ${this.dbVersion}`)
     this.db = await openDB(this.dbName, this.dbVersion, {
-      upgrade(db, oldVersion, newVersion, transaction, event) {
+      upgrade(db, oldVersion, newVersion) {
         log(`upgrade db from ${oldVersion} to ${newVersion}`)
         function createObjectStore(params: IdbStoreType) {
           const { storeName, keyPath } = params
@@ -62,11 +62,6 @@ class IndexedDBService {
     if (!this.db) return
     log('close db', this.db.close)
     this.db.close && this.db.close()
-  }
-  private async readTx(storeName: string) {
-    log('readTx', this.db)
-    await this.openDatabase()
-    return this.db.transaction(storeName, 'readonly').objectStore(storeName)
   }
   private async writeTx(storeName: string) {
     log('writeTx', this.db)

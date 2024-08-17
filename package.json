@@ -20,7 +20,8 @@
   },
   "scripts": {
     "prepare": "husky",
-    "commitlint": "commitlint --config commitlint.config.mjs -e -V"
+    "commitlint": "commitlint --config commitlint.config.mjs -e -V",
+    "gh-pages": "sh scripts/gh-pages.sh"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
