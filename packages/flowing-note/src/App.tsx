@@ -8,7 +8,6 @@ import { FlowingNoteHeader } from './components/flowing-note-header'
 import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
 import { useEffect } from 'react'
-import { noteDB } from './services/note-store'
 import { useLocation } from 'react-router-dom'
 import { init } from './services/init'
 import { useNoteState } from './hooks/useNoteState'
@@ -28,11 +27,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!id) {
-      setCurrentNote(0)
-      info('没有id，默认设置为0')
-      return
-    }
+    if (!id) return
     setCurrentNote(parseInt(id))
     info(`id为${id}，设置为当前笔记`)
   }, [id])
