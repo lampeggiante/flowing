@@ -1,4 +1,3 @@
-import { baseUrl } from '@/pages/routes'
 import {
   BarsOutlined,
   CaretRightOutlined,
