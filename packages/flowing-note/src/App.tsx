@@ -27,10 +27,10 @@ function App() {
   }
 
   useEffect(() => {
-    if (!id) return
+    if (!id || !setCurrentNote) return
     setCurrentNote(parseInt(id))
     info(`id为${id}，设置为当前笔记`)
-  }, [id])
+  }, [id, setCurrentNote])
 
   useEffect(() => {
     init()
