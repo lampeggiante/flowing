@@ -11,11 +11,14 @@ import StarterKit from '@tiptap/starter-kit'
 import './index.scss'
 import FlowingFloatingMenu from './flowing-floating-menu'
 import FlowingBubbleMenu from './flowing-bubble-menu'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { log } from '@/utils/log'
 
 interface FlowingPlainTextProps {
+  /** 笔记内容 */
   content: string
+  /** 持久化保存笔记 */
+  setContent: (content: string) => void
 }
 
 const extensions = [
@@ -33,7 +36,7 @@ const extensions = [
 ]
 
 const FlowingMainEditor = (props: FlowingPlainTextProps) => {
-  const { content } = props
+  const { content, setContent } = props
 
   const editor = useEditor({
     extensions,
@@ -42,6 +45,10 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
       attributes: {
         class: 'flowing-main-editor'
       }
+    },
+    onUpdate: ({ editor }) => {
+      if (!editor.isFocused) return
+      setContent(editor.getHTML())
     }
   })
 

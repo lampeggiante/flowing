@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useCallback } from 'react'
 import {
   FlowingMainEditor,
   FlowingTopHeading
@@ -9,13 +8,7 @@ import './note-body.scss'
 import FlowingNoteInfo from '@/components/flowing-note-main/flowing-note-info'
 
 const NoteBody = () => {
-  const { id } = useParams()
-  const { currentNote, setCurrentNote, setNoteTitle } = useNoteState()
-
-  useEffect(() => {
-    /** 从路由获取笔记id */
-    setCurrentNote(parseInt(id!))
-  }, [id])
+  const { currentNote, setNoteTitle, setNoteContent } = useNoteState()
 
   return (
     <div className="note-body">
@@ -24,7 +17,10 @@ const NoteBody = () => {
         setNoteTitle={setNoteTitle}
       />
       <FlowingNoteInfo />
-      <FlowingMainEditor content={currentNote.noteContent} />
+      <FlowingMainEditor
+        content={currentNote.noteContent}
+        setContent={setNoteContent}
+      />
     </div>
   )
 }

@@ -86,6 +86,7 @@ class IndexedDBService {
   }
   /** 更新记录 */
   public async updateStore(storeName: string, data: any) {
+    log(`update ${storeName} data: ${JSON.stringify(data)}`)
     await this.openDatabase()
     return (await this.writeTx(storeName)).put(data)
   }
