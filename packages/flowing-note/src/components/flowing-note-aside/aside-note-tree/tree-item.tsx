@@ -21,7 +21,7 @@ export interface TreeItemProps {
   title: string
   id: number
   pad?: number
-  children?: TreeItemProps[]
+  children: TreeItemProps[]
   style?: HTMLAttributes<HTMLDivElement>['style']
 }
 
@@ -31,7 +31,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   const [expanded, setExpanded] = useState<boolean>(false)
   const caretClsName =
     'aside-note-tree-item-icon aside-note-tree-item-caret' +
-    (children ? ' aside-note-tree-item-icon-hover' : '')
+    (children.length > 0 ? ' aside-note-tree-item-icon-hover' : '')
 
   const handleExpand = useCallback(
     (e: MouseEvent<HTMLSpanElement>) => {
@@ -58,7 +58,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
       <Link to={`${baseUrl}/wiki/${id}`} style={{ width: '100%' }}>
         <div ref={ref} className="aside-note-tree-item" {...rest}>
           <span className={caretClsName} onClick={handleExpand}>
-            {children &&
+            {children.length > 0 &&
               (expanded ? <CaretDownOutlined /> : <CaretRightOutlined />)}
           </span>
           <span

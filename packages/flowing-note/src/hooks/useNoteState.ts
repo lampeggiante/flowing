@@ -12,6 +12,7 @@ export interface FlowingNote {
   noteId: number
   noteTitle: string
   noteContent: string
+  parent: number | null
 }
 
 export interface UseNoteStateType {
@@ -27,7 +28,8 @@ export interface UseNoteMethodsType {
 export const emptyCurrentNote: FlowingNote = {
   noteId: 0,
   noteTitle: '<h1></h1>',
-  noteContent: '<p></p>'
+  noteContent: '<p></p>',
+  parent: null
 }
 
 export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
@@ -42,12 +44,13 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
       }
       noteDB.instance?.getStore(noteDBStoreName.storeName, id).then((store) => {
         log('setCurrentNote', store)
-        const { noteId, title, content } = store
+        const { noteId, title, content, parent } = store
         set({
           currentNote: {
             noteId,
             noteTitle: paragraphWrap(title),
-            noteContent: content
+            noteContent: content,
+            parent
           }
         })
       })
@@ -57,7 +60,8 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         noteDB.instance?.updateStore(noteDBStoreName.storeName, {
           noteId: state.currentNote.noteId,
           title,
-          content: state.currentNote.noteContent
+          content: state.currentNote.noteContent,
+          parent: state.currentNote.parent
         })
         return {
           currentNote: { ...state.currentNote, noteTitle: paragraphWrap(title) }
@@ -69,7 +73,8 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         noteDB.instance?.updateStore(noteDBStoreName.storeName, {
           noteId: state.currentNote.noteId,
           title: state.currentNote.noteTitle,
-          content
+          content,
+          parent: state.currentNote.parent
         })
         return {
           currentNote: { ...state.currentNote, noteContent: content }

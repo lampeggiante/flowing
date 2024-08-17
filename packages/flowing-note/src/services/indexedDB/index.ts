@@ -78,6 +78,11 @@ class IndexedDBService {
     await this.openDatabase()
     return await this.db.get(storeName, key)
   }
+  /** 获取某个存储的所有值 */
+  public async getAllStore(storeName: string) {
+    await this.openDatabase()
+    return await this.db.getAll(storeName)
+  }
   /** 添加记录 */
   public async addStore(storeName: string, data: any) {
     log(`add ${storeName} data: ${JSON.stringify(data)}`)
