@@ -26,7 +26,10 @@ function App() {
   }
 
   useEffect(() => {
-    if (!id) return
+    if (!id) {
+      setCurrentNote(0)
+      return
+    }
     setCurrentNote(parseInt(id))
   }, [id])
 
