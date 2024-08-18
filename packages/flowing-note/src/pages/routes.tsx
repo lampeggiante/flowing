@@ -9,7 +9,7 @@ export default [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/wiki',
+        path: '/wiki/:id',
         element: <NoteBody />
       }
     ]

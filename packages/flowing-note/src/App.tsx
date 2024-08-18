@@ -8,14 +8,13 @@ import { FlowingNoteHeader } from './components/flowing-note-header'
 import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { init } from './services/init'
 import { useNoteState } from './hooks/useNoteState'
 import { info } from './utils/log'
 
 function App() {
-  const location = useLocation()
-  const id = new URLSearchParams(location.search).get('id')
+  const { id } = useParams()
   const { setCurrentNote } = useNoteState()
 
   const WelcomePage = () => {
