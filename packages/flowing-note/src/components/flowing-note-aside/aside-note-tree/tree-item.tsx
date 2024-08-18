@@ -14,6 +14,7 @@ import {
   type MouseEvent
 } from 'react'
 import { Link } from 'react-router-dom'
+import { baseUrl } from '@/pages/routes'
 
 export interface TreeItemProps {
   prefixIcon?: ReactNode

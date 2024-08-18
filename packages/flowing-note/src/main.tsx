@@ -5,7 +5,7 @@ import 'normalize.css'
 import routes from './pages/routes.tsx'
 import 'dayjs/locale/zh-cn'
 
-const router = createBrowserRouter(routes)
+const router = createBrowserRouter(routes, { basename: process.env.PUBLIC_URL })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
