@@ -1,5 +1,6 @@
-import { log } from '@/utils/log'
 import { create } from 'zustand'
+import { createJSONStorage, persist } from 'zustand/middleware'
+import { log } from '@/utils/log'
 
 export interface NoteTreeItem {
   id: number
@@ -35,16 +36,24 @@ function traverseTree(tree: NoteTreeItem[], id: number, newTitle: string) {
   return tree.map((item) => traverse(item))
 }
 
-export const useNoteTree = create<NoteTreeState & NoteTreeActions>((set) => ({
-  noteTree: [],
-  updateNoteTree: (noteTree: NoteTreeItem[]) => set({ noteTree }),
-  updateTreeItemTitle: (id: number, newTitle: string) =>
-    set((state) => {
-      log('updateTreeItemTitle', id, newTitle)
-      const newTree = traverseTree(state.noteTree, id, newTitle)
-      log('newTree', newTree)
-      return {
-        noteTree: newTree
-      }
-    })
-}))
+export const useNoteTree = create<NoteTreeState & NoteTreeActions>()(
+  persist(
+    (set) => ({
+      noteTree: [],
+      updateNoteTree: (noteTree: NoteTreeItem[]) => set({ noteTree }),
+      updateTreeItemTitle: (id: number, newTitle: string) =>
+        set((state) => {
+          log('updateTreeItemTitle', id, newTitle)
+          const newTree = traverseTree(state.noteTree, id, newTitle)
+          log('newTree', newTree)
+          return {
+            noteTree: newTree
+          }
+        })
+    }),
+    {
+      name: 'flowing-note-tree',
+      storage: createJSONStorage(() => localStorage)
+    }
+  )
+)
