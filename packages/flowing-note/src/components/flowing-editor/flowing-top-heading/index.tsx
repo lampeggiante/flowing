@@ -1,59 +1,75 @@
-import { EditorContent, useEditor } from '@tiptap/react'
-import Document from '@tiptap/extension-document'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
-import CharacterCount from '@tiptap/extension-character-count'
+import { useEffect, useState } from 'react'
 import './index.scss'
-import { useEffect } from 'react'
 import { log } from '@/utils/log'
 
 interface FlowingTopHeadingProps {
   noteTitle: string
-  editable?: boolean
+  editable: boolean
   setNoteTitle: (title: string) => void
 }
 
+/* Backspace - Delete - Arrow Keys - Ctrl - Shift */
+const validKeyCode = [
+  'Backspace',
+  'Shift',
+  'Control',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowUp',
+  'ArrowDown',
+  'Delete'
+]
+
 const FlowingTopHeading = (props: FlowingTopHeadingProps) => {
   const { noteTitle, editable = true, setNoteTitle } = props
+  const [title, setTitle] = useState(noteTitle)
+  const [isInput, setIsInput] = useState(false)
+  const maxLength = 20 // 最大字数限制
 
-  const editor = useEditor({
-    extensions: [
-      Document,
-      Paragraph,
-      Text,
-      CharacterCount.configure({ limit: 30 })
-    ],
-    editorProps: {
-      attributes: {
-        class: 'flowing-top-heading',
-        wrap: 'off'
-      },
-      handleDOMEvents: {
-        keydown: (v, e) => {
-          if (e.key === 'Enter') {
-            __DEV__ && log(v, e)
-            e.preventDefault()
-            editor?.commands.blur()
-          }
-        }
-      }
-    },
-    onUpdate: ({ editor }) => {
-      if (!editor.getText()) return
-      setNoteTitle(editor.getText())
+  const handleTitleInput = (e: React.FormEvent<HTMLDivElement>) => {
+    if (!isInput) setIsInput(true)
+    log('handleTitleInput', e.currentTarget.innerText)
+    if (e.currentTarget.innerText.length > maxLength) return
+    setNoteTitle(e.currentTarget.innerText)
+  }
+
+  const handleTitleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (isInput) setIsInput(false)
+    setNoteTitle(e.currentTarget.innerText)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
     }
-  })
+    if (
+      e.currentTarget.innerText.length > maxLength - 1 &&
+      !validKeyCode.includes(e.key)
+    ) {
+      e.preventDefault()
+    }
+    if (e.key === 'Backspace' && e.currentTarget.innerText.length === 0) {
+      e.preventDefault()
+    }
+  }
 
   useEffect(() => {
-    editor?.setEditable(editable)
-  }, [editable])
-
-  useEffect(() => {
-    if (noteTitle && editor?.isFocused) return
-    editor?.commands.setContent(noteTitle)
+    if (isInput) return
+    setTitle(noteTitle)
   }, [noteTitle])
 
-  return <EditorContent editor={editor} />
+  return (
+    <div
+      contentEditable={editable}
+      suppressContentEditableWarning={true}
+      className="flowing-top-heading"
+      onInput={handleTitleInput}
+      onKeyDown={handleKeyDown}
+      onBlur={handleTitleBlur}
+    >
+      {title}
+    </div>
+  )
 }
 
 export default FlowingTopHeading

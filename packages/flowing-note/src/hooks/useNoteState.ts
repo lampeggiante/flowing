@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { noteDB, storeName } from '@/services/note-store'
 import { log } from '@/utils/log'
-import { paragraphWrap } from '@/utils/wrap'
 
 export interface NoteContentNode {
   contentId: number
@@ -50,7 +49,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           set({
             currentNote: {
               noteId,
-              noteTitle: paragraphWrap(title),
+              noteTitle: title,
               noteContent: content,
               parent
             }
@@ -68,7 +67,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           return {
             currentNote: {
               ...state.currentNote,
-              noteTitle: paragraphWrap(title)
+              noteTitle: title
             }
           }
         })
