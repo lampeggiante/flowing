@@ -1,4 +1,4 @@
-import { FlowingButton } from 'flowing-components'
+import { FlowingButton } from '@flowing/components'
 import './index.scss'
 const FlowingFloatingMenu = () => {
   return (

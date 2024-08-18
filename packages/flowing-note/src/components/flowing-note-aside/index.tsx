@@ -3,7 +3,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import './aside.scss'
 import { AsideHeader } from './aside-header'
 import { GlobalConfigCtx } from '../config-context'
-import { FlowingButton } from 'flowing-components'
+import { FlowingButton } from '@flowing/components'
 import AsideNoteTree from './aside-note-tree'
 
 export function FlowingNoteAside() {

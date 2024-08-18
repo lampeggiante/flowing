@@ -8,12 +8,11 @@ export default defineConfig(({ mode }) => ({
   define: {
     __DEV__: mode === 'development'
   },
-  publicDir: '/assets',
   plugins: [react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      assets: path.resolve(__dirname, 'assets')
+      public: path.resolve(__dirname, 'public')
     }
   }
 }))

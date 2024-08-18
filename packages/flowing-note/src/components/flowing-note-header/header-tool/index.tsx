@@ -1,6 +1,6 @@
 import { GlobalConfigCtx } from '@/components/config-context'
 import { SkinOutlined } from '@ant-design/icons'
-import { FlowingButton } from 'flowing-components'
+import { FlowingButton } from '@flowing/components'
 import { useCallback, useContext } from 'react'
 
 export function HeaderTool() {
