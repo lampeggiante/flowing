@@ -4,7 +4,7 @@ import { log } from '@/utils/log'
 
 interface FlowingTopHeadingProps {
   noteTitle: string
-  editable: boolean
+  editable?: boolean
   setNoteTitle: (title: string) => void
 }
 
