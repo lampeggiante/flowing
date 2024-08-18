@@ -3,15 +3,18 @@ import ErrorPage from './error-page'
 import NoteBody from './note-body'
 
 export const baseUrl = '/flowing'
+function getPath(path: string) {
+  return `${baseUrl}${path}`
+}
 
 export default [
   {
-    path: '/',
+    path: getPath('/'),
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/wiki',
+        path: getPath('/wiki'),
         element: <NoteBody />
       }
     ]
