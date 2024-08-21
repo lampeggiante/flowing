@@ -71,7 +71,7 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
           return empty && lastText === '/' && previousText === '\n'
         }}
       >
-        <FlowingFloatingMenu />
+        <FlowingFloatingMenu editor={editor} />
       </FloatingMenu>
       <BubbleMenu editor={editor}>
         <FlowingBubbleMenu />
