@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logoUrl from 'public/logo_transparent-cut.png'
+import logoUrl from '/logo_transparent-cut.png'
 
 export function AsideHeader() {
   return (
