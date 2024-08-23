@@ -1,6 +1,3 @@
-import { Color } from '@tiptap/extension-color'
-import ListItem from '@tiptap/extension-list-item'
-import TextStyle from '@tiptap/extension-text-style'
 import {
   BubbleMenu,
   EditorContent,
@@ -11,7 +8,7 @@ import StarterKit from '@tiptap/starter-kit'
 import './index.scss'
 import FlowingFloatingMenu from './flowing-floating-menu'
 import FlowingBubbleMenu from './flowing-bubble-menu'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { log } from '@/utils/log'
 
 interface FlowingPlainTextProps {
@@ -21,25 +18,10 @@ interface FlowingPlainTextProps {
   setContent: (content: string) => void
 }
 
-const extensions = [
-  Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  StarterKit.configure({
-    bulletList: {
-      keepMarks: true,
-      keepAttributes: false // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-    },
-    orderedList: {
-      keepMarks: true,
-      keepAttributes: false // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-    }
-  })
-]
+const extensions = [StarterKit]
 
 const FlowingMainEditor = (props: FlowingPlainTextProps) => {
   const { content, setContent } = props
-
-  const [shouldFix, setShouldFix] = useState(false)
-
   const editor = useEditor({
     extensions,
     content: content,
@@ -50,7 +32,6 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
     },
     onUpdate: ({ editor }) => {
       setContent(editor.getHTML())
-      // if (shouldFix) setShouldFix(false)
       log('editor', editor)
     }
   })
@@ -67,8 +48,6 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
       <FloatingMenu
         editor={editor}
         shouldShow={({ editor, state }) => {
-          log('shouldFix', shouldFix)
-          if (shouldFix) return true
           const from = state.selection.from
           const to = state.selection.to
           const empty = from === to
@@ -83,10 +62,10 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
           )
         }}
       >
-        <FlowingFloatingMenu editor={editor} setShouldFix={setShouldFix} />
+        <FlowingFloatingMenu editor={editor} />
       </FloatingMenu>
-      <BubbleMenu editor={editor}>
-        <FlowingBubbleMenu />
+      <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+        <FlowingBubbleMenu editor={editor} />
       </BubbleMenu>
     </>
   )

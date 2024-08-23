@@ -1,18 +1,15 @@
-import type { RCSetter } from '@/types/react'
 import { floatingMenus, Level } from './constants'
 import './index.scss'
 import type { Editor } from '@tiptap/react'
 
 interface FlowingFloatingMenu {
   editor: Editor | null
-  setShouldFix: RCSetter<boolean>
 }
 
 const FlowingFloatingMenu = (props: FlowingFloatingMenu) => {
-  const { editor, setShouldFix } = props
+  const { editor } = props
 
   const handleToggleHeading = (level: Level) => {
-    setShouldFix(true)
     editor?.chain().focus().toggleHeading({ level }).run()
     const selection = editor?.view.state.selection.$from.pos || 0
     editor?.commands.deleteRange({ from: selection - 1, to: selection })

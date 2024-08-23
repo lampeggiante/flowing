@@ -1,0 +1,32 @@
+.flowing-bubble-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 100px;
+  border-radius: 5px;
+  height: 30px;
+  padding: 3px 12px;
+  gap: 8px;
+  background-color: var(--flowing-front-color);
+  border: var(--flowing-border-small) solid var(--flowing-border-color);
+  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.15);
+  &-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--flowing-text-color);
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    &:hover {
+      background-color: var(--flowing-hover-color);
+      color: #f2f2f2;
+      cursor: pointer;
+    }
+    &-active {
+      background-color: var(--flowing-hover-color);
+      color: #3370eb;
+    }
+  }
+}
