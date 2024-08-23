@@ -11,7 +11,7 @@ import StarterKit from '@tiptap/starter-kit'
 import './index.scss'
 import FlowingFloatingMenu from './flowing-floating-menu'
 import FlowingBubbleMenu from './flowing-bubble-menu'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { log } from '@/utils/log'
 
 interface FlowingPlainTextProps {
@@ -38,6 +38,8 @@ const extensions = [
 const FlowingMainEditor = (props: FlowingPlainTextProps) => {
   const { content, setContent } = props
 
+  const [shouldFix, setShouldFix] = useState(false)
+
   const editor = useEditor({
     extensions,
     content: content,
@@ -48,6 +50,8 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
     },
     onUpdate: ({ editor }) => {
       setContent(editor.getHTML())
+      // if (shouldFix) setShouldFix(false)
+      log('editor', editor)
     }
   })
 
@@ -63,19 +67,22 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
       <FloatingMenu
         editor={editor}
         shouldShow={({ editor, state }) => {
+          if (shouldFix) return true
           const from = state.selection.from
           const to = state.selection.to
           const empty = from === to
           const lastText = editor?.getText()[from - 2]
           const previousText = editor?.getText()[from - 3]
+          const nextText = editor?.getText()[to - 1]
           return (
             empty &&
             lastText === '/' &&
-            (!previousText || previousText === '\n')
+            (!previousText || previousText === '\n') &&
+            (!nextText || nextText === '\n')
           )
         }}
       >
-        <FlowingFloatingMenu editor={editor} />
+        <FlowingFloatingMenu editor={editor} setShouldFix={setShouldFix} />
       </FloatingMenu>
       <BubbleMenu editor={editor}>
         <FlowingBubbleMenu />
