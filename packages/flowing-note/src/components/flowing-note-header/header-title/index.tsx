@@ -20,7 +20,7 @@ export function HeaderTitle() {
   return (
     <div className="app-header-title">
       <FlowingTopHeading
-        noteTitle={currentNote.noteTitle}
+        noteTitle={id ? currentNote.noteTitle : 'Welcome to Flowing Note'}
         editable={Boolean(id)}
         setNoteTitle={updateNoteTitle}
       />
