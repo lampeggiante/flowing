@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 set -e
-push_addr=https://github.com/YuXingLiang214/flowing.git
+push_addr=https://github.com/lampeggiante/flowing.git
 commit_info=`git describe --all --always --long`
 repo_path=packages/flowing-note
 dist_path=dist # 打包生成的文件夹路径
