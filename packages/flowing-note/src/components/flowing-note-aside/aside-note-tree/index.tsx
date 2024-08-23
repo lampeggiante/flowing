@@ -45,7 +45,7 @@ const AsideNoteTree = () => {
   }, [initTreeData])
 
   return (
-    <div className={`${prefix}-container p-2`}>
+    <div className={`${prefix}-container`}>
       {noteTree.length > 0 && <Tree treeData={noteTree} title={storeTitle} />}
     </div>
   )

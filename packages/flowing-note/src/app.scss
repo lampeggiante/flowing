@@ -3,9 +3,19 @@
   padding: 0;
   box-sizing: border-box;
   -webkit-user-drag: none;
+  text-decoration: none;
   :focus-visible {
     outline: none;
   }
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  border: none;
+  color: inherit;
 }
 
 :root {
