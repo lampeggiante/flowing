@@ -68,7 +68,11 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
           const empty = from === to
           const lastText = editor?.getText()[from - 2]
           const previousText = editor?.getText()[from - 3]
-          return empty && lastText === '/' && previousText === '\n'
+          return (
+            empty &&
+            lastText === '/' &&
+            (!previousText || previousText === '\n')
+          )
         }}
       >
         <FlowingFloatingMenu editor={editor} />
