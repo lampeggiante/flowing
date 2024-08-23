@@ -67,6 +67,7 @@ const FlowingMainEditor = (props: FlowingPlainTextProps) => {
       <FloatingMenu
         editor={editor}
         shouldShow={({ editor, state }) => {
+          log('shouldFix', shouldFix)
           if (shouldFix) return true
           const from = state.selection.from
           const to = state.selection.to
