@@ -14,10 +14,12 @@
   h5,
   h6,
   img,
-  ul,
   blockquote table {
     padding: 4px 0;
     margin: 8px 0;
+    border-radius: 4px;
+  }
+  ul {
     border-radius: 4px;
   }
 }
