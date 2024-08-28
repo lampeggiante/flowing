@@ -42,7 +42,7 @@ export interface FlowingTooltipProps {
   /**
    * trigger type of tooltip
    */
-  triggerType: 'click' | 'hover'
+  triggerType?: 'click' | 'hover'
   /**
    * option of show arrow for tooltip
    */
