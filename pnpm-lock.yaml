@@ -65,6 +65,9 @@ importers:
 
   packages/flowing-components:
     dependencies:
+      '@flowing/lib':
+        specifier: workspace:*
+        version: link:../flowing-lib
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3

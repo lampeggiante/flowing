@@ -9,13 +9,12 @@
     border-radius: 6px;
     transition: opacity 0.3s;
     font-size: 14px;
-
     &::before {
       content: '';
       position: absolute;
       left: var(--arrowX);
       top: var(--arrowY);
-      display: var(--arrowShow);
+      display: var(--show);
       width: 10px;
       height: 10px;
       transform: rotate(45deg);

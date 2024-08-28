@@ -1,8 +1,15 @@
-import { cloneElement, useCallback, useEffect, useState } from 'react'
+import React, {
+  cloneElement,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 import { createPortal } from 'react-dom'
 import classnames from 'classnames'
 import { FlowingTooltipProps } from './types'
 import './tooltip.scss'
+import { getPopoverStyle } from './common'
 
 const FlowingTooltip = (props: FlowingTooltipProps) => {
   const {
@@ -19,6 +26,16 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
   const [trigger, setTrigger] = useState<HTMLElement | null>(null)
   const [popover, setPopover] = useState<HTMLDivElement | null>(null)
   const [show, setShow] = useState<boolean>(false)
+
+  const { offsetX, offsetY, arrowX, arrowY } = useMemo(
+    () =>
+      getPopoverStyle({
+        trigger,
+        popover,
+        placement
+      }),
+    [trigger, popover, placement]
+  )
 
   const setTriggerDom = (node: HTMLElement) => {
     if (node && node !== trigger) {
@@ -39,7 +56,6 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
   const registerHoverEvent = useCallback(() => {
     let timeout: number
     trigger?.addEventListener('mouseleave', () => {
-      console.log('mouseleave')
       timeout = setTimeout(() => {
         setShow(false)
       }, delay)
@@ -80,7 +96,16 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
         <div
           ref={setPopoverDom}
           className={classnames('flowing-tooltip-popover', tooltipCls)}
-          style={{}}
+          style={
+            {
+              left: offsetX,
+              top: offsetY,
+              opacity: !disabled && show ? 1 : 0,
+              '--arrowX': arrowX + 'px',
+              '--arrowY': arrowY + 'px',
+              show: arrowShow ? 'block' : 'none'
+            } as React.CSSProperties
+          }
         >
           {content}
         </div>,

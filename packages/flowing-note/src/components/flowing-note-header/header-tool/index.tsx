@@ -14,7 +14,7 @@ export function HeaderTool() {
 
   return (
     <div className="app-header-tool">
-      <FlowingTooltip content="123">
+      <FlowingTooltip content="切换皮肤" placement="left">
         <FlowingButton
           className="flowing-frontColor flowing-fontColor app-header-tool-item"
           onClick={handleSkinChange}
