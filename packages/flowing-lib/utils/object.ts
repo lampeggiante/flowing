@@ -1,48 +1,23 @@
-export const compareObject = (obj1: any, obj2: any) => {
-  // Check if both objects are null or undefined
-  if (
-    obj1 === null ||
-    obj1 === undefined ||
-    obj2 === null ||
-    obj2 === undefined
-  ) {
-    return obj1 === obj2
-  }
-
-  // Check if both objects are of the same type
-  if (typeof obj1 !== typeof obj2) {
-    return false
-  }
-
-  // Check if both objects are arrays
-  if (Array.isArray(obj1) && Array.isArray(obj2)) {
-    // Check if both arrays have the same length
-    if (obj1.length !== obj2.length) {
-      return false
+export function compareObject(a: any, b: any): boolean {
+  const visited = new Set()
+  function compare(a: any, b: any): boolean {
+    if (a === b) return true
+    if (a === null || b === null) return false
+    if (typeof a !== 'object' || typeof b !== 'object') return false
+    if (typeof a === 'object' && typeof b === 'object') {
+      if (visited.has(a) || visited.has(b)) return true
+      visited.add(a)
+      visited.add(b)
+      const aKeys = Object.keys(a)
+      const bKeys = Object.keys(b)
+      if (aKeys.length !== bKeys.length) return false
+      return aKeys.every((key) => compare(a[key], b[key]))
     }
-
-    // Check if both arrays have the same elements
-    for (let i = 0; i < obj1.length; i++) {
-      if (!compareObject(obj1[i], obj2[i])) {
-        return false
-      }
+    if (Array.isArray(a) && Array.isArray(b)) {
+      if (a.length !== b.length) return false
+      return a.every((item, index) => compare(item, b[index]))
     }
+    return a === b
   }
-  // Check if both objects are objects
-  else if (typeof obj1 === 'object' && typeof obj2 === 'object') {
-    // Check if both objects have the same keys
-    const keys1 = Object.keys(obj1)
-    const keys2 = Object.keys(obj2)
-    if (keys1.length !== keys2.length) {
-      return false
-    }
-
-    // Check if both objects have the same values for each key
-    for (const key of keys1) {
-      if (!compareObject(obj1[key], obj2[key])) {
-        return false
-      }
-    }
-  }
-  return false
+  return compare(a, b)
 }
