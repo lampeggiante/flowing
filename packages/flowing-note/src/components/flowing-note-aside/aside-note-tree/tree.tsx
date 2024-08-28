@@ -43,7 +43,7 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
       <div
         {...rest}
         className={
-          'aside-note-tree' + (expanded ? '' : ' aside-note-tree-hiden')
+          'aside-note-tree' + (expanded ? '' : ' aside-note-tree-hidden')
         }
         ref={ref}
       >

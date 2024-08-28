@@ -13,10 +13,6 @@
     position: sticky;
     top: -0.5rem;
     background-color: var(--flowing-back-color);
-    --aside-note-header-display: none;
-    &:hover {
-      --aside-note-header-display: inline;
-    }
     &-container {
       display: flex;
       align-items: center;
@@ -42,11 +38,8 @@
       line-height: 16px;
       border-radius: 4px;
     }
-    &-option {
-      display: var(--aside-note-header-display);
-    }
   }
-  &-hiden {
+  &-hidden {
     display: none;
   }
   &-item {
