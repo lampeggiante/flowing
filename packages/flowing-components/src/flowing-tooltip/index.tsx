@@ -56,7 +56,7 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
   const registerHoverEvent = useCallback(() => {
     let timeout: number
     trigger?.addEventListener('mouseleave', () => {
-      timeout = setTimeout(() => {
+      timeout = window.setTimeout(() => {
         setShow(false)
       }, delay)
     })
@@ -65,7 +65,7 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
       !show && setShow(true)
     })
     popover?.addEventListener('mouseleave', () => {
-      timeout = setTimeout(() => {
+      timeout = window.setTimeout(() => {
         setShow(false)
       }, delay)
     })
