@@ -89,29 +89,36 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
     }
   }, [trigger, popover, triggerType])
 
+  const popoverStyle = useMemo(() => {
+    const style = {
+      left: offsetX,
+      top: offsetY,
+      opacity: !disabled && show ? 1 : 0,
+      '--arrowX': arrowX + 'px',
+      '--arrowY': arrowY + 'px',
+      '--arrowShow': arrowShow ? 'block' : 'none'
+    } as React.CSSProperties
+
+    if (disabled || !show) {
+      style.display = 'none'
+    }
+
+    return style
+  }, [disabled, show, offsetX, offsetY, arrowX, arrowY, arrowShow])
+
   return (
     <div className="flowing-tooltip">
       <span className="flowing-tooltip-trigger">{triggerDom}</span>
-      {show &&
-        createPortal(
-          <div
-            ref={setPopoverDom}
-            className={classnames('flowing-tooltip-popover', tooltipCls)}
-            style={
-              {
-                left: offsetX,
-                top: offsetY,
-                opacity: !disabled && show ? 1 : 0,
-                '--arrowX': arrowX + 'px',
-                '--arrowY': arrowY + 'px',
-                '--arrowShow': arrowShow ? 'block' : 'none'
-              } as React.CSSProperties
-            }
-          >
-            {content}
-          </div>,
-          document.body
-        )}
+      {createPortal(
+        <div
+          ref={setPopoverDom}
+          className={classnames('flowing-tooltip-popover', tooltipCls)}
+          style={popoverStyle}
+        >
+          {content}
+        </div>,
+        document.body
+      )}
     </div>
   )
 }
