@@ -92,25 +92,26 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
   return (
     <div className="flowing-tooltip">
       <span className="flowing-tooltip-trigger">{triggerDom}</span>
-      {createPortal(
-        <div
-          ref={setPopoverDom}
-          className={classnames('flowing-tooltip-popover', tooltipCls)}
-          style={
-            {
-              left: offsetX,
-              top: offsetY,
-              opacity: !disabled && show ? 1 : 0,
-              '--arrowX': arrowX + 'px',
-              '--arrowY': arrowY + 'px',
-              show: arrowShow ? 'block' : 'none'
-            } as React.CSSProperties
-          }
-        >
-          {content}
-        </div>,
-        document.body
-      )}
+      {show &&
+        createPortal(
+          <div
+            ref={setPopoverDom}
+            className={classnames('flowing-tooltip-popover', tooltipCls)}
+            style={
+              {
+                left: offsetX,
+                top: offsetY,
+                opacity: !disabled && show ? 1 : 0,
+                '--arrowX': arrowX + 'px',
+                '--arrowY': arrowY + 'px',
+                '--arrowShow': arrowShow ? 'block' : 'none'
+              } as React.CSSProperties
+            }
+          >
+            {content}
+          </div>,
+          document.body
+        )}
     </div>
   )
 }
