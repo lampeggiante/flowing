@@ -96,7 +96,8 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
       top: offsetY,
       opacity: !disabled && show ? 1 : 0,
       '--arrowX': arrowX + 'px',
-      '--arrowY': arrowY + 'px'
+      '--arrowY': arrowY + 'px',
+      '--arrowShow': arrowShow ? 'visible' : 'hidden'
     } as React.CSSProperties
 
     return style

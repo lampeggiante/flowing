@@ -12,6 +12,7 @@
     &::before {
       content: '';
       position: absolute;
+      visibility: var(--arrowShow, visible);
       left: var(--arrowX);
       top: var(--arrowY);
       width: 10px;
