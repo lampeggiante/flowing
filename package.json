@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YuXingLiang214/flowing.git"
+    "url": "https://github.com/lampeggiante/flowing.git"
   },
   "engines": {
     "node": "20.15.0",
