@@ -1,4 +1,8 @@
 .flowing-tooltip {
+  width: 100%;
+  &-trigger {
+    width: 100%;
+  }
   &-tooltip {
     position: absolute;
     max-width: 200px;

@@ -5,6 +5,7 @@ import {
   FileTextOutlined,
   PlusOutlined
 } from '@ant-design/icons'
+import { FlowingTooltip } from '@flowing/components'
 import {
   forwardRef,
   HTMLAttributes,
@@ -54,33 +55,41 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
 
   return (
     <>
-      <Link to={`/wiki/${id}`} style={{ width: '100%' }}>
-        <div ref={ref} className="aside-note-tree-item" {...rest}>
-          <span className={caretClsName} onClick={handleExpand}>
-            {children.length > 0 &&
-              (expanded ? <CaretDownOutlined /> : <CaretRightOutlined />)}
-          </span>
-          <span
-            className="aside-note-tree-item-icon aside-note-tree-item-icon-hover"
-            onClick={handleChangeIcon}
-          >
-            {prefixIcon || <FileTextOutlined />}
-          </span>
-          <span className="aside-note-tree-item-title">{title}</span>
-          <span
-            className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
-            onClick={handleAddNote}
-          >
-            <PlusOutlined />
-          </span>
-          <span
-            className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
-            onClick={handleShowOption}
-          >
-            <BarsOutlined />
-          </span>
-        </div>
-      </Link>
+      <FlowingTooltip
+        content={title}
+        placement="right"
+        tooltipCls="aside-tooltip"
+        gap={25}
+        delay={1000}
+      >
+        <Link to={`/wiki/${id}`} style={{ width: '100%' }}>
+          <div ref={ref} className="aside-note-tree-item" {...rest}>
+            <span className={caretClsName} onClick={handleExpand}>
+              {children.length > 0 &&
+                (expanded ? <CaretDownOutlined /> : <CaretRightOutlined />)}
+            </span>
+            <span
+              className="aside-note-tree-item-icon aside-note-tree-item-icon-hover"
+              onClick={handleChangeIcon}
+            >
+              {prefixIcon || <FileTextOutlined />}
+            </span>
+            <span className="aside-note-tree-item-title">{title}</span>
+            <span
+              className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
+              onClick={handleAddNote}
+            >
+              <PlusOutlined />
+            </span>
+            <span
+              className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
+              onClick={handleShowOption}
+            >
+              <BarsOutlined />
+            </span>
+          </div>
+        </Link>
+      </FlowingTooltip>
       {expanded &&
         children?.map((child) => {
           const { id } = child

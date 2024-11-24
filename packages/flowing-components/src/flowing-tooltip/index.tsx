@@ -9,7 +9,7 @@ import { createPortal } from 'react-dom'
 import classnames from 'classnames'
 import { FlowingTooltipProps } from './types'
 import './tooltip.scss'
-import { getTooltipStyle } from './common'
+import useTooltipStyle from './common'
 
 const FlowingTooltip = (props: FlowingTooltipProps) => {
   const {
@@ -20,7 +20,8 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
     disabled = false,
     delay = 200,
     triggerType = 'hover',
-    arrowShow = true
+    arrowShow = true,
+    gap
   } = props
 
   const [trigger, setTrigger] = useState<HTMLElement | null>(null)
@@ -79,18 +80,15 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
     }
   }, [trigger, tooltip, triggerType])
 
-  const { offsetX, offsetY, arrowX, arrowY } = useMemo(() => {
-    if (!trigger || !tooltip) {
-      return { offsetX: 0, offsetY: 0, arrowX: 0, arrowY: 0 }
-    }
-    return getTooltipStyle({
-      trigger,
-      tooltip,
-      placement
-    })
-  }, [trigger, tooltip, placement])
+  const { computedStyle } = useTooltipStyle({
+    trigger,
+    tooltip,
+    placement,
+    gap
+  })
 
   const tooltipStyle = useMemo(() => {
+    const { offsetX, offsetY, arrowX, arrowY } = computedStyle
     const style = {
       left: offsetX,
       top: offsetY,
@@ -101,7 +99,7 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
     } as React.CSSProperties
 
     return style
-  }, [disabled, show, offsetX, offsetY, arrowX, arrowY, arrowShow])
+  }, [disabled, show, computedStyle, arrowShow])
 
   return (
     <div className="flowing-tooltip">

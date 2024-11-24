@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Placement } from './types'
 import { compareObject } from '@flowing/lib'
 
@@ -16,6 +17,8 @@ interface GetTooltipStyleParams {
    * placement
    */
   placement: Placement
+  /** 间距 */
+  gap?: number
 }
 
 interface TooltipStyle {
@@ -78,10 +81,13 @@ const initStyle = {
   arrowY: 0
 }
 
+const initGap = 10
+
 function getStyle(
   triggerRect: DOMRect,
   tooltipRect: DOMRect,
-  placement: Placement
+  placement: Placement,
+  gap: number = initGap
 ): TooltipStyle {
   const { clientWidth, clientHeight, scrollLeft, scrollTop } =
     document.documentElement || document.body
@@ -107,28 +113,28 @@ function getStyle(
   // 先计算主方向来判断是否超出屏幕，超出则再计算一遍
   function getOverStyle() {
     if (mainDirection === 'left') {
-      newStyle.offsetX = AlignPointL.x - tooltipRect.width - 10
+      newStyle.offsetX = AlignPointL.x - tooltipRect.width - gap
       newStyle.arrowX = tooltipRect.width - 6
       if (newStyle.offsetX < 0) {
         mainDirection = 'right'
         getOverStyle()
       }
     } else if (mainDirection === 'right') {
-      newStyle.offsetX = AlignPointR.x + 10
+      newStyle.offsetX = AlignPointR.x + gap
       newStyle.arrowX = -4
       if (newStyle.offsetX + tooltipRect.width > clientWidth) {
         mainDirection = 'left'
         getOverStyle()
       }
     } else if (mainDirection === 'top') {
-      newStyle.offsetY = AlignPointT.y - tooltipRect.height - 10
+      newStyle.offsetY = AlignPointT.y - tooltipRect.height - gap
       newStyle.arrowY = tooltipRect.height - 6
       if (newStyle.offsetY < 0) {
         mainDirection = 'bottom'
         getOverStyle()
       }
     } else {
-      newStyle.offsetY = AlignPointB.y + 10
+      newStyle.offsetY = AlignPointB.y + gap
       newStyle.arrowY = -4
       if (newStyle.offsetY + tooltipRect.height > clientHeight) {
         mainDirection = 'bottom'
@@ -170,18 +176,21 @@ function getStyle(
   return newStyle
 }
 
-export function getTooltipStyle(params: GetTooltipStyleParams): TooltipStyle {
-  const { trigger, tooltip, placement } = params
-  const style = { ...initStyle }
+export default function useTooltipStyle(params: GetTooltipStyleParams) {
+  const { trigger, tooltip, placement, gap } = params
+  const [style, setStyle] = useState({ ...initStyle })
 
   if (trigger && tooltip) {
     const triggerRect = trigger.getBoundingClientRect()
     const tooltipRect = tooltip.getBoundingClientRect()
 
-    const newStyle = getStyle(triggerRect, tooltipRect, placement)
+    const newStyle = getStyle(triggerRect, tooltipRect, placement, gap)
     if (!compareObject(newStyle, style)) {
-      return { ...style, ...newStyle }
+      setStyle({ ...style, ...newStyle })
     }
   }
-  return style
+
+  return {
+    computedStyle: style
+  }
 }
