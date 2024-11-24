@@ -9,7 +9,7 @@ import { createPortal } from 'react-dom'
 import classnames from 'classnames'
 import { FlowingTooltipProps } from './types'
 import './tooltip.scss'
-import { getPopoverStyle } from './common'
+import { getTooltipStyle } from './common'
 
 const FlowingTooltip = (props: FlowingTooltipProps) => {
   const {
@@ -24,18 +24,8 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
   } = props
 
   const [trigger, setTrigger] = useState<HTMLElement | null>(null)
-  const [popover, setPopover] = useState<HTMLDivElement | null>(null)
+  const [tooltip, setTooltip] = useState<HTMLDivElement | null>(null)
   const [show, setShow] = useState<boolean>(false)
-
-  const { offsetX, offsetY, arrowX, arrowY } = useMemo(
-    () =>
-      getPopoverStyle({
-        trigger,
-        popover,
-        placement
-      }),
-    [trigger, popover, placement]
-  )
 
   const setTriggerDom = (node: HTMLElement) => {
     if (node && node !== trigger) {
@@ -43,9 +33,9 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
     }
   }
 
-  const setPopoverDom = (node: HTMLDivElement) => {
-    if (node && node !== popover) {
-      setPopover(node)
+  const setTooltipDom = (node: HTMLDivElement) => {
+    if (node && node !== tooltip) {
+      setTooltip(node)
     }
   }
 
@@ -64,22 +54,22 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
       clearTimeout(timeout)
       !show && setShow(true)
     })
-    popover?.addEventListener('mouseleave', () => {
+    tooltip?.addEventListener('mouseleave', () => {
       timeout = window.setTimeout(() => {
         setShow(false)
       }, delay)
     })
-    popover?.addEventListener('mouseenter', () => {
+    tooltip?.addEventListener('mouseenter', () => {
       clearTimeout(timeout)
       !show && setShow(true)
     })
-  }, [trigger, popover, show, delay])
+  }, [trigger, tooltip, show, delay])
 
   const registerClickEvent = useCallback(() => {
     trigger?.addEventListener('click', () => {
       setShow(!show)
     })
-  }, [trigger, popover, show, delay])
+  }, [trigger, tooltip, show, delay])
 
   useEffect(() => {
     if (triggerType === 'hover') {
@@ -87,21 +77,27 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
     } else {
       registerClickEvent()
     }
-  }, [trigger, popover, triggerType])
+  }, [trigger, tooltip, triggerType])
 
-  const popoverStyle = useMemo(() => {
+  const { offsetX, offsetY, arrowX, arrowY } = useMemo(() => {
+    if (!trigger || !tooltip) {
+      return { offsetX: 0, offsetY: 0, arrowX: 0, arrowY: 0 }
+    }
+    return getTooltipStyle({
+      trigger,
+      tooltip,
+      placement
+    })
+  }, [trigger, tooltip, placement])
+
+  const tooltipStyle = useMemo(() => {
     const style = {
       left: offsetX,
       top: offsetY,
       opacity: !disabled && show ? 1 : 0,
       '--arrowX': arrowX + 'px',
-      '--arrowY': arrowY + 'px',
-      '--arrowShow': arrowShow ? 'block' : 'none'
+      '--arrowY': arrowY + 'px'
     } as React.CSSProperties
-
-    if (disabled || !show) {
-      style.display = 'none'
-    }
 
     return style
   }, [disabled, show, offsetX, offsetY, arrowX, arrowY, arrowShow])
@@ -111,9 +107,9 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
       <span className="flowing-tooltip-trigger">{triggerDom}</span>
       {createPortal(
         <div
-          ref={setPopoverDom}
-          className={classnames('flowing-tooltip-popover', tooltipCls)}
-          style={popoverStyle}
+          ref={setTooltipDom}
+          className={classnames('flowing-tooltip-tooltip', tooltipCls)}
+          style={tooltipStyle}
         >
           {content}
         </div>,
