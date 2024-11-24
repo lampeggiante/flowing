@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { noteDB, storeName } from '@/services/note-store'
 import { log } from '@/utils/log'
+import { now } from '@/utils/time'
 
 export interface NoteContentNode {
   contentId: number
@@ -10,6 +11,8 @@ export interface NoteContentNode {
 
 export interface FlowingNote {
   noteId: number
+  author: string
+  lastModified: string
   noteTitle: string
   noteContent: string
   parent: number | null
@@ -27,6 +30,8 @@ export interface UseNoteMethodsType {
 
 export const emptyCurrentNote: FlowingNote = {
   noteId: 0,
+  author: 'flowing',
+  lastModified: now(),
   noteTitle: '<h1></h1>',
   noteContent: '<p></p>',
   parent: null
@@ -45,10 +50,12 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         }
         noteDB.instance?.getStore(storeName, id).then((store) => {
           log('setCurrentNote', store)
-          const { noteId, title, content, parent } = store
+          const { noteId, author, lastModified, title, content, parent } = store
           set({
             currentNote: {
               noteId,
+              author: author ?? 'flowing',
+              lastModified: lastModified ?? now(),
               noteTitle: title,
               noteContent: content,
               parent
@@ -60,6 +67,8 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         set((state) => {
           noteDB.instance?.updateStore(storeName, {
             noteId: state.currentNote.noteId,
+            author: state.currentNote.author,
+            lastModified: now(),
             title,
             content: state.currentNote.noteContent,
             parent: state.currentNote.parent
@@ -67,6 +76,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           return {
             currentNote: {
               ...state.currentNote,
+              lastModified: now(),
               noteTitle: title
             }
           }
@@ -76,12 +86,18 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         set((state) => {
           noteDB.instance?.updateStore(storeName, {
             noteId: state.currentNote.noteId,
+            author: state.currentNote.author,
+            lastModified: now(),
             title: state.currentNote.noteTitle,
             content,
             parent: state.currentNote.parent
           })
           return {
-            currentNote: { ...state.currentNote, noteContent: content }
+            currentNote: {
+              ...state.currentNote,
+              lastModified: now(),
+              noteContent: content
+            }
           }
         })
       }

@@ -17,13 +17,11 @@ function App() {
   const { id } = useParams()
   const { setCurrentNote } = useNoteState()
 
-  const WelcomePage = () => {
-    return (
-      <div className="app-welcome">
-        欢迎来到<span className="app-welcome-title">Flowing</span>
-      </div>
-    )
-  }
+  const WelcomePage = () => (
+    <div className="app-welcome">
+      欢迎来到<span className="app-welcome-title">Flowing</span>
+    </div>
+  )
 
   useEffect(() => {
     if (!id || !setCurrentNote) return
@@ -32,6 +30,7 @@ function App() {
   }, [id, setCurrentNote])
 
   useEffect(() => {
+    /** 初始化数据库 */
     init()
   }, [])
   return (

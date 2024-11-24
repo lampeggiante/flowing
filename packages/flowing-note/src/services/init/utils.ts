@@ -1,3 +1,4 @@
+import { now } from '@/utils/time'
 import IndexedDBService from '../indexedDB'
 
 export function injectDBData(
@@ -10,6 +11,8 @@ export function injectDBData(
   db.getStore(storeName, id).then((store) => {
     const addData: Record<string, string | number | null> = {
       noteId: id,
+      author: 'flowing',
+      lastModified: now(),
       title,
       content: '<p>这是内容</p>',
       parent: parent || null
