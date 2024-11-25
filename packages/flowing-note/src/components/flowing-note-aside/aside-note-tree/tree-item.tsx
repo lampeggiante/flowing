@@ -36,13 +36,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
     'aside-note-tree-item-icon aside-note-tree-item-caret' +
     (children.length > 0 ? ' aside-note-tree-item-icon-hover' : '')
 
-  const showTooltip = useMemo(() => {
-    if (!titleRef.current) {
-      return true
-    }
-    return titleRef.current.clientWidth < titleRef.current.scrollWidth
-  }, [titleRef])
-
   const handleExpand = useCallback(
     (e: MouseEvent<HTMLSpanElement>) => {
       e.preventDefault()
@@ -71,7 +64,10 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
         tooltipCls="aside-tooltip"
         gap={25}
         delay={100}
-        showTooltip={showTooltip}
+        showTooltip={
+          (titleRef.current?.clientWidth || 0) <
+          (titleRef.current?.scrollWidth || 1)
+        }
       >
         <Link to={`/wiki/${id}`} style={{ width: '100%' }}>
           <div ref={ref} className="aside-note-tree-item" {...rest}>

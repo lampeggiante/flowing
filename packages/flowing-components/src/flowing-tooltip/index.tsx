@@ -107,16 +107,17 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
   return (
     <div className="flowing-tooltip">
       <span className="flowing-tooltip-trigger">{triggerDom}</span>
-      {createPortal(
-        <div
-          ref={setTooltipDom}
-          className={classnames('flowing-tooltip-tooltip', tooltipCls)}
-          style={tooltipStyle}
-        >
-          {content}
-        </div>,
-        document.body
-      )}
+      {show &&
+        createPortal(
+          <div
+            ref={setTooltipDom}
+            className={classnames('flowing-tooltip-tooltip', tooltipCls)}
+            style={tooltipStyle}
+          >
+            {content}
+          </div>,
+          document.body
+        )}
     </div>
   )
 }
