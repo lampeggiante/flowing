@@ -11,7 +11,6 @@ import {
   HTMLAttributes,
   ReactNode,
   useCallback,
-  useMemo,
   useRef,
   useState,
   type MouseEvent
@@ -64,10 +63,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
         tooltipCls="aside-tooltip"
         gap={25}
         delay={100}
-        showTooltip={
-          (titleRef.current?.clientWidth || 0) <
-          (titleRef.current?.scrollWidth || 1)
-        }
       >
         <Link to={`/wiki/${id}`} style={{ width: '100%' }}>
           <div ref={ref} className="aside-note-tree-item" {...rest}>
