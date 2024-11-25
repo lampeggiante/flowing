@@ -21,7 +21,8 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
     delay = 200,
     triggerType = 'hover',
     arrowShow = true,
-    gap
+    gap,
+    showTooltip = true
   } = props
 
   const [trigger, setTrigger] = useState<HTMLElement | null>(null)
@@ -89,7 +90,7 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
 
   const tooltipStyle = useMemo(() => {
     const { offsetX, offsetY, arrowX, arrowY } = computedStyle
-    const style = {
+    return {
       left: offsetX,
       top: offsetY,
       opacity: !disabled && show ? 1 : 0,
@@ -97,9 +98,11 @@ const FlowingTooltip = (props: FlowingTooltipProps) => {
       '--arrowY': arrowY + 'px',
       '--arrowShow': arrowShow ? 'visible' : 'hidden'
     } as React.CSSProperties
-
-    return style
   }, [disabled, show, computedStyle, arrowShow])
+
+  if (!showTooltip) {
+    return triggerDom
+  }
 
   return (
     <div className="flowing-tooltip">

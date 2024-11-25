@@ -11,6 +11,8 @@ import {
   HTMLAttributes,
   ReactNode,
   useCallback,
+  useMemo,
+  useRef,
   useState,
   type MouseEvent
 } from 'react'
@@ -29,9 +31,17 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   /** props and states */
   const { prefixIcon, title, id, pad, children, ...rest } = props
   const [expanded, setExpanded] = useState<boolean>(false)
+  const titleRef = useRef<HTMLSpanElement>(null)
   const caretClsName =
     'aside-note-tree-item-icon aside-note-tree-item-caret' +
     (children.length > 0 ? ' aside-note-tree-item-icon-hover' : '')
+
+  const showTooltip = useMemo(() => {
+    if (!titleRef.current) {
+      return true
+    }
+    return titleRef.current.clientWidth < titleRef.current.scrollWidth
+  }, [titleRef])
 
   const handleExpand = useCallback(
     (e: MouseEvent<HTMLSpanElement>) => {
@@ -60,7 +70,8 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
         placement="right"
         tooltipCls="aside-tooltip"
         gap={25}
-        delay={1000}
+        delay={100}
+        showTooltip={showTooltip}
       >
         <Link to={`/wiki/${id}`} style={{ width: '100%' }}>
           <div ref={ref} className="aside-note-tree-item" {...rest}>
@@ -74,7 +85,9 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
             >
               {prefixIcon || <FileTextOutlined />}
             </span>
-            <span className="aside-note-tree-item-title">{title}</span>
+            <span ref={titleRef} className="aside-note-tree-item-title">
+              {title}
+            </span>
             <span
               className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
               onClick={handleAddNote}

@@ -49,4 +49,8 @@ export interface FlowingTooltipProps {
   arrowShow?: boolean
   /** 间距 */
   gap?: number
+  /**
+   * option of show tooltip
+   */
+  showTooltip?: boolean
 }
