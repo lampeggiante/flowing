@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import '../style/flowing.css'
 
 import { Button } from '../..'
 
@@ -13,6 +14,21 @@ type Story = StoryObj<typeof Button>
 
 export const Basic: Story = {
   args: {
-    children: 'Button'
+    children: '按钮',
+    status: 'default'
+  }
+}
+
+export const Primary: Story = {
+  args: {
+    children: '按钮',
+    status: 'success'
+  }
+}
+
+export const Secondary: Story = {
+  args: {
+    children: '按钮',
+    status: 'info'
   }
 }

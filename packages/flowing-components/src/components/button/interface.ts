@@ -20,9 +20,9 @@ export interface BaseButtonProps {
   /**
    * @description 按钮状态
    * @default default
-   * @type warning | danger |success | default
+   * @type warning | danger |success | default | info
    */
-  status?: 'warning' | 'danger' | 'success' | 'default'
+  status?: 'warning' | 'danger' | 'success' | 'default' | 'info'
   /**
    * @description 按钮尺寸
    * @default default

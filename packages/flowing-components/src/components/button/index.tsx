@@ -7,6 +7,7 @@ import React, {
 } from 'react'
 import { IconLoading } from '@flowing/icons'
 import { ButtonProps } from './interface'
+import { baseCls, ButtonBg } from './cs'
 import classNames from 'classnames'
 
 const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
@@ -52,7 +53,7 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
   )
 
   const _type = type === 'default' ? 'secondary' : type
-  const classes = classNames(['flowing-button', `flowing-button-${_type}`])
+  const classes = classNames(baseCls, status && ButtonBg[status], className)
 
   const handleClick: MouseEventHandler<any> = (event: any) => {
     if (disabled || loading) {
@@ -71,7 +72,7 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
         className={classes}
         onClick={handleClick}
       >
-        {innerContent}
+        {innerContent || 'FlowingButton'}
       </a>
     )
   }
@@ -80,11 +81,13 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
     <button
       ref={buttonRef}
       {...rest}
+      style={style}
+      className={classes}
       disabled={disabled}
       type={htmlType}
       onClick={handleClick}
     >
-      {innerContent}
+      {innerContent || 'FlowingButton'}
     </button>
   )
 }
