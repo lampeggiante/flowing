@@ -1,0 +1,35 @@
+{
+  "name": "@flowing/icons",
+  "private": true,
+  "version": "0.0.0",
+  "main": "./index.js",
+  "module": "./index.es.js",
+  "scripts": {
+    "build": "rimraf react-icon/ && rimraf react-icon-cjs && cd build/ && node generate.js && node genDemo.js"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-arrow-functions": "^7.25.9",
+    "@babel/plugin-transform-destructuring": "^7.25.9",
+    "@babel/plugin-transform-modules-commonjs": "^7.26.3",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/plugin-transform-spread": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@types/react": "18",
+    "@types/react-dom": "^18.3.0",
+    "fs-extra": "^11.3.0",
+    "lodash": "^4.17.21",
+    "nunjucks": "^3.2.4",
+    "rimraf": "^6.0.1",
+    "svgo": "^2.3.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@babel/runtime": "^7.26.0"
+  }
+}

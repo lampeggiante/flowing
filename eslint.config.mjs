@@ -11,7 +11,8 @@ export default [
       '**/node_modules/**',
       '**/dist/**',
       '**/assets/**',
-      '**/stories/**'
+      '**/stories/**',
+      '**/flowing-icons/**'
     ]
   },
   { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
@@ -43,7 +44,9 @@ export default [
       '@typescript-eslint/ban-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-empty-function': 'off',
-      '@typescript-eslint/no-this-alias': 'warn'
+      '@typescript-eslint/no-this-alias': 'warn',
+      'no-undef': 'warn',
+      '@typescript-eslint/no-var-requires': 'off'
     }
   }
 ]

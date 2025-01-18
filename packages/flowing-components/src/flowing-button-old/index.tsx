@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 import type { ReactNode, ButtonHTMLAttributes } from 'react'
 import './button.scss'
+import React from 'react'
 
 interface FlowingButtonProps extends ButtonHTMLAttributes<HTMLElement> {
   children?: ReactNode
