@@ -27,6 +27,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "**/*.d.ts"],
+  "include": ["src/**/*.ts", "**/*.d.ts", "src/stories/Button.stories.tsx"],
   "exclude": ["src/stories/*"]
 }

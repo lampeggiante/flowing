@@ -1,2 +1,2 @@
 /** 有关样式处理的工具 */
-export {}
+export * from './tailwind'

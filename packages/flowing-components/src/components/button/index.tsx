@@ -7,8 +7,7 @@ import React, {
 } from 'react'
 import { IconLoading } from '@flowing/icons'
 import { ButtonProps } from './interface'
-import { baseCls, ButtonBg } from './cs'
-import classNames from 'classnames'
+import { getButtonClassNames } from './cs'
 
 const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
   const {
@@ -37,7 +36,8 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
   const buttonRef = ref ?? innerRef
 
   const prefixIconNode = useMemo(
-    () => (loading ? <IconLoading /> : prefixIcon),
+    () =>
+      loading ? <IconLoading className="animate-spin-slow" /> : prefixIcon,
     [loading, prefixIcon]
   )
 
@@ -52,8 +52,33 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
     [prefixIconNode, children, suffixIcon]
   )
 
-  const _type = type === 'default' ? 'secondary' : type
-  const classes = classNames(baseCls, status && ButtonBg[status], className)
+  const classes = useMemo(
+    () =>
+      getButtonClassNames({
+        type,
+        status,
+        size,
+        shape,
+        iconOnly,
+        long,
+        loading,
+        loadingFixedWidth,
+        href,
+        disabled
+      }),
+    [
+      type,
+      status,
+      size,
+      shape,
+      iconOnly,
+      long,
+      loading,
+      loadingFixedWidth,
+      href,
+      disabled
+    ]
+  )
 
   const handleClick: MouseEventHandler<any> = (event: any) => {
     if (disabled || loading) {
