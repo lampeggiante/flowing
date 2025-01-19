@@ -16,13 +16,13 @@ export interface BaseButtonProps {
    * @default default
    * @type default | primary | secondary | dashed | text | outline
    */
-  type?: 'default' | 'primary' | 'secondary' | 'dashed' | 'text' | 'outline'
+  type?: 'default' | 'dashed' | 'text' | 'outline'
   /**
-   * @description 按钮状态
+   * @description 主题
    * @default default
    * @type warning | danger |success | default | info
    */
-  status?: 'warning' | 'danger' | 'success' | 'default' | 'info'
+  theme?: 'primary' | 'warning' | 'danger' | 'success' | 'default' | 'info'
   /**
    * @description 按钮尺寸
    * @default default
@@ -34,7 +34,7 @@ export interface BaseButtonProps {
    * @default square
    * @type square | round |circle
    */
-  shape?: 'circle' | 'round' | 'square'
+  shape?: 'round' | 'square' | 'circle'
   /**
    * @description 添加跳转连接，变得和a标签一致
    * @type string
@@ -60,11 +60,6 @@ export interface BaseButtonProps {
    */
   loading?: boolean
   /**
-   * @description 按钮加载中是否固定宽度
-   * @default false
-   */
-  loadingFixedWidth?: boolean
-  /**
    * @description 文字前的icon
    * @type ReactNode
    */
@@ -75,9 +70,9 @@ export interface BaseButtonProps {
    */
   suffixIcon?: ReactNode
   /**
-   * @description 是否只显示icon
+   * @description 是否纯原型按钮
    */
-  iconOnly?: boolean
+  pureCircle?: boolean
   /**
    * @description 按钮宽度撑满容器
    * @default true

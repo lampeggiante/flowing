@@ -8,6 +8,8 @@ import React, {
 import { IconLoading } from '@flowing/icons'
 import { ButtonProps } from './interface'
 import { getButtonClassNames } from './cs'
+import classNames from 'classnames'
+import { ButtonSize } from './constants'
 
 const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
   const {
@@ -16,17 +18,17 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
     children,
     htmlType,
     type,
-    status,
+    theme,
     size,
     shape,
     href,
+    target,
     anchorProps,
     disabled,
     loading,
-    loadingFixedWidth,
     prefixIcon,
     suffixIcon,
-    iconOnly,
+    pureCircle,
     long,
     onClick,
     ...rest
@@ -36,8 +38,7 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
   const buttonRef = ref ?? innerRef
 
   const prefixIconNode = useMemo(
-    () =>
-      loading ? <IconLoading className="animate-spin-slow" /> : prefixIcon,
+    () => (loading ? <IconLoading className="animate-spin" /> : prefixIcon),
     [loading, prefixIcon]
   )
 
@@ -56,28 +57,16 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
     () =>
       getButtonClassNames({
         type,
-        status,
+        theme,
         size,
         shape,
-        iconOnly,
+        pureCircle,
         long,
         loading,
-        loadingFixedWidth,
         href,
         disabled
       }),
-    [
-      type,
-      status,
-      size,
-      shape,
-      iconOnly,
-      long,
-      loading,
-      loadingFixedWidth,
-      href,
-      disabled
-    ]
+    [type, theme, size, shape, pureCircle, long, loading, href, disabled]
   )
 
   const handleClick: MouseEventHandler<any> = (event: any) => {
@@ -93,11 +82,14 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
       <a
         ref={buttonRef}
         {...rest}
+        {...anchorProps}
+        href={href}
+        target={target}
         style={style}
         className={classes}
         onClick={handleClick}
       >
-        {innerContent || 'FlowingButton'}
+        {innerContent}
       </a>
     )
   }
@@ -112,7 +104,7 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
       type={htmlType}
       onClick={handleClick}
     >
-      {innerContent || 'FlowingButton'}
+      {innerContent}
     </button>
   )
 }

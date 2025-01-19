@@ -1,5 +1,5 @@
 /** 去除空类名 */
-export const processClassName = (
+export const cs = (
   className: string | undefined | (string | undefined)[]
 ): string[] => {
   if (typeof className === 'string') {
