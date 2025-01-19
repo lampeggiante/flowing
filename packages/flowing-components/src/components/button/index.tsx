@@ -8,8 +8,6 @@ import React, {
 import { IconLoading } from '@flowing/icons'
 import { ButtonProps } from './interface'
 import { getButtonClassNames } from './cs'
-import classNames from 'classnames'
-import { ButtonSize } from './constants'
 
 const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
   const {
