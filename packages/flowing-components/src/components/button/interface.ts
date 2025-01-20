@@ -107,7 +107,16 @@ export type FinalButtonProps = {
 export type ButtonProps = Partial<FinalButtonProps & AnchorButtonProps>
 
 export interface ButtonGroupProps {
+  /**
+   * @description 自定义类名
+   */
+  className?: string
+  /**
+   * @description 自定义样式
+   */
   style?: CSSProperties
-  className?: string | string[]
+  /**
+   * @description 子元素
+   */
   children?: ReactNode
 }

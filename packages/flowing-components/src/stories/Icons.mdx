@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="通用组件/Icons/文档" />
+
+# Icons API
+
+## 使用方式
+
+```tsx
+import { IconName } from '@flowing/icons'
+;<IconName />
+```
+
+## 属性
+
+<table className="min-w-full border-collapse">
+  <thead>
+    <tr>
+      <th className="border p-2 bg-slate-50">属性名</th>
+      <th className="border p-2 bg-slate-50">说明</th>
+      <th className="border p-2 bg-slate-50">类型</th>
+      <th className="border p-2 bg-slate-50">默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="border p-2">className</td>
+      <td className="border p-2">自定义类名</td>
+      <td className="border p-2 font-mono text-sm">string</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">style</td>
+      <td className="border p-2">自定义样式</td>
+      <td className="border p-2 font-mono text-sm">CSSProperties</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">spin</td>
+      <td className="border p-2">是否旋转</td>
+      <td className="border p-2 font-mono text-sm">boolean</td>
+      <td className="border p-2 font-mono text-sm">false</td>
+    </tr>
+  </tbody>
+</table>
+
+## 图标尺寸
+
+通过 Tailwind 的文本尺寸类来控制图标大小：
+
+- `text-xs`: 12px
+- `text-sm`: 14px
+- `text-base`: 16px
+- `text-lg`: 18px
+- `text-xl`: 20px
+- `text-2xl`: 24px
+
+## 图标颜色
+
+通过 Tailwind 的文本颜色类来控制图标颜色：
+
+- `text-fuchsia-600`: 主色
+- `text-emerald-600`: 成功
+- `text-yellow-600`: 警告
+- `text-red-600`: 错误
+- `text-slate-600`: 默认
+
+## 动画效果
+
+使用 Tailwind 的 `animate-spin` 类来添加旋转动画。

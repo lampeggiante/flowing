@@ -1,0 +1,106 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="通用组件/Link/文档" />
+
+# Link API
+
+## 属性
+
+<table className="min-w-full border-collapse">
+  <thead>
+    <tr>
+      <th className="border p-2 bg-slate-50">属性名</th>
+      <th className="border p-2 bg-slate-50">说明</th>
+      <th className="border p-2 bg-slate-50">类型</th>
+      <th className="border p-2 bg-slate-50">默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="border p-2">href</td>
+      <td className="border p-2">链接地址</td>
+      <td className="border p-2 font-mono text-sm">string</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">target</td>
+      <td className="border p-2">链接打开方式</td>
+      <td className="border p-2 font-mono text-sm">string</td>
+      <td className="border p-2 font-mono text-sm">'_blank'</td>
+    </tr>
+    <tr>
+      <td className="border p-2">icon</td>
+      <td className="border p-2">链接图标</td>
+      <td className="border p-2 font-mono text-sm">ReactNode | boolean</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">status</td>
+      <td className="border p-2">链接状态</td>
+      <td className="border p-2 font-mono text-sm">
+        'default' | 'success' | 'warning' | 'error'
+      </td>
+      <td className="border p-2 font-mono text-sm">'default'</td>
+    </tr>
+    <tr>
+      <td className="border p-2">disabled</td>
+      <td className="border p-2">是否禁用</td>
+      <td className="border p-2 font-mono text-sm">boolean</td>
+      <td className="border p-2 font-mono text-sm">false</td>
+    </tr>
+    <tr>
+      <td className="border p-2">className</td>
+      <td className="border p-2">自定义类名</td>
+      <td className="border p-2 font-mono text-sm">string | string[]</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">style</td>
+      <td className="border p-2">自定义样式</td>
+      <td className="border p-2 font-mono text-sm">CSSProperties</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">onClick</td>
+      <td className="border p-2">点击事件回调</td>
+      <td className="border p-2 font-mono text-sm">(e: MouseEvent) => void</td>
+      <td className="border p-2">-</td>
+    </tr>
+  </tbody>
+</table>
+
+## 状态颜色
+
+<table className="min-w-full border-collapse">
+  <thead>
+    <tr>
+      <th className="border p-2 bg-slate-50">状态</th>
+      <th className="border p-2 bg-slate-50">颜色</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="border p-2">default</td>
+      <td className="border p-2 font-mono text-sm">text-blue-600</td>
+    </tr>
+    <tr>
+      <td className="border p-2">success</td>
+      <td className="border p-2 font-mono text-sm">text-green-600</td>
+    </tr>
+    <tr>
+      <td className="border p-2">warning</td>
+      <td className="border p-2 font-mono text-sm">text-yellow-600</td>
+    </tr>
+    <tr>
+      <td className="border p-2">error</td>
+      <td className="border p-2 font-mono text-sm">text-red-600</td>
+    </tr>
+  </tbody>
+</table>
+
+## 注意事项
+
+1. 当设置 `href` 时，组件渲染为 `<a>` 标签，否则渲染为 `<span>` 标签
+2. 当设置 `icon={true}` 时，将显示默认的链接图标
+3. 禁用状态下，链接将不可点击且样式变为半透明
+4. 所有链接默认在新窗口打开（target="\_blank"）

@@ -199,3 +199,30 @@ export const ButtonLong: Story = {
     </div>
   )
 }
+
+export const ButtonGroups: Story = {
+  render: () => (
+    <div className="w-full h-80 flex flex-col items-center justify-center gap-8">
+      <Button.Group className="flex items-center justify-center gap-4">
+        <Button>左侧按钮</Button>
+        <Button>中间按钮</Button>
+        <Button>右侧按钮</Button>
+      </Button.Group>
+
+      <Button.Group className="flex items-center justify-center gap-4">
+        <Button type="outline" theme="primary">
+          编辑
+        </Button>
+        <Button type="outline" theme="danger">
+          删除
+        </Button>
+      </Button.Group>
+
+      <Button.Group className="flex items-center justify-center gap-4">
+        <Button size="small">小按钮</Button>
+        <Button size="small">小按钮</Button>
+        <Button size="small">小按钮</Button>
+      </Button.Group>
+    </div>
+  )
+}

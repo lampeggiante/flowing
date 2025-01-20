@@ -6,8 +6,9 @@ import React, {
   useRef
 } from 'react'
 import { IconLoading } from '@flowing/icons'
-import { ButtonProps } from './interface'
+import { ButtonGroupProps, ButtonProps } from './interface'
 import { getButtonClassNames } from './cs'
+import Group from './group'
 
 const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
   const {
@@ -111,13 +112,15 @@ const ForwardRefButton = forwardRef<any, ButtonProps>(Button)
 
 const ButtonComponent = ForwardRefButton as typeof ForwardRefButton & {
   __FLOWING_BUTTON__: boolean
-  // Group: typeof Group;
+  Group: typeof Group
 }
 
 ButtonComponent.__FLOWING_BUTTON__ = true
 
 ButtonComponent.displayName = 'FlowingButton'
 
+ButtonComponent.Group = Group
+
 export default ButtonComponent
 
-export type { ButtonProps }
+export type { ButtonProps, ButtonGroupProps }
