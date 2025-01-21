@@ -4,7 +4,7 @@ import '../style/flowing.css'
 import * as Icons from '@flowing/icons'
 
 const meta: Meta = {
-  title: '通用组件/Icons',
+  title: '通用/Icons',
   parameters: {
     layout: 'centered'
   }

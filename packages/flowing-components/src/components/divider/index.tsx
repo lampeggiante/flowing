@@ -12,7 +12,7 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
     ...rest
   } = props
 
-  const classes = getDividerClassNames({
+  const { DividerCls: classes, textCls } = getDividerClassNames({
     type,
     contentPosition,
     hasChildren: !!children
@@ -20,7 +20,7 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
 
   return (
     <div ref={ref} className={classes} style={style} {...rest}>
-      {children && <span>{children}</span>}
+      {children && <span className={textCls}>{children}</span>}
     </div>
   )
 })

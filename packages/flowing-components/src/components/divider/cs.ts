@@ -1,50 +1,55 @@
 import { cs } from '@flowing/lib'
 import { DividerProps } from './interface'
 
-const defaultCls = ['relative', 'border-0', 'transition-all']
+const defaultCls = ['text-slate-200']
 
 const DividerType = {
   horizontal: [
-    'block',
-    'clear-both',
+    'relative',
     'w-full',
     'min-w-full',
-    'h-[1px]',
-    'my-4',
-    'bg-slate-200'
+    'max-w-full',
+    'my-[20px]',
+    'mx-0',
+    'border-b-[1px]',
+    'clear-both'
   ],
   vertical: [
     'inline-block',
-    'h-[0.9em]',
-    'w-[1px]',
+    'min-w-[1px]',
+    'max-w-[1px]',
+    'h-[1em]',
     'align-middle',
-    'mx-2',
-    'bg-slate-200'
+    'mx-[12px]',
+    'border-l-[1px]'
   ]
 }
 
-const ContentPosition = {
-  left: ['before:w-[5%]', 'after:w-[95%]'],
-  center: ['before:w-[50%]', 'after:w-[50%]'],
-  right: ['before:w-[95%]', 'after:w-[5%]']
-}
-
 const WithChildrenCls = [
+  'mx-[20px]',
   'flex',
   'items-center',
-  'border-0',
-  'border-slate-200',
+  'border-b-0',
+  'border-solid',
   'before:content-[""]',
-  'before:block',
-  'before:relative',
-  'before:h-[1px]',
-  'before:bg-slate-200',
+  'before:h-0',
+  'before:flex-1',
+  'before:border-b-[1px]',
+  'before:border-b-inherit',
   'after:content-[""]',
-  'after:block',
-  'after:relative',
-  'after:h-[1px]',
-  'after:bg-slate-200'
+  'after:h-0',
+  'after:flex-1',
+  'after:border-b-[1px]',
+  'after:border-b-inherit'
 ]
+
+const ContentPosition = {
+  center: [],
+  left: ['after:basis-[80%]', 'flex-grow-0'],
+  right: ['before:basis-[80%]', 'flex-grow-0']
+}
+
+export const TextCls = ['box-border', 'px-[16px]', 'text-sm', 'text-slate-500']
 
 export const getDividerClassNames = (
   params: Pick<DividerProps, 'type' | 'contentPosition'> & {
@@ -61,9 +66,12 @@ export const getDividerClassNames = (
     ...defaultCls,
     ...(type === 'horizontal' && !hasChildren ? DividerType.horizontal : []),
     ...(type === 'vertical' ? DividerType.vertical : []),
-    ...(hasChildren ? WithChildrenCls : []),
-    ...(hasChildren && contentPosition ? ContentPosition[contentPosition] : [])
+    ...(hasChildren && contentPosition ? ContentPosition[contentPosition] : []),
+    ...(hasChildren ? WithChildrenCls : [])
   ])
 
-  return classnames.join(' ')
+  return {
+    DividerCls: classnames.join(' '),
+    textCls: hasChildren ? TextCls.join(' ') : ''
+  }
 }

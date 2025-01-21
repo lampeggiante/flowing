@@ -6,7 +6,7 @@ import { Button } from '../..'
 import { IconApps } from '@flowing/icons'
 
 const meta: Meta<typeof Button> = {
-  title: '通用组件/Button',
+  title: '通用/Button',
   component: Button
 }
 
