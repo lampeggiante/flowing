@@ -15,10 +15,13 @@ export default meta
 type Story = StoryObj<typeof Divider>
 
 export const Basic: Story = {
-  render: () => (
+  args: {
+    children: '分割线'
+  },
+  render: (args) => (
     <div className="w-full p-8">
       <p>上面的内容</p>
-      <Divider />
+      <Divider {...args} />
       <p>下面的内容</p>
     </div>
   )

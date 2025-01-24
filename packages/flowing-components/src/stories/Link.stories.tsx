@@ -15,6 +15,14 @@ export default meta
 
 type Story = StoryObj<typeof Link>
 
+export const Basic: Story = {
+  args: {
+    children: '默认链接',
+    icon: true
+  },
+  render: (args) => <Link {...args} />
+}
+
 export const DifferentStatus: Story = {
   render: () => (
     <div className="w-full h-60 flex flex-col p-8">

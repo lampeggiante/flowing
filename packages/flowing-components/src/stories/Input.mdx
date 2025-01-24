@@ -1,0 +1,226 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="表单/Input/文档" />
+
+# Input API
+
+## 属性
+
+<table className="min-w-full border-collapse">
+  <thead>
+    <tr>
+      <th className="border p-2 bg-slate-50">属性名</th>
+      <th className="border p-2 bg-slate-50">说明</th>
+      <th className="border p-2 bg-slate-50">类型</th>
+      <th className="border p-2 bg-slate-50">默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="border p-2">value</td>
+      <td className="border p-2">输入框的值</td>
+      <td className="border p-2 font-mono text-sm">string</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">defaultValue</td>
+      <td className="border p-2">输入框默认值</td>
+      <td className="border p-2 font-mono text-sm">string</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">size</td>
+      <td className="border p-2">输入框大小</td>
+      <td className="border p-2 font-mono text-sm">
+        'small' | 'medium' | 'large' | 'default'
+      </td>
+      <td className="border p-2 font-mono text-sm">'default'</td>
+    </tr>
+    <tr>
+      <td className="border p-2">status</td>
+      <td className="border p-2">输入框状态</td>
+      <td className="border p-2 font-mono text-sm">
+        'default' | 'error' | 'warning'
+      </td>
+      <td className="border p-2 font-mono text-sm">'default'</td>
+    </tr>
+    <tr>
+      <td className="border p-2">disabled</td>
+      <td className="border p-2">是否禁用</td>
+      <td className="border p-2 font-mono text-sm">boolean</td>
+      <td className="border p-2 font-mono text-sm">false</td>
+    </tr>
+    <tr>
+      <td className="border p-2">readOnly</td>
+      <td className="border p-2">是否只读</td>
+      <td className="border p-2 font-mono text-sm">boolean</td>
+      <td className="border p-2 font-mono text-sm">false</td>
+    </tr>
+    <tr>
+      <td className="border p-2">allowClear</td>
+      <td className="border p-2">是否可清除内容</td>
+      <td className="border p-2 font-mono text-sm">boolean</td>
+      <td className="border p-2 font-mono text-sm">false</td>
+    </tr>
+    <tr>
+      <td className="border p-2">placeholder</td>
+      <td className="border p-2">提示文本</td>
+      <td className="border p-2 font-mono text-sm">string</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">maxLength</td>
+      <td className="border p-2">最大长度</td>
+      <td className="border p-2 font-mono text-sm">number</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">showWordLimit</td>
+      <td className="border p-2">是否显示字数统计</td>
+      <td className="border p-2 font-mono text-sm">boolean</td>
+      <td className="border p-2 font-mono text-sm">false</td>
+    </tr>
+    <tr>
+      <td className="border p-2">prefix</td>
+      <td className="border p-2">前缀图标/文本</td>
+      <td className="border p-2 font-mono text-sm">ReactNode</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">suffix</td>
+      <td className="border p-2">后缀图标/文本</td>
+      <td className="border p-2 font-mono text-sm">ReactNode</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">addBefore</td>
+      <td className="border p-2">前置标签</td>
+      <td className="border p-2 font-mono text-sm">ReactNode</td>
+      <td className="border p-2">-</td>
+    </tr>
+    <tr>
+      <td className="border p-2">addAfter</td>
+      <td className="border p-2">后置标签</td>
+      <td className="border p-2 font-mono text-sm">ReactNode</td>
+      <td className="border p-2">-</td>
+    </tr>
+  </tbody>
+</table>
+
+## 事件
+
+<table className="min-w-full border-collapse">
+  <thead>
+    <tr>
+      <th className="border p-2 bg-slate-50">事件名</th>
+      <th className="border p-2 bg-slate-50">说明</th>
+      <th className="border p-2 bg-slate-50">类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="border p-2">onChange</td>
+      <td className="border p-2">输入框内容变化时的回调</td>
+      <td className="border p-2 font-mono text-sm">(value: string) => void</td>
+    </tr>
+    <tr>
+      <td className="border p-2">onClear</td>
+      <td className="border p-2">点击清除按钮时的回调</td>
+      <td className="border p-2 font-mono text-sm">() => void</td>
+    </tr>
+    <tr>
+      <td className="border p-2">onPressEnter</td>
+      <td className="border p-2">按下回车的回调</td>
+      <td className="border p-2 font-mono text-sm">
+        (e: KeyboardEvent\<HTMLInputElement\>) => void
+      </td>
+    </tr>
+    <tr>
+      <td className="border p-2">onFocus</td>
+      <td className="border p-2">获取焦点时的回调</td>
+      <td className="border p-2 font-mono text-sm">
+        (e: FocusEvent\<HTMLInputElement\>) => void
+      </td>
+    </tr>
+    <tr>
+      <td className="border p-2">onBlur</td>
+      <td className="border p-2">失去焦点时的回调</td>
+      <td className="border p-2 font-mono text-sm">
+        (e: FocusEvent\<HTMLInputElement\>) => void
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## 样式相关属性
+
+<table className="min-w-full border-collapse">
+  <thead>
+    <tr>
+      <th className="border p-2 bg-slate-50">属性名</th>
+      <th className="border p-2 bg-slate-50">说明</th>
+      <th className="border p-2 bg-slate-50">类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="border p-2">className</td>
+      <td className="border p-2">自定义类名</td>
+      <td className="border p-2 font-mono text-sm">string | string[]</td>
+    </tr>
+    <tr>
+      <td className="border p-2">style</td>
+      <td className="border p-2">自定义样式</td>
+      <td className="border p-2 font-mono text-sm">CSSProperties</td>
+    </tr>
+    <tr>
+      <td className="border p-2">beforeStyle</td>
+      <td className="border p-2">前置标签样式</td>
+      <td className="border p-2 font-mono text-sm">CSSProperties</td>
+    </tr>
+    <tr>
+      <td className="border p-2">afterStyle</td>
+      <td className="border p-2">后置标签样式</td>
+      <td className="border p-2 font-mono text-sm">CSSProperties</td>
+    </tr>
+    <tr>
+      <td className="border p-2">prefixStyle</td>
+      <td className="border p-2">前缀样式</td>
+      <td className="border p-2 font-mono text-sm">CSSProperties</td>
+    </tr>
+    <tr>
+      <td className="border p-2">suffixStyle</td>
+      <td className="border p-2">后缀样式</td>
+      <td className="border p-2 font-mono text-sm">CSSProperties</td>
+    </tr>
+  </tbody>
+</table>
+
+## Ref Methods
+
+<table className="min-w-full border-collapse">
+  <thead>
+    <tr>
+      <th className="border p-2 bg-slate-50">方法名</th>
+      <th className="border p-2 bg-slate-50">说明</th>
+      <th className="border p-2 bg-slate-50">类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="border p-2">focus</td>
+      <td className="border p-2">使输入框获取焦点</td>
+      <td className="border p-2 font-mono text-sm">() => void</td>
+    </tr>
+    <tr>
+      <td className="border p-2">blur</td>
+      <td className="border p-2">使输入框失去焦点</td>
+      <td className="border p-2 font-mono text-sm">() => void</td>
+    </tr>
+    <tr>
+      <td className="border p-2">dom</td>
+      <td className="border p-2">获取输入框 DOM 元素</td>
+      <td className="border p-2 font-mono text-sm">HTMLInputElement</td>
+    </tr>
+  </tbody>
+</table>

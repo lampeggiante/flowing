@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Input } from '../../index'
+import { Input } from '../..'
 import '../style/flowing.css'
 
 const meta: Meta<typeof Input> = {
   title: '表单/Input',
   component: Input,
-  tags: ['autodocs'],
-  args: {
-    placeholder: '请输入内容'
-  }
+  tags: ['autodocs']
 }
 
 export default meta
@@ -20,7 +17,6 @@ export const Basic: Story = {
   args: {
     placeholder: '请输入'
   },
-
   render: (args) => <Input {...args} />
 }
 
