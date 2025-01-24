@@ -7,11 +7,21 @@ const meta: Meta = {
   title: '通用/Icons',
   parameters: {
     layout: 'centered'
-  }
+  },
+  tags: ['autodocs']
 }
 
 export default meta
 type Story = StoryObj
+
+export const Basic: Story = {
+  args: {
+    style: {
+      fontSize: '24px'
+    }
+  },
+  render: (args) => <Icons.IconApps {...args} />
+}
 
 // 图标分类
 const iconCategories = {
