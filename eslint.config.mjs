@@ -36,7 +36,7 @@ export default [
       '@typescript-eslint/no-non-null-assertion': 'off',
       // 'array-bracket-spacing': ['error', 'always'], // 数组前后留空格
       'object-curly-spacing': ['error', 'always'], // 对象前后留空格
-      semi: ['error', 'never'], // ;分号省略
+      semi: ['error', 'never'], // ;分号
       'comma-dangle': ['error', 'never'], // ,逗号省略
       // "simple-import-sort/imports": "error",
       // "simple-import-sort/exports": "error",

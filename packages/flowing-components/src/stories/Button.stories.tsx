@@ -5,10 +5,73 @@ import '../style/flowing.css'
 import { Button } from '../..'
 import { IconApps } from '@flowing/icons'
 
-const meta: Meta<typeof Button> = {
+const meta = {
   title: '通用/Button',
-  component: Button
-}
+  component: Button,
+  subcomponents: {
+    Group: Button.Group as any
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    type: {
+      description: '按钮类型',
+      options: ['default', 'dashed', 'text', 'outline'],
+      control: { type: 'select' }
+    },
+    theme: {
+      description: '按钮主题',
+      options: ['primary', 'warning', 'danger', 'success', 'default', 'info'],
+      control: { type: 'select' }
+    },
+    size: {
+      description: '按钮尺寸',
+      options: ['mini', 'small', 'default', 'large'],
+      control: { type: 'select' }
+    },
+    shape: {
+      description: '按钮形状',
+      options: ['round', 'square', 'circle'],
+      control: { type: 'select' }
+    },
+    disabled: {
+      description: '是否禁用',
+      control: { type: 'boolean' }
+    },
+    loading: {
+      description: '是否加载中',
+      control: { type: 'boolean' }
+    },
+    long: {
+      description: '是否撑满父元素宽度',
+      control: { type: 'boolean' }
+    },
+    pureCircle: {
+      description: '是否为纯图标按钮',
+      control: { type: 'boolean' }
+    },
+    htmlType: {
+      description: '按钮原生type属性',
+      options: ['button', 'submit', 'reset'],
+      control: { type: 'select' }
+    },
+    href: {
+      description: '点击跳转的地址',
+      control: { type: 'text' }
+    },
+    target: {
+      description: '链接打开方式',
+      control: { type: 'text' }
+    },
+    prefixIcon: {
+      description: '前置图标',
+      control: false
+    },
+    suffixIcon: {
+      description: '后置图标',
+      control: false
+    }
+  }
+} satisfies Meta<typeof Button>
 
 export default meta
 

@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useImperativeHandle } from 'react'
 import { DividerProps } from './interface'
 import { getDividerClassNames } from './cs'
 
-const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
+const Divider = forwardRef<any, DividerProps>((props, ref: any) => {
   const {
     className,
     style,
@@ -17,6 +17,10 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
     contentPosition,
     hasChildren: !!children
   })
+
+  useImperativeHandle(ref, () => ({
+    dom: ref?.current
+  }))
 
   return (
     <div ref={ref} className={classes} style={style} {...rest}>

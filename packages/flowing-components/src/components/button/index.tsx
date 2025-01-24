@@ -2,6 +2,7 @@ import React, {
   ForwardedRef,
   forwardRef,
   MouseEventHandler,
+  useImperativeHandle,
   useMemo,
   useRef
 } from 'react'
@@ -10,7 +11,7 @@ import { ButtonGroupProps, ButtonProps } from './interface'
 import { getButtonClassNames } from './cs'
 import Group from './group'
 
-const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
+const Button = forwardRef<any, ButtonProps>((props: ButtonProps, ref: any) => {
   const {
     style,
     className,
@@ -35,6 +36,13 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
 
   const innerRef = useRef(null)
   const buttonRef = ref ?? innerRef
+
+  useImperativeHandle(ref, () => ({
+    dom: buttonRef?.current,
+    click: () => {
+      buttonRef?.current?.click()
+    }
+  }))
 
   const prefixIconNode = useMemo(
     () => (loading ? <IconLoading className="animate-spin" /> : prefixIcon),
@@ -106,18 +114,16 @@ const Button = (props: ButtonProps, ref: ForwardedRef<any>) => {
       {innerContent}
     </button>
   )
-}
+})
 
-const ForwardRefButton = forwardRef<any, ButtonProps>(Button)
+Button.displayName = 'FlowingButton'
 
-const ButtonComponent = ForwardRefButton as typeof ForwardRefButton & {
+const ButtonComponent = Button as typeof Button & {
   __FLOWING_BUTTON__: boolean
   Group: typeof Group
 }
 
 ButtonComponent.__FLOWING_BUTTON__ = true
-
-ButtonComponent.displayName = 'FlowingButton'
 
 ButtonComponent.Group = Group
 

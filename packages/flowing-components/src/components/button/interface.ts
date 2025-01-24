@@ -1,13 +1,7 @@
-import {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  CSSProperties,
-  HTMLProps,
-  ReactNode
-} from 'react'
+import { CSSProperties, HTMLProps, ReactNode } from 'react'
 
 /** 基础按钮属性 */
-export interface BaseButtonProps {
+export interface ButtonProps {
   style?: CSSProperties
   className?: string | string[]
   children?: ReactNode
@@ -81,30 +75,9 @@ export interface BaseButtonProps {
   /**
    * @description 点击事件
    */
+  htmlType?: 'button' | 'submit' | 'reset'
   onClick?: (e: MouseEvent) => void
 }
-
-export type AnchorButtonProps = {
-  href: string
-  target?: string
-  anchorProps?: HTMLProps<HTMLAnchorElement>
-} & BaseButtonProps &
-  Omit<AnchorHTMLAttributes<any>, 'type' | 'onClick' | 'className'>
-
-export type FinalButtonProps = {
-  /**
-   * @zh 按钮原生的 html type 类型
-   * @en html button type
-   * @defaultValue button
-   */
-  htmlType?: 'button' | 'submit' | 'reset'
-} & BaseButtonProps &
-  Omit<ButtonHTMLAttributes<any>, 'type' | 'onClick' | 'className'>
-
-/**
- * @title Button
- */
-export type ButtonProps = Partial<FinalButtonProps & AnchorButtonProps>
 
 export interface ButtonGroupProps {
   /**

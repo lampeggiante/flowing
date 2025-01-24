@@ -7,7 +7,8 @@ import { IconApps } from '@flowing/icons'
 
 const meta: Meta<typeof Link> = {
   title: '通用/Link',
-  component: Link
+  component: Link,
+  tags: ['autodocs']
 }
 
 export default meta

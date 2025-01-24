@@ -6,7 +6,8 @@ import { Divider } from '../..'
 
 const meta: Meta<typeof Divider> = {
   title: '布局/Divider',
-  component: Divider
+  component: Divider,
+  tags: ['autodocs']
 }
 
 export default meta
