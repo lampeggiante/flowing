@@ -22,7 +22,8 @@
     "prepare": "husky",
     "commitlint": "commitlint --config commitlint.config.mjs -e -V",
     "gh-pages": "sh scripts/gh-pages.sh",
-    "dev:note": "pnpm --filter @flowing/note dev"
+    "dev:note": "pnpm --filter @flowing/note dev",
+    "dev:components": "pnpm --filter @flowing/components dev"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
