@@ -8,14 +8,14 @@
     "markdown",
     "helpful"
   ],
-  "author": "leon yu",
+  "author": "clyde",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/lampeggiante/flowing.git"
   },
   "engines": {
-    "node": "20.15.0",
+    "node": "20.18.2",
     "pnpm": "9.4.0"
   },
   "scripts": {
