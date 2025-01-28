@@ -59,6 +59,64 @@ const ReadOnlyCls = [
   'focus-within:ring-0'
 ]
 
+// 添加 TextArea 相关的样式
+const textAreaDefaultCls = [
+  'inline-flex',
+  'flex-col',
+  'w-full',
+  'relative',
+  'transition-all',
+  'border',
+  'rounded-md',
+  'bg-white'
+]
+
+const TextAreaStatus = {
+  default: [
+    'border-slate-200',
+    'hover:border-blue-400',
+    'focus-within:border-blue-500',
+    'focus-within:ring-1',
+    'focus-within:ring-blue-500'
+  ],
+  error: [
+    'border-red-300',
+    'hover:border-red-400',
+    'focus-within:border-red-500',
+    'focus-within:ring-1',
+    'focus-within:ring-red-500'
+  ],
+  warning: [
+    'border-yellow-300',
+    'hover:border-yellow-400',
+    'focus-within:border-yellow-500',
+    'focus-within:ring-1',
+    'focus-within:ring-yellow-500'
+  ]
+}
+
+const TextAreaSize = {
+  small: ['min-h-[32px]', 'text-sm'],
+  medium: ['min-h-[40px]', 'text-base'],
+  large: ['min-h-[48px]', 'text-lg'],
+  default: ['min-h-[40px]', 'text-base']
+}
+
+const TextAreaDisabledCls = [
+  'bg-slate-50',
+  'cursor-not-allowed',
+  'hover:border-slate-200',
+  'focus-within:border-slate-200',
+  'focus-within:ring-0'
+]
+
+const TextAreaReadOnlyCls = [
+  'bg-slate-50',
+  'hover:border-slate-200',
+  'focus-within:border-slate-200',
+  'focus-within:ring-0'
+]
+
 export const getInputClassNames = (
   params: Pick<InputProps, 'size' | 'disabled' | 'status' | 'readOnly'>
 ) => {
@@ -122,5 +180,53 @@ export const getAffixClassNames = () => {
     'px-3',
     'text-slate-400',
     'flex-shrink-0'
+  ]).join(' ')
+}
+
+export const getTextAreaWrapperClassNames = (
+  params: Pick<InputProps, 'size' | 'disabled' | 'status' | 'readOnly'>
+) => {
+  const {
+    size = 'medium',
+    disabled = false,
+    readOnly = false,
+    status = 'default'
+  } = params
+
+  let classnames = cs([
+    ...textAreaDefaultCls,
+    ...TextAreaSize[size],
+    ...TextAreaStatus[status]
+  ])
+
+  if (disabled) {
+    classnames = classnames.filter((item) => !item.includes('hover:'))
+    classnames = classnames.filter((item) => !item.includes('focus-within:'))
+    classnames.push(...TextAreaDisabledCls)
+  }
+
+  if (readOnly) {
+    classnames = classnames.filter((item) => !item.includes('hover:'))
+    classnames = classnames.filter((item) => !item.includes('focus-within:'))
+    classnames.push(...TextAreaReadOnlyCls)
+  }
+
+  return classnames.join(' ')
+}
+
+export const getTextAreaElementClassNames = () => {
+  return cs([
+    'w-full',
+    'h-full',
+    'min-h-[inherit]',
+    'px-3',
+    'py-2',
+    'bg-transparent',
+    'outline-none',
+    'resize-vertical',
+    'disabled:cursor-not-allowed',
+    'placeholder:text-slate-400',
+    '[&::-webkit-resizer]:appearance-none',
+    'resize-none'
   ]).join(' ')
 }

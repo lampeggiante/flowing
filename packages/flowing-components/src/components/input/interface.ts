@@ -3,7 +3,9 @@ import {
   InputHTMLAttributes,
   ReactNode,
   KeyboardEvent,
-  FocusEvent
+  FocusEvent,
+  TextareaHTMLAttributes,
+  ChangeEvent
 } from 'react'
 
 export interface InputProps
@@ -50,4 +52,43 @@ export type RefInputType = {
   focus: () => void
   /** input dom元素 */
   dom: HTMLInputElement
+}
+
+export type AutoSizeType = {
+  minRows?: number
+  maxRows?: number
+}
+
+export interface TextAreaProps
+  extends Omit<
+    TextareaHTMLAttributes<HTMLTextAreaElement>,
+    'onChange' | 'className' | 'maxLength' | 'style' | 'prefix' | 'size'
+  > {
+  style?: CSSProperties
+  className?: string | string[]
+  wrapperStyle?: CSSProperties
+  wrapperClassName?: string | string[]
+  value?: string
+  defaultValue?: string
+  placeholder?: string
+  maxLength?: number
+  showWordLimit?: boolean
+  allowClear?: boolean
+  clearIcon?: ReactNode
+  status?: 'default' | 'error' | 'warning'
+  size?: 'small' | 'medium' | 'large' | 'default'
+  disabled?: boolean
+  readOnly?: boolean
+  autoSize?: boolean | AutoSizeType
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void
+  onPressEnter?: (event: KeyboardEvent<HTMLTextAreaElement>) => void
+  onClear?: () => void
+  rows?: number
+  cols?: number
+}
+
+export type RefTextAreaType = {
+  dom: HTMLTextAreaElement
+  focus: () => void
+  blur: () => void
 }

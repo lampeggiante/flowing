@@ -17,7 +17,7 @@ import {
   getAddonClassNames,
   getAffixClassNames
 } from './cs'
-
+import TextArea from './text-area'
 const Input = (props: InputProps, ref: any) => {
   const {
     className,
@@ -53,21 +53,40 @@ const Input = (props: InputProps, ref: any) => {
   } = props
 
   const [innerValue, setInnerValue] = useState(defaultValue)
+  const isComposing = useRef(false)
   const innerRef = useRef(null)
   const inputRef = ref ?? innerRef
   const controlled = value !== undefined
+
+  const handleCompositionStart = () => {
+    isComposing.current = true
+  }
+
+  const handleCompositionEnd = (
+    e: React.CompositionEvent<HTMLInputElement>
+  ) => {
+    isComposing.current = false
+    // 在输入法结束后触发 onChange
+    handleChange(e as any)
+  }
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!disabled && !readOnly) {
-        onChange?.(e.target.value)
-        setInnerValue(e.target.value)
+        const newValue = e.target.value
+        setInnerValue(newValue)
+        // 只在非输入法编辑状态下触发 onChange
+        if (!isComposing.current) {
+          onChange?.(newValue)
+        }
       }
     },
-    [disabled, readOnly, controlled, onChange, setInnerValue]
+    [disabled, readOnly, controlled, onChange, setInnerValue, isComposing]
   )
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (isComposing.current) return
       if (e.key === 'Enter') {
         onPressEnter?.(e)
       }
@@ -213,6 +232,8 @@ const Input = (props: InputProps, ref: any) => {
         placeholder={placeholder}
         maxLength={maxLength}
         onChange={handleChange}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
         onKeyDown={handleKeyDown}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -228,19 +249,20 @@ const Input = (props: InputProps, ref: any) => {
 }
 
 type InputRefType = ForwardRefExoticComponent<
-  InputProps &
-    RefAttributes<RefInputType> & {
-      // TextArea: typeof TextArea
-      // Password: typeof Password
-      // Group: typeof Group
-    }
->
+  InputProps & RefAttributes<RefInputType>
+> & {
+  TextArea: typeof TextArea
+  // Password: typeof Password
+  // Group: typeof Group
+}
 
 const ForwardedInput = forwardRef<HTMLInputElement, InputProps>(
   Input
 ) as InputRefType
 
 ForwardedInput.displayName = 'FlowingInput'
+
+ForwardedInput.TextArea = TextArea
 
 export default ForwardedInput
 
