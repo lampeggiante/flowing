@@ -6,5 +6,9 @@ export interface TriggerProps {
   popupStyle?: CSSProperties
   popupClassName?: string | string[]
   children: ReactNode
-  popup: () => ReactNode
+  visible?: boolean
+  defaultVisible?: boolean
+  popup?: () => ReactNode
+  getPopupContainer?: (node: HTMLElement | null) => Element
+  getTargetDOMNode?: () => HTMLElement
 }

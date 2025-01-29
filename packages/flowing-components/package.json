@@ -15,8 +15,8 @@
     "build": "storybook build"
   },
   "dependencies": {
-    "@flowing/lib": "workspace:*",
     "@flowing/icons": "workspace:*",
+    "@flowing/lib": "workspace:*",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "react": "^18.3.1",
@@ -31,6 +31,7 @@
     "@storybook/react": "8.6.0-alpha.0",
     "@storybook/react-vite": "8.6.0-alpha.0",
     "@storybook/test": "8.6.0-alpha.0",
+    "@types/node": "^22.12.0",
     "autoprefixer": "^10.4.19",
     "classnames": "^2.5.1",
     "postcss": "^8.4.40",
