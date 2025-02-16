@@ -1,5 +1,5 @@
 export default function warning(
-  condition: any,
+  condition: boolean,
   message: string,
   ...extra: any[]
 ) {

@@ -15,6 +15,17 @@ function hasInstanceWarned(instance: ReactInstance) {
   return hasWarned
 }
 
+export const callbackOriginRef = (children: any, node: any) => {
+  if (children && children.ref) {
+    if (isFunction(children.ref)) {
+      children?.ref(node)
+    }
+    if ('current' in children.ref) {
+      children.ref.current = node
+    }
+  }
+}
+
 /**
  *
  * @param element
@@ -38,7 +49,6 @@ export const findDOMNode = (element: any, instance?: ReactInstance) => {
 
   if (element instanceof Component) {
     if (ReactDOM.findDOMNode) {
-      // eslint-disable-next-line react/no-find-dom-node
       return ReactDOM.findDOMNode(element)
     }
   }
@@ -51,7 +61,6 @@ export const findDOMNode = (element: any, instance?: ReactInstance) => {
       { element, instance }
     )
     if (ReactDOM.findDOMNode) {
-      // eslint-disable-next-line react/no-find-dom-node
       return ReactDOM.findDOMNode(instance)
     }
   }
