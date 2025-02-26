@@ -2,7 +2,6 @@ import { forwardRef, useState } from 'react'
 import TreeItem from './tree-item'
 import type { TreeItemProps } from './tree-item'
 import {
-  BarsOutlined,
   CaretDownOutlined,
   CaretRightOutlined,
   PlusOutlined
@@ -34,9 +33,9 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
             <span className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option">
               <PlusOutlined />
             </span>
-            <span className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option">
+            {/* <span className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option">
               <BarsOutlined />
-            </span>
+            </span> */}
           </span>
         </span>
       </div>

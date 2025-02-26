@@ -9,7 +9,7 @@ import { FlowingNoteMain } from './components/flowing-note-main'
 import './app.scss'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { init } from './services/init'
+import { initDB } from './services/init'
 import { useNoteState } from './hooks/useNoteState'
 import { info } from './utils/log'
 
@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     /** 初始化数据库 */
-    init()
+    initDB()
   }, [])
   return (
     <ConfigContext>

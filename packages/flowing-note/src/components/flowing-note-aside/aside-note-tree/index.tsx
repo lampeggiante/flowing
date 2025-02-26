@@ -3,6 +3,7 @@ import './aside-note.scss'
 import { noteDB, storeName, storeNameMap } from '@/services/note-store'
 import { useEffect } from 'react'
 import { useNoteTree } from '@/hooks/useNoteTree'
+import { info } from '@/utils/log'
 
 const prefix = 'aside-note-tree'
 
@@ -13,7 +14,7 @@ const AsideNoteTree = () => {
     const store = await noteDB.instance?.getAllStore(storeName)
     if (!store) return
     const data = store.filter((item: any) => item.noteId !== 0)
-    console.log('initTreeData', data)
+    info('initTreeData', data)
     const visited = new Set()
     function traverse(id?: number) {
       let ans = []
@@ -35,7 +36,7 @@ const AsideNoteTree = () => {
       return ans
     }
     const treeDataList = traverse()
-    console.log('treeDataList', treeDataList)
+    info('treeDataList', treeDataList)
     updateNoteTree(treeDataList)
   }
 

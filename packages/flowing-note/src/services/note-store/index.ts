@@ -19,3 +19,5 @@ export enum storeNameMap {
 export const noteDB: NoteDB = {
   instance: null
 }
+
+export const NOTE_INIT_KEY = '__flowing_note_inited__'

@@ -7,6 +7,7 @@ import './note-body.scss'
 import FlowingNoteInfo from '@/components/flowing-note-main/flowing-note-info'
 import { useNoteTree } from '@/hooks/useNoteTree'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { info } from 'console'
 
 const NoteBody = () => {
   const { currentNote, setNoteTitle, setNoteContent } = useNoteState()
@@ -46,7 +47,7 @@ const NoteBody = () => {
   }
 
   useEffect(() => {
-    console.log('currentNote发生了改变', currentNote)
+    info('currentNote发生了改变', currentNote)
     if (currentNote.noteId !== preNoteId.current) {
       normalUpdate()
       return

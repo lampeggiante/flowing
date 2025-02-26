@@ -43,17 +43,17 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
     [expanded]
   )
 
-  const handleChangeIcon = useCallback((e: MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault()
-  }, [])
+  // const handleChangeIcon = useCallback((e: MouseEvent<HTMLSpanElement>) => {
+  //   e.preventDefault()
+  // }, [])
 
   const handleAddNote = useCallback((e: MouseEvent<HTMLSpanElement>) => {
     e.preventDefault()
   }, [])
 
-  const handleShowOption = useCallback((e: MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault()
-  }, [])
+  // const handleShowOption = useCallback((e: MouseEvent<HTMLSpanElement>) => {
+  //   e.preventDefault()
+  // }, [])
 
   return (
     <>
@@ -71,8 +71,8 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
                 (expanded ? <CaretDownOutlined /> : <CaretRightOutlined />)}
             </span>
             <span
-              className="aside-note-tree-item-icon aside-note-tree-item-icon-hover"
-              onClick={handleChangeIcon}
+              className="aside-note-tree-item-icon"
+              // onClick={handleChangeIcon}
             >
               {prefixIcon || <FileTextOutlined />}
             </span>
@@ -85,12 +85,12 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
             >
               <PlusOutlined />
             </span>
-            <span
+            {/* <span
               className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
               onClick={handleShowOption}
             >
               <BarsOutlined />
-            </span>
+            </span> */}
           </div>
         </Link>
       </Tooltip>
