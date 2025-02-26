@@ -26,6 +26,7 @@ export interface UseNoteMethodsType {
   setCurrentNote: (id: number) => void
   setNoteTitle: (title: string) => void
   setNoteContent: (content: string) => void
+  addNewNote: (parentId: number | null, newId: number) => void
 }
 
 export const emptyCurrentNote: FlowingNote = {
@@ -98,6 +99,22 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
               lastModified: now(),
               noteContent: content
             }
+          }
+        })
+      },
+      addNewNote: (parentId: number | null, newId: number) => {
+        set(() => {
+          const newNote = {
+            noteId: newId,
+            author: 'flowing',
+            lastModified: now(),
+            noteTitle: '新笔记',
+            noteContent: '<p>这是内容</p>',
+            parent: parentId || null
+          }
+          noteDB.instance?.addStore(storeName, newNote)
+          return {
+            currentNote: newNote
           }
         })
       }

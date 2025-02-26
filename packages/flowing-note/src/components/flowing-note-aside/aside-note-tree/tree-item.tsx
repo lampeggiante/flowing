@@ -1,5 +1,6 @@
+import { useNoteState } from '@/hooks/useNoteState'
+import { useNoteTree } from '@/hooks/useNoteTree'
 import {
-  BarsOutlined,
   CaretRightOutlined,
   CaretDownOutlined,
   FileTextOutlined,
@@ -34,7 +35,8 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   const caretClsName =
     'aside-note-tree-item-icon aside-note-tree-item-caret' +
     (children.length > 0 ? ' aside-note-tree-item-icon-hover' : '')
-
+  const { appendNote } = useNoteTree()
+  const { addNewNote } = useNoteState()
   const handleExpand = useCallback(
     (e: MouseEvent<HTMLSpanElement>) => {
       e.preventDefault()
@@ -47,8 +49,10 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   //   e.preventDefault()
   // }, [])
 
-  const handleAddNote = useCallback((e: MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault()
+  const handleAddNote = useCallback((id: number) => {
+    console.log('handleAddNote', id)
+    const newId = appendNote(id)
+    addNewNote(id, newId)
   }, [])
 
   // const handleShowOption = useCallback((e: MouseEvent<HTMLSpanElement>) => {
@@ -81,7 +85,10 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
             </span>
             <span
               className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
-              onClick={handleAddNote}
+              onClick={(e) => {
+                e.stopPropagation()
+                handleAddNote(id)
+              }}
             >
               <PlusOutlined />
             </span>

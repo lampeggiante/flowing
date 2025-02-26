@@ -6,7 +6,8 @@ import {
   CaretRightOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-
+import { useNoteTree } from '@/hooks/useNoteTree'
+import { useNoteState } from '@/hooks/useNoteState'
 interface TreeProps {
   title: string
   treeData: TreeItemProps[]
@@ -15,6 +16,8 @@ interface TreeProps {
 const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
   const { treeData, title, ...rest } = props
   const [expanded, setExpanded] = useState<boolean>(true)
+  const { appendNote } = useNoteTree()
+  const { addNewNote } = useNoteState()
 
   return (
     <>
@@ -30,7 +33,13 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
             </span>
           </span>
           <span>
-            <span className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option">
+            <span
+              className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option"
+              onClick={() => {
+                const newId = appendNote(null)
+                addNewNote(null, newId)
+              }}
+            >
               <PlusOutlined />
             </span>
             {/* <span className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option">

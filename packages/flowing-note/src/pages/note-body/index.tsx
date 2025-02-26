@@ -7,8 +7,7 @@ import './note-body.scss'
 import FlowingNoteInfo from '@/components/flowing-note-main/flowing-note-info'
 import { useNoteTree } from '@/hooks/useNoteTree'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { info } from 'console'
-
+import { info } from '@/utils/log'
 const NoteBody = () => {
   const { currentNote, setNoteTitle, setNoteContent } = useNoteState()
   const { updateTreeItemTitle } = useNoteTree()
