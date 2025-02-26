@@ -5,7 +5,7 @@ import {
   FileTextOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import { FlowingTooltip } from '@flowing/components'
+import { Tooltip } from 'antd'
 import {
   forwardRef,
   HTMLAttributes,
@@ -57,12 +57,12 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
 
   return (
     <>
-      <FlowingTooltip
-        content={title}
+      <Tooltip
+        title={title}
         placement="right"
-        tooltipCls="aside-tooltip"
-        gap={25}
-        delay={100}
+        // tooltipCls="aside-tooltip"
+        // gap={25}
+        // delay={100}
       >
         <Link to={`/wiki/${id}`} style={{ width: '100%' }}>
           <div ref={ref} className="aside-note-tree-item" {...rest}>
@@ -93,7 +93,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
             </span>
           </div>
         </Link>
-      </FlowingTooltip>
+      </Tooltip>
       {expanded &&
         children?.map((child) => {
           const { id } = child

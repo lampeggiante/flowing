@@ -45,7 +45,6 @@ export default [
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-this-alias': 'warn',
-      'no-undef': 'warn',
       '@typescript-eslint/no-var-requires': 'off'
     }
   }

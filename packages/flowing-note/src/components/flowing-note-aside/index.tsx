@@ -3,7 +3,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import './aside.scss'
 import { AsideHeader } from './aside-header'
 import { GlobalConfigCtx } from '../config-context'
-import { FlowingButton } from '@flowing/components'
+import { Button } from 'antd'
 import AsideNoteTree from './aside-note-tree'
 
 export function FlowingNoteAside() {
@@ -100,18 +100,18 @@ export function FlowingNoteAside() {
       >
         <div className="aside-cursor" />
         <AsideHeader />
-        <FlowingButton
+        <Button
           className="aside-button aside-button-left"
           style={{ display: openAside ? 'flex' : 'none' }}
           onClick={handleBtnClick}
-          prefixIcon={<LeftOutlined />}
+          icon={<LeftOutlined />}
         />
         <AsideNoteTree />
       </div>
-      <FlowingButton
+      <Button
         className="aside-button aside-button-right"
         onClick={handleBtnClick}
-        prefixIcon={<RightOutlined />}
+        icon={<RightOutlined />}
         style={{ display: openAside ? 'none' : 'flex' }}
       />
     </aside>
