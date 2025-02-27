@@ -103,20 +103,15 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         })
       },
       addNewNote: (parentId: number | null, newId: number) => {
-        set(() => {
-          const newNote = {
-            noteId: newId,
-            author: 'flowing',
-            lastModified: now(),
-            noteTitle: '新笔记',
-            noteContent: '<p>这是内容</p>',
-            parent: parentId || null
-          }
-          noteDB.instance?.addStore(storeName, newNote)
-          return {
-            currentNote: newNote
-          }
-        })
+        const newNote = {
+          noteId: newId,
+          author: 'flowing',
+          lastModified: now(),
+          title: '新笔记',
+          content: '<p>这是内容</p>',
+          parent: parentId || null
+        }
+        noteDB.instance?.addStore(storeName, newNote)
       }
     }),
     {

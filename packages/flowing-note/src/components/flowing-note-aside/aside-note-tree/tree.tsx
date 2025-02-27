@@ -38,6 +38,7 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
               onClick={() => {
                 const newId = appendNote(null)
                 addNewNote(null, newId)
+                location.pathname = `/flowing/wiki/${newId}`
               }}
             >
               <PlusOutlined />

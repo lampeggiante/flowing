@@ -1,5 +1,6 @@
 import { useNoteState } from '@/hooks/useNoteState'
 import { useNoteTree } from '@/hooks/useNoteTree'
+import { log } from '@/utils/log'
 import {
   CaretRightOutlined,
   CaretDownOutlined,
@@ -49,11 +50,16 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   //   e.preventDefault()
   // }, [])
 
-  const handleAddNote = useCallback((id: number) => {
-    console.log('handleAddNote', id)
-    const newId = appendNote(id)
-    addNewNote(id, newId)
-  }, [])
+  const handleAddNote = useCallback(
+    (e: MouseEvent<HTMLSpanElement>, id: number) => {
+      e.preventDefault()
+      log('handleAddNote', id)
+      const newId = appendNote(id)
+      addNewNote(id, newId)
+      location.pathname = `/flowing/wiki/${newId}`
+    },
+    [appendNote, addNewNote]
+  )
 
   // const handleShowOption = useCallback((e: MouseEvent<HTMLSpanElement>) => {
   //   e.preventDefault()
@@ -85,10 +91,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
             </span>
             <span
               className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
-              onClick={(e) => {
-                e.stopPropagation()
-                handleAddNote(id)
-              }}
+              onClick={(e) => handleAddNote(e, id)}
             >
               <PlusOutlined />
             </span>
