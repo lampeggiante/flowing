@@ -16,7 +16,7 @@ const AsideNoteTree = () => {
     const data = store.filter((item: any) => item.noteId !== 0)
     info('initTreeData', data)
     const visited = new Set()
-    function traverse(id?: number) {
+    function traverse({ id, level }: { id?: string; level?: number }) {
       let ans = []
       let target
       if (!id) {
@@ -30,12 +30,14 @@ const AsideNoteTree = () => {
         return {
           id: item.noteId,
           title: item.title,
-          children: traverse(item.noteId)
+          level: level ?? 1,
+          expanded: false,
+          children: traverse({ id: item.noteId, level: (level ?? 1) + 1 })
         }
       })
       return ans
     }
-    const treeDataList = traverse()
+    const treeDataList = traverse({ level: 1 })
     info('treeDataList', treeDataList)
     updateNoteTree(treeDataList)
   }

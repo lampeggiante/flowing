@@ -7,6 +7,7 @@ export interface NoteTreeItem {
   id: string
   title: string
   level: number
+  expanded: boolean
   children: NoteTreeItem[]
 }
 
@@ -17,6 +18,7 @@ export type NoteTreeState = {
 export interface NoteTreeActions {
   updateNoteTree: (noteTree: NoteTreeItem[]) => void
   updateTreeItemTitle: (id: string, newTitle: string) => void
+  updateTreeItemExpanded: (id: string, expanded: boolean) => void
   appendNote: (parentId: string | null, parentLevel: number) => string
 }
 
@@ -49,6 +51,7 @@ function appendNewNote(
     id: newId,
     title: '新笔记',
     level: parentLevel + 1,
+    expanded: false,
     children: []
   }
   if (!parentId) {
@@ -83,6 +86,29 @@ function appendNewNote(
   return [tree.map((item) => traverse(item)), newId]
 }
 
+function traverseTreeExpanded(
+  tree: NoteTreeItem[],
+  id: string,
+  expanded: boolean
+) {
+  let stop = false
+  function traverse(item: NoteTreeItem) {
+    if (stop) return item
+    if (item.id === id) {
+      stop = true
+      return {
+        ...item,
+        expanded
+      }
+    }
+    if (item.children.length > 0) {
+      item.children = item.children.map((child) => traverse(child))
+    }
+    return item
+  }
+  return tree.map((item) => traverse(item))
+}
+
 export const useNoteTree = create<NoteTreeState & NoteTreeActions>()(
   persist(
     (set) => ({
@@ -93,6 +119,14 @@ export const useNoteTree = create<NoteTreeState & NoteTreeActions>()(
           log('updateTreeItemTitle', id, newTitle)
           const newTree = traverseTree(state.noteTree, id, newTitle)
           log('newTree', newTree)
+          return {
+            noteTree: newTree
+          }
+        })
+      },
+      updateTreeItemExpanded: (id: string, expanded: boolean) => {
+        return set((state) => {
+          const newTree = traverseTreeExpanded(state.noteTree, id, expanded)
           return {
             noteTree: newTree
           }

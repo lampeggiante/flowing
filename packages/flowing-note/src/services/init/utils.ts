@@ -6,7 +6,7 @@ export function injectDBData(
   db: IndexedDBService,
   storeName: string,
   data: any,
-  parent?: string | number,
+  parent?: string,
   preLevel?: number
 ) {
   const { title, children } = data
@@ -19,7 +19,7 @@ export function injectDBData(
       lastModified: now(),
       title,
       content: '<p>这是内容</p>',
-      level: preLevel || 1,
+      level: (preLevel ?? 0) || 1,
       parent: parent || null
     }
     if (store) return

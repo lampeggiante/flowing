@@ -7,7 +7,7 @@ import {
   FileTextOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import { Tooltip } from 'antd'
+import { Tooltip, message } from 'antd'
 import {
   forwardRef,
   HTMLAttributes,
@@ -54,6 +54,10 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   const handleAddNote = useCallback(
     (e: MouseEvent<HTMLSpanElement>, id: string, level: number) => {
       e.preventDefault()
+      if (level >= 5) {
+        message.error('最多只能创建5级笔记')
+        return
+      }
       log('handleAddNote', id)
       const newId = appendNote(id, level)
       addNewNote(id, newId, level)
