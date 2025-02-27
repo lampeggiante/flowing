@@ -96,7 +96,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
             currentNote: {
               ...state.currentNote,
               lastModified: now(),
-              noteTitle: title
+              title
             }
           }
         })

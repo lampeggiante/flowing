@@ -21,7 +21,7 @@
   "scripts": {
     "prepare": "husky",
     "commitlint": "commitlint --config commitlint.config.mjs -e -V",
-    "gh-pages": "sh scripts/gh-pages.sh",
+    "gh-pages": "chmod +x scripts/gh-pages.sh && scripts/gh-pages.sh",
     "dev:note": "pnpm --filter @flowing/note dev",
     "dev:components": "pnpm --filter @flowing/components dev",
     "build:icon": "pnpm --filter @flowing/icons build"
