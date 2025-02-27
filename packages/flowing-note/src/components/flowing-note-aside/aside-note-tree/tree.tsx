@@ -36,8 +36,8 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
             <span
               className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option"
               onClick={() => {
-                const newId = appendNote(null)
-                addNewNote(null, newId)
+                const newId = appendNote(null, 0)
+                addNewNote(null, newId, 0)
                 location.pathname = `/flowing/wiki/${newId}`
               }}
             >

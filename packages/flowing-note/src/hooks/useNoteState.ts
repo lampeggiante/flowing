@@ -4,17 +4,14 @@ import { noteDB, storeName } from '@/services/note-store'
 import { log } from '@/utils/log'
 import { now } from '@/utils/time'
 
-export interface NoteContentNode {
-  contentId: number
-  content: string
-}
-
 export interface FlowingNote {
-  noteId: number
+  noteId: string
   author: string
+  createdAt: string
   lastModified: string
-  noteTitle: string
-  noteContent: string
+  title: string
+  content: string
+  level: number
   parent: number | null
 }
 
@@ -23,18 +20,26 @@ export interface UseNoteStateType {
 }
 
 export interface UseNoteMethodsType {
-  setCurrentNote: (id: number) => void
+  setCurrentNote: (id: string) => void
   setNoteTitle: (title: string) => void
   setNoteContent: (content: string) => void
-  addNewNote: (parentId: number | null, newId: number) => void
+  addNewNote: (
+    parentId: string | null,
+    newId: string,
+    parentLevel: number
+  ) => void
 }
 
+export const EMPTY_NOTE_ID = 'empty'
+
 export const emptyCurrentNote: FlowingNote = {
-  noteId: 0,
+  noteId: EMPTY_NOTE_ID,
   author: 'flowing',
+  createdAt: now(),
   lastModified: now(),
-  noteTitle: '<h1></h1>',
-  noteContent: '<p></p>',
+  title: '<h1></h1>',
+  content: '<p></p>',
+  level: 1,
   parent: null
 }
 
@@ -42,8 +47,8 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
   persist(
     (set) => ({
       currentNote: emptyCurrentNote,
-      setCurrentNote: (id: number) => {
-        if (id === 0) {
+      setCurrentNote: (id: string) => {
+        if (id === EMPTY_NOTE_ID) {
           set({
             currentNote: emptyCurrentNote
           })
@@ -51,15 +56,26 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
         }
         noteDB.instance?.getStore(storeName, id).then((store) => {
           log('setCurrentNote', store)
-          const { noteId, author, lastModified, title, content, parent } = store
+          const {
+            noteId,
+            author,
+            createdAt,
+            lastModified,
+            title,
+            content,
+            parent,
+            level
+          } = store
           set({
             currentNote: {
               noteId,
               author: author ?? 'flowing',
+              createdAt: createdAt ?? now(),
               lastModified: lastModified ?? now(),
-              noteTitle: title,
-              noteContent: content,
-              parent
+              title,
+              content,
+              parent,
+              level: level ?? 1
             }
           })
         })
@@ -69,10 +85,12 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           noteDB.instance?.updateStore(storeName, {
             noteId: state.currentNote.noteId,
             author: state.currentNote.author,
+            createdAt: state.currentNote.createdAt,
             lastModified: now(),
             title,
-            content: state.currentNote.noteContent,
-            parent: state.currentNote.parent
+            content: state.currentNote.content,
+            parent: state.currentNote.parent,
+            level: state.currentNote.level
           })
           return {
             currentNote: {
@@ -88,28 +106,36 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           noteDB.instance?.updateStore(storeName, {
             noteId: state.currentNote.noteId,
             author: state.currentNote.author,
+            createdAt: state.currentNote.createdAt,
             lastModified: now(),
-            title: state.currentNote.noteTitle,
+            title: state.currentNote.title,
             content,
-            parent: state.currentNote.parent
+            parent: state.currentNote.parent,
+            level: state.currentNote.level
           })
           return {
             currentNote: {
               ...state.currentNote,
               lastModified: now(),
-              noteContent: content
+              content
             }
           }
         })
       },
-      addNewNote: (parentId: number | null, newId: number) => {
+      addNewNote: (
+        parentId: string | null,
+        newId: string,
+        parentLevel: number
+      ) => {
         const newNote = {
           noteId: newId,
           author: 'flowing',
+          createdAt: now(),
           lastModified: now(),
           title: '新笔记',
           content: '<p>这是内容</p>',
-          parent: parentId || null
+          parent: parentId || null,
+          level: parentLevel + 1
         }
         noteDB.instance?.addStore(storeName, newNote)
       }

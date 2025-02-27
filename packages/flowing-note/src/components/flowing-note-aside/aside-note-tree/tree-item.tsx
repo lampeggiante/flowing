@@ -22,7 +22,8 @@ import { Link } from 'react-router-dom'
 export interface TreeItemProps {
   prefixIcon?: ReactNode
   title: string
-  id: number
+  id: string
+  level: number
   pad?: number
   children: TreeItemProps[]
   style?: HTMLAttributes<HTMLDivElement>['style']
@@ -30,7 +31,7 @@ export interface TreeItemProps {
 
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   /** props and states */
-  const { prefixIcon, title, id, pad, children, ...rest } = props
+  const { prefixIcon, title, id, level, pad, children, ...rest } = props
   const [expanded, setExpanded] = useState<boolean>(false)
   const titleRef = useRef<HTMLSpanElement>(null)
   const caretClsName =
@@ -51,11 +52,11 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   // }, [])
 
   const handleAddNote = useCallback(
-    (e: MouseEvent<HTMLSpanElement>, id: number) => {
+    (e: MouseEvent<HTMLSpanElement>, id: string, level: number) => {
       e.preventDefault()
       log('handleAddNote', id)
-      const newId = appendNote(id)
-      addNewNote(id, newId)
+      const newId = appendNote(id, level)
+      addNewNote(id, newId, level)
       location.pathname = `/flowing/wiki/${newId}`
     },
     [appendNote, addNewNote]
@@ -91,7 +92,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
             </span>
             <span
               className="aside-note-tree-item-icon aside-note-tree-item-option aside-note-tree-item-icon-hover"
-              onClick={(e) => handleAddNote(e, id)}
+              onClick={(e) => handleAddNote(e, id, level)}
             >
               <PlusOutlined />
             </span>

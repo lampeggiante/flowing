@@ -16,7 +16,7 @@ const NoteBody = () => {
     currentNote.lastModified
   )
   const timer = useRef<NodeJS.Timeout>()
-  const preNoteId = useRef<number>(currentNote.noteId)
+  const preNoteId = useRef<string>(currentNote.noteId)
 
   const updateNoteTitle = useCallback(
     (title: string) => {
@@ -57,12 +57,12 @@ const NoteBody = () => {
   return (
     <div className="note-body">
       <FlowingTopHeading
-        noteTitle={currentNote.noteTitle}
+        noteTitle={currentNote.title}
         setNoteTitle={updateNoteTitle}
       />
       <FlowingNoteInfo lastModified={noteLastModified} author={noteAuthor} />
       <FlowingMainEditor
-        content={currentNote.noteContent}
+        content={currentNote.content}
         setContent={setNoteContent}
       />
     </div>

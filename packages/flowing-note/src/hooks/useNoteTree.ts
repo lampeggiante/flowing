@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { info, log } from '@/utils/log'
+import { getUUID } from '@/utils/uuid'
 
 export interface NoteTreeItem {
-  id: number
+  id: string
   title: string
+  level: number
   children: NoteTreeItem[]
 }
 
@@ -14,11 +16,11 @@ export type NoteTreeState = {
 
 export interface NoteTreeActions {
   updateNoteTree: (noteTree: NoteTreeItem[]) => void
-  updateTreeItemTitle: (id: number, newTitle: string) => void
-  appendNote: (parentId: number | null) => number
+  updateTreeItemTitle: (id: string, newTitle: string) => void
+  appendNote: (parentId: string | null, parentLevel: number) => string
 }
 
-function traverseTree(tree: NoteTreeItem[], id: number, newTitle: string) {
+function traverseTree(tree: NoteTreeItem[], id: string, newTitle: string) {
   let stop = false
   function traverse(item: NoteTreeItem) {
     if (stop) return item
@@ -39,12 +41,14 @@ function traverseTree(tree: NoteTreeItem[], id: number, newTitle: string) {
 
 function appendNewNote(
   tree: NoteTreeItem[],
-  parentId: number | null
-): [NoteTreeItem[], number] {
-  let newId = (tree.at(-1)?.id ?? 0) + 1
+  parentId: string | null,
+  parentLevel: number
+): [NoteTreeItem[], string] {
+  const newId = getUUID()
   const defaultNote = {
     id: newId,
     title: '新笔记',
+    level: parentLevel + 1,
     children: []
   }
   if (!parentId) {
@@ -58,9 +62,8 @@ function appendNewNote(
       stop = true
       info('appendNewNote', {
         ...defaultNote,
-        id: (item.children.at(-1)?.id ?? 0) + 1
+        id: newId
       })
-      newId = (item.children.at(-1)?.id ?? 0) + 1
       return {
         ...item,
         children: [
@@ -85,7 +88,7 @@ export const useNoteTree = create<NoteTreeState & NoteTreeActions>()(
     (set) => ({
       noteTree: [],
       updateNoteTree: (noteTree: NoteTreeItem[]) => set({ noteTree }),
-      updateTreeItemTitle: (id: number, newTitle: string) => {
+      updateTreeItemTitle: (id: string, newTitle: string) => {
         return set((state) => {
           log('updateTreeItemTitle', id, newTitle)
           const newTree = traverseTree(state.noteTree, id, newTitle)
@@ -95,10 +98,14 @@ export const useNoteTree = create<NoteTreeState & NoteTreeActions>()(
           }
         })
       },
-      appendNote: (parentId: number | null) => {
-        let newIdToAdd = 0
+      appendNote: (parentId: string | null, parentLevel: number) => {
+        let newIdToAdd = ''
         set((state) => {
-          const [newTree, newId] = appendNewNote(state.noteTree, parentId)
+          const [newTree, newId] = appendNewNote(
+            state.noteTree,
+            parentId,
+            parentLevel
+          )
           newIdToAdd = newId
           return {
             noteTree: newTree

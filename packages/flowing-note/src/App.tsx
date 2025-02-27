@@ -25,7 +25,7 @@ function App() {
 
   useEffect(() => {
     if (!id || !setCurrentNote) return
-    setCurrentNote(parseInt(id))
+    setCurrentNote(id)
     info(`id为${id}，设置为当前笔记`)
   }, [id, setCurrentNote])
 
