@@ -25,26 +25,37 @@ export interface TreeItemProps {
   id: string
   level: number
   pad?: number
+  expanded?: boolean
   children: TreeItemProps[]
   style?: HTMLAttributes<HTMLDivElement>['style']
 }
 
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
   /** props and states */
-  const { prefixIcon, title, id, level, pad, children, ...rest } = props
-  const [expanded, setExpanded] = useState<boolean>(false)
+  const {
+    prefixIcon,
+    title,
+    id,
+    level,
+    pad,
+    children,
+    expanded: initExpanded,
+    ...rest
+  } = props
+  const [expanded, setExpanded] = useState<boolean>(initExpanded ?? false)
   const titleRef = useRef<HTMLSpanElement>(null)
   const caretClsName =
     'aside-note-tree-item-icon aside-note-tree-item-caret' +
     (children.length > 0 ? ' aside-note-tree-item-icon-hover' : '')
-  const { appendNote } = useNoteTree()
+  const { updateTreeItemExpanded, appendNote } = useNoteTree()
   const { addNewNote } = useNoteState()
   const handleExpand = useCallback(
     (e: MouseEvent<HTMLSpanElement>) => {
       e.preventDefault()
       setExpanded(!expanded)
+      updateTreeItemExpanded(id, !expanded)
     },
-    [expanded]
+    [expanded, id, updateTreeItemExpanded]
   )
 
   // const handleChangeIcon = useCallback((e: MouseEvent<HTMLSpanElement>) => {
