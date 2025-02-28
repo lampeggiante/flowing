@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import { useNoteTree } from '@/hooks/useNoteTree'
 import { useNoteState } from '@/hooks/useNoteState'
+import { useNavigate } from 'react-router-dom'
 interface TreeProps {
   title: string
   treeData: TreeItemProps[]
@@ -18,6 +19,7 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
   const [expanded, setExpanded] = useState<boolean>(true)
   const { appendNote } = useNoteTree()
   const { addNewNote } = useNoteState()
+  const navigate = useNavigate()
 
   return (
     <>
@@ -35,10 +37,10 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
           <span>
             <span
               className="aside-note-tree-header-hover aside-note-tree-header-item aside-note-tree-header-option"
-              onClick={() => {
+              onClick={async () => {
                 const newId = appendNote(null, 0)
-                addNewNote(null, newId, 0)
-                location.pathname = `/flowing/wiki/${newId}`
+                await addNewNote(null, newId, 0)
+                navigate(`/wiki/${newId}`)
               }}
             >
               <PlusOutlined />

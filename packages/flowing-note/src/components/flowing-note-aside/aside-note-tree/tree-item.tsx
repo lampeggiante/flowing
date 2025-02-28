@@ -17,7 +17,7 @@ import {
   useState,
   type MouseEvent
 } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export interface TreeItemProps {
   prefixIcon?: ReactNode
@@ -57,13 +57,14 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
     },
     [expanded, id, updateTreeItemExpanded]
   )
+  const navigate = useNavigate()
 
   // const handleChangeIcon = useCallback((e: MouseEvent<HTMLSpanElement>) => {
   //   e.preventDefault()
   // }, [])
 
   const handleAddNote = useCallback(
-    (e: MouseEvent<HTMLSpanElement>, id: string, level: number) => {
+    async (e: MouseEvent<HTMLSpanElement>, id: string, level: number) => {
       e.preventDefault()
       if (level >= 5) {
         message.error('最多只能创建5级笔记')
@@ -71,8 +72,8 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>((props, ref) => {
       }
       log('handleAddNote', id)
       const newId = appendNote(id, level)
-      addNewNote(id, newId, level)
-      location.pathname = `/flowing/wiki/${newId}`
+      await addNewNote(id, newId, level)
+      navigate(`/wiki/${newId}`)
     },
     [appendNote, addNewNote]
   )

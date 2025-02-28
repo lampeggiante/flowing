@@ -27,7 +27,7 @@ export interface UseNoteMethodsType {
     parentId: string | null,
     newId: string,
     parentLevel: number
-  ) => void
+  ) => Promise<void>
 }
 
 export const EMPTY_NOTE_ID = 'empty'
@@ -122,7 +122,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           }
         })
       },
-      addNewNote: (
+      addNewNote: async (
         parentId: string | null,
         newId: string,
         parentLevel: number
@@ -137,7 +137,7 @@ export const useNoteState = create<UseNoteStateType & UseNoteMethodsType>()(
           parent: parentId || null,
           level: parentLevel + 1
         }
-        noteDB.instance?.addStore(storeName, newNote)
+        await noteDB.instance?.addStore(storeName, newNote)
       }
     }),
     {
