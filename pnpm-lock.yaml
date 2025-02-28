@@ -285,7 +285,7 @@ importers:
         version: 8.5.1
       tailwindcss:
         specifier: ^3.4.7
-        version: 3.4.17(ts-node@10.9.2(@types/node@22.10.10))
+        version: 3.4.17(ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.10.10)(typescript@5.7.3))
       vite:
         specifier: ^5.3.1
         version: 5.4.14(@types/node@22.10.10)(sass@1.83.4)(terser@5.37.0)
@@ -304,6 +304,9 @@ importers:
       '@nestjs/platform-express':
         specifier: ^10.0.0
         version: 10.4.15(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15)
+      mongodb:
+        specifier: ^6.14.0
+        version: 6.14.0(socks@2.8.3)
       reflect-metadata:
         specifier: ^0.2.0
         version: 0.2.2
@@ -1622,6 +1625,9 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
+  '@mongodb-js/saslprep@1.2.0':
+    resolution: {integrity: sha512-+ywrb0AqkfaYuhHs6LxKWgqbh3I72EpEgESCw37o+9qPx9WTCkgDm2B+eMrwehGtHBWHFU4GXvnSCNiFhhausg==}
+
   '@napi-rs/wasm-runtime@0.2.4':
     resolution: {integrity: sha512-9zESzOO5aDByvhIAsOy9TbpZ0Ur2AJbUI7UT73kcUTS2mxAMHOBaa1st/jAymNoCtvrit99kkzT1FZuXVcgfIQ==}
 
@@ -1801,28 +1807,24 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@nx/nx-linux-arm64-musl@20.3.3':
     resolution: {integrity: sha512-RrLgujPU5NfDrsDRa7Y2isxGb8XkoQeJkTMUl1xmBK2Qnf4jAUn0PH0ULWrRMNgChi4nYUTn/Sf+2m6Uyoqcfw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@nx/nx-linux-x64-gnu@20.3.3':
     resolution: {integrity: sha512-/WmCnPxv1eR8tyYiFp4XoMbcXrJ8a/OIw1rpZZ5ceMKgH8lPaF2/KFf04JZZygrCKletEdqqIojBXz4AHoaueQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@nx/nx-linux-x64-musl@20.3.3':
     resolution: {integrity: sha512-y4BJsR0fgJrXY3P7GkWfUZAeQEHMTXvaRHvzJfBSBPmnVcVZDYNTfEQYnslp8m8ahKdlJwtflxzykJ4Bwf55fw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@nx/nx-win32-arm64-msvc@20.3.3':
     resolution: {integrity: sha512-BHqZitBaGT9ybv386B5QKxP5N66+xpTiYlKClzQ44o6Ca8QxnkugI64exBdcQyj+DRiL6HJhN14kaPJ1KrsKRA==}
@@ -2765,6 +2767,12 @@ packages:
   '@types/uuid@9.0.8':
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
 
+  '@types/webidl-conversions@7.0.3':
+    resolution: {integrity: sha512-CiJJvcRtIgzadHCYXw7dqEnMNRjhGZlYK05Mj9OyktqV8uVT8fD2BFOB7S1uwBE3Kj2Z+4UyPmFw/Ixgw/LAlA==}
+
+  '@types/whatwg-url@11.0.5':
+    resolution: {integrity: sha512-coYR071JRaHa+xoEvvYqvnIHaVqaYrLPbsufM9BF63HkwI5Lgmy2QR8Q5K/lYDYo5AK82wOvSOS0UsLTpTG7uQ==}
+
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
 
@@ -3281,6 +3289,10 @@ packages:
 
   bser@2.1.1:
     resolution: {integrity: sha512-gQxTNE/GAfIIrmHLUE3oJyp5FO6HRBfhjnw4/wMmA63ZGDJnWBmgY/lyQBpnDUkGmAhbSe39tx2d/iTOAfglwQ==}
+
+  bson@6.10.3:
+    resolution: {integrity: sha512-MTxGsqgYTwfshYWTRdmZRC+M7FnG1b4y7RO7p2k3X24Wq0yv1m77Wsj0BzlPzd/IowgESfsruQCUToa7vbOpPQ==}
+    engines: {node: '>=16.20.1'}
 
   buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
@@ -5336,6 +5348,9 @@ packages:
   memoizerific@1.11.3:
     resolution: {integrity: sha512-/EuHYwAPdLtXwAwSZkh/Gutery6pD2KYd44oQLhAvQp/50mpyduZh8Q7PYHXTCJ+wuXxt7oij2LXyIJOOYFPog==}
 
+  memory-pager@1.5.0:
+    resolution: {integrity: sha512-ZS4Bp4r/Zoeq6+NLJpP+0Zzm0pR8whtGPf1XExKLJBAczGMnSi3It14OiNCStjQjM6NU1okjQGSxgEZN8eBYKg==}
+
   meow@12.1.1:
     resolution: {integrity: sha512-BhXM0Au22RwUneMPwSCnyhTOizdWoIEPU9sp0Aqa1PnDMR5Wv2FGXYDjuzJEIX+Eo2Rb8xuYe5jrnm5QowQFkw==}
     engines: {node: '>=16.10'}
@@ -5481,6 +5496,36 @@ packages:
   modify-values@1.0.1:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
     engines: {node: '>=0.10.0'}
+
+  mongodb-connection-string-url@3.0.2:
+    resolution: {integrity: sha512-rMO7CGo/9BFwyZABcKAWL8UJwH/Kc2x0g72uhDWzG48URRax5TCIcJ7Rc3RZqffZzO/Gwff/jyKwCU9TN8gehA==}
+
+  mongodb@6.14.0:
+    resolution: {integrity: sha512-AlM6alTx98vcnk/jMMmoYuBrm4qpe1/VrbwvL2SXEHjdtJ1ZbVZmrpyjUx9mqS94e9HcemzpLn+CxzhmT7b0uw==}
+    engines: {node: '>=16.20.1'}
+    peerDependencies:
+      '@aws-sdk/credential-providers': ^3.188.0
+      '@mongodb-js/zstd': ^1.1.0 || ^2.0.0
+      gcp-metadata: ^5.2.0
+      kerberos: ^2.0.1
+      mongodb-client-encryption: '>=6.0.0 <7'
+      snappy: ^7.2.2
+      socks: ^2.7.1
+    peerDependenciesMeta:
+      '@aws-sdk/credential-providers':
+        optional: true
+      '@mongodb-js/zstd':
+        optional: true
+      gcp-metadata:
+        optional: true
+      kerberos:
+        optional: true
+      mongodb-client-encryption:
+        optional: true
+      snappy:
+        optional: true
+      socks:
+        optional: true
 
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
@@ -6791,6 +6836,9 @@ packages:
     resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
     engines: {node: '>= 8'}
 
+  sparse-bitfield@3.0.3:
+    resolution: {integrity: sha512-kvzhi7vqKTfkh0PZU+2D2PIllw2ymqJKujUcyPMd9Y75Nv4nPbGJZXNhxsgdQab2BmlDct1YnfQCguEvHr7VsQ==}
+
   spdx-correct@3.2.0:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}
 
@@ -7090,6 +7138,10 @@ packages:
 
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+
+  tr46@5.0.0:
+    resolution: {integrity: sha512-tk2G5R2KRwBd+ZN0zaEXpmzdKyOYksXwywulIX95MBODjSzMIuQnQ3m8JxgbhnL1LeVo7lqQKsYa1O3Htl7K5g==}
+    engines: {node: '>=18'}
 
   tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
@@ -7429,6 +7481,10 @@ packages:
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
 
+  webidl-conversions@7.0.0:
+    resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
+    engines: {node: '>=12'}
+
   webpack-node-externals@3.0.0:
     resolution: {integrity: sha512-LnL6Z3GGDPht/AigwRh2dvL9PQPFQ8skEpVrWZXLWBYmqcaojHNN0onvHzie6rq7EWKrrBfPYqNEzTJgiwEQDQ==}
     engines: {node: '>=6'}
@@ -7449,6 +7505,10 @@ packages:
     peerDependenciesMeta:
       webpack-cli:
         optional: true
+
+  whatwg-url@14.1.1:
+    resolution: {integrity: sha512-mDGf9diDad/giZ/Sm9Xi2YcyzaFpbdLpJPr+E9fSkyQ7KpQD4SdFcugkRQYzhmfI4KeV4Qpnn2sKPdo+kmsgRQ==}
+    engines: {node: '>=18'}
 
   whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
@@ -9132,6 +9192,10 @@ snapshots:
       '@types/react': 18.3.18
       react: 18.3.1
 
+  '@mongodb-js/saslprep@1.2.0':
+    dependencies:
+      sparse-bitfield: 3.0.3
+
   '@napi-rs/wasm-runtime@0.2.4':
     dependencies:
       '@emnapi/core': 1.3.1
@@ -10413,6 +10477,12 @@ snapshots:
 
   '@types/uuid@9.0.8': {}
 
+  '@types/webidl-conversions@7.0.3': {}
+
+  '@types/whatwg-url@11.0.5':
+    dependencies:
+      '@types/webidl-conversions': 7.0.3
+
   '@types/yargs-parser@21.0.3': {}
 
   '@types/yargs@17.0.33':
@@ -11142,6 +11212,8 @@ snapshots:
   bser@2.1.1:
     dependencies:
       node-int64: 0.4.0
+
+  bson@6.10.3: {}
 
   buffer-from@1.1.2: {}
 
@@ -13684,6 +13756,8 @@ snapshots:
     dependencies:
       map-or-similar: 1.5.0
 
+  memory-pager@1.5.0: {}
+
   meow@12.1.1: {}
 
   meow@8.1.2:
@@ -13813,6 +13887,19 @@ snapshots:
   mkdirp@1.0.4: {}
 
   modify-values@1.0.1: {}
+
+  mongodb-connection-string-url@3.0.2:
+    dependencies:
+      '@types/whatwg-url': 11.0.5
+      whatwg-url: 14.1.1
+
+  mongodb@6.14.0(socks@2.8.3):
+    dependencies:
+      '@mongodb-js/saslprep': 1.2.0
+      bson: 6.10.3
+      mongodb-connection-string-url: 3.0.2
+    optionalDependencies:
+      socks: 2.8.3
 
   ms@2.0.0: {}
 
@@ -14343,6 +14430,14 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.5.1
 
+  postcss-load-config@4.0.2(postcss@8.5.1)(ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.10.10)(typescript@5.7.3)):
+    dependencies:
+      lilconfig: 3.1.3
+      yaml: 2.7.0
+    optionalDependencies:
+      postcss: 8.5.1
+      ts-node: 10.9.2(@swc/core@1.10.11)(@types/node@22.10.10)(typescript@5.7.3)
+
   postcss-load-config@4.0.2(postcss@8.5.1)(ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.12.0)(typescript@5.7.3)):
     dependencies:
       lilconfig: 3.1.3
@@ -14350,14 +14445,6 @@ snapshots:
     optionalDependencies:
       postcss: 8.5.1
       ts-node: 10.9.2(@swc/core@1.10.11)(@types/node@22.12.0)(typescript@5.7.3)
-
-  postcss-load-config@4.0.2(postcss@8.5.1)(ts-node@10.9.2(@types/node@22.10.10)):
-    dependencies:
-      lilconfig: 3.1.3
-      yaml: 2.7.0
-    optionalDependencies:
-      postcss: 8.5.1
-      ts-node: 10.9.2(@types/node@22.10.10)
 
   postcss-nested@6.2.0(postcss@8.5.1):
     dependencies:
@@ -15391,6 +15478,10 @@ snapshots:
 
   source-map@0.7.4: {}
 
+  sparse-bitfield@3.0.3:
+    dependencies:
+      memory-pager: 1.5.0
+
   spdx-correct@3.2.0:
     dependencies:
       spdx-expression-parse: 3.0.1
@@ -15614,6 +15705,33 @@ snapshots:
       '@pkgr/core': 0.1.1
       tslib: 2.8.1
 
+  tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.10.10)(typescript@5.7.3)):
+    dependencies:
+      '@alloc/quick-lru': 5.2.0
+      arg: 5.0.2
+      chokidar: 3.6.0
+      didyoumean: 1.2.2
+      dlv: 1.1.3
+      fast-glob: 3.3.3
+      glob-parent: 6.0.2
+      is-glob: 4.0.3
+      jiti: 1.21.7
+      lilconfig: 3.1.3
+      micromatch: 4.0.8
+      normalize-path: 3.0.0
+      object-hash: 3.0.0
+      picocolors: 1.1.1
+      postcss: 8.5.1
+      postcss-import: 15.1.0(postcss@8.5.1)
+      postcss-js: 4.0.1(postcss@8.5.1)
+      postcss-load-config: 4.0.2(postcss@8.5.1)(ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.10.10)(typescript@5.7.3))
+      postcss-nested: 6.2.0(postcss@8.5.1)
+      postcss-selector-parser: 6.1.2
+      resolve: 1.22.10
+      sucrase: 3.35.0
+    transitivePeerDependencies:
+      - ts-node
+
   tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.12.0)(typescript@5.7.3)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
@@ -15634,33 +15752,6 @@ snapshots:
       postcss-import: 15.1.0(postcss@8.5.1)
       postcss-js: 4.0.1(postcss@8.5.1)
       postcss-load-config: 4.0.2(postcss@8.5.1)(ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.12.0)(typescript@5.7.3))
-      postcss-nested: 6.2.0(postcss@8.5.1)
-      postcss-selector-parser: 6.1.2
-      resolve: 1.22.10
-      sucrase: 3.35.0
-    transitivePeerDependencies:
-      - ts-node
-
-  tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.10.10)):
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.6.0
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.3
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.7
-      lilconfig: 3.1.3
-      micromatch: 4.0.8
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.1.1
-      postcss: 8.5.1
-      postcss-import: 15.1.0(postcss@8.5.1)
-      postcss-js: 4.0.1(postcss@8.5.1)
-      postcss-load-config: 4.0.2(postcss@8.5.1)(ts-node@10.9.2(@types/node@22.10.10))
       postcss-nested: 6.2.0(postcss@8.5.1)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.10
@@ -15764,6 +15855,10 @@ snapshots:
 
   tr46@0.0.3: {}
 
+  tr46@5.0.0:
+    dependencies:
+      punycode: 2.3.1
+
   tree-kill@1.2.2: {}
 
   treeverse@3.0.0: {}
@@ -15831,6 +15926,27 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.10.11
 
+  ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.10.10)(typescript@5.7.3):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.11
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 22.10.10
+      acorn: 8.14.0
+      acorn-walk: 8.3.4
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.7.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optionalDependencies:
+      '@swc/core': 1.10.11
+    optional: true
+
   ts-node@10.9.2(@swc/core@1.10.11)(@types/node@22.12.0)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
@@ -15850,24 +15966,6 @@ snapshots:
       yn: 3.1.1
     optionalDependencies:
       '@swc/core': 1.10.11
-    optional: true
-
-  ts-node@10.9.2(@types/node@22.10.10):
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.11
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 22.10.10
-      acorn: 8.14.0
-      acorn-walk: 8.3.4
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
     optional: true
 
   tsconfig-paths-webpack-plugin@4.2.0:
@@ -16110,6 +16208,8 @@ snapshots:
 
   webidl-conversions@3.0.1: {}
 
+  webidl-conversions@7.0.0: {}
+
   webpack-node-externals@3.0.0: {}
 
   webpack-sources@3.2.3: {}
@@ -16145,6 +16245,11 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
+
+  whatwg-url@14.1.1:
+    dependencies:
+      tr46: 5.0.0
+      webidl-conversions: 7.0.0
 
   whatwg-url@5.0.0:
     dependencies:
