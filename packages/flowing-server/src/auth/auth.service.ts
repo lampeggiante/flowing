@@ -1,10 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable, Req } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { UsersService } from '../v1/users/users.service'
 import { RegisterDto } from './dto/register.dto'
 import { LoginDto } from './dto/login.dto'
 import * as bcrypt from 'bcrypt'
 import { ConfigService } from '@nestjs/config'
+import { UserRole } from 'src/v1/users/schemas/user.schema'
 
 @Injectable()
 export class AuthService {
@@ -16,11 +17,10 @@ export class AuthService {
     console.log('JWT_SECRET:', this.configService.get('JWT_SECRET'))
   }
 
-  async register(registerDto: RegisterDto) {
+  async register(registerDto: RegisterDto, @Req() request: any) {
     const userExists = await this.userService.findByUsername(
       registerDto.username
     )
-    console.log(userExists)
     if (userExists) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST)
     }
@@ -28,14 +28,21 @@ export class AuthService {
     const salt = await bcrypt.genSalt()
     const hashedPassword = await bcrypt.hash(registerDto.password, salt)
 
-    const user = await this.userService.create({
-      username: registerDto.username,
-      encryptedPassword: hashedPassword
-    })
+    // 检查 header 中的 clyde-tag
+    const clydeTag = request.headers['clyde-tag']
+    console.log('clyde-tag:', clydeTag)
+    const adminTag = this.configService.get<string>('ADMIN_TAG')
 
-    // 注册成功后直接生成 token
-    const token = this.generateToken(user)
-    return { user, token }
+    // 设置用户角色
+    const role =
+      clydeTag && clydeTag === adminTag ? UserRole.ADMIN : UserRole.USER
+
+    return this.userService.create({
+      username: registerDto.username,
+      encryptedPassword: hashedPassword,
+      role: role,
+      is_deleted: false
+    })
   }
 
   async login(loginDto: LoginDto) {
